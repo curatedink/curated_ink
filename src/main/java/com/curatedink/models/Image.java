@@ -27,8 +27,8 @@ public class Image {
     @Column(nullable = false)
     private boolean isCanvas;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Image> images;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+//    private List<Image> images;
 
 
     // ------------------------------------------------------ Constructors:
@@ -43,7 +43,7 @@ public class Image {
         this.studioName = studioName;
         this.creditedArtist = creditedArtist;
         this.isCanvas = isCanvas;
-        this.images = images;
+//        this.images = images;
     }
 
 
@@ -98,12 +98,12 @@ public class Image {
         this.isCanvas = isCanvas;
     }
 
-    public List<Image> getImages() {
-        return images;
-    }
+//    public List<Image> getImages() {
+//        return images;
+//    }
 
-    public void setImages(List<Image> images) {
-        this.images = images;
-    }
+//    public void setImages(List<Image> images) {
+//        this.images = images;
+//    }
 }
 
