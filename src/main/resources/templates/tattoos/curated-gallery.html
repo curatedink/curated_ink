@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Gallery</title>
+    <head th:replace=" partials/head :: head"/>
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+</head>
+<body>
+
+<nav th:replace=" partials/nav :: nav"/>
+
+
+<ul class="nav nav-pills mb-3" id="gallery-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="curated-tab" data-toggle="pill" href="#curated" role="tab"
+           aria-controls="curated" aria-selected="true">CURATED GALLERY</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="world-tab" data-toggle="pill" href="#world" role="tab"
+           aria-controls="world" aria-selected="false">WORLD GALLERY</a>
+    </li>
+</ul>
+<div class="tab-content" id="pills-tabContent">
+
+<!--    Below will be for the curated gallery - need the logic-->
+    <div class="tab-pane fade show active" id="curated" role="tabpanel" aria-labelledby="curated-tab">...</div>
+
+<!--    Below is for the world gallery-->
+    <div class="tab-pane fade" id="world" role="tabpanel" aria-labelledby="world-tab">
+        <div class="container">
+            <div class="row justify-space-between">
+                <div class="col-12 col-md-6" th:each="image : ${images}">
+                    <div class="card-body">
+                        <img th:text="${image.imageUrl}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer th:replace="partials/foot :: foot"/>
+
+</body>
+</html>
