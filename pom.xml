@@ -8,11 +8,11 @@
 		<version>2.3.10.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.codeup</groupId>
-	<artifactId>SpringBlog</artifactId>
+	<groupId>com</groupId>
+	<artifactId>curatedink</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SpringBlog</name>
-	<description>Demo project for Spring Boot</description>
+	<name>curatedink</name>
+	<description>curated ink website</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
