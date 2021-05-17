@@ -98,8 +98,8 @@ public class User {
         return isArtist;
     }
 
-    public void setIsArtist(boolean artist) {
-        isArtist = artist;
+    public void setIsArtist(boolean isArtist) {
+        this.isArtist = isArtist;
     }
 
     public String getStudioName() {
