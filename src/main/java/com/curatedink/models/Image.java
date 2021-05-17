@@ -90,11 +90,11 @@ public class Image {
         this.creditedArtist = creditedArtist;
     }
 
-    public boolean isCanvas() {
+    public boolean getIsCanvas() {
         return isCanvas;
     }
 
-    public void setCanvas(boolean canvas) {
+    public void setIsCanvas(boolean canvas) {
         isCanvas = canvas;
     }
 
