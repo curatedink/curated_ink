@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "INT UNSIGNED")
     private long id;
 
     @Column(nullable = false, unique = true)
@@ -93,11 +94,11 @@ public class User {
         this.displayName = displayName;
     }
 
-    public boolean isArtist() {
+    public boolean getIsArtist() {
         return isArtist;
     }
 
-    public void setArtist(boolean artist) {
+    public void setIsArtist(boolean artist) {
         isArtist = artist;
     }
 
