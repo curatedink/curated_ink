@@ -94,8 +94,8 @@ public class Image {
         return isCanvas;
     }
 
-    public void setIsCanvas(boolean canvas) {
-        isCanvas = canvas;
+    public void setIsCanvas(boolean isCanvas) {
+        this.isCanvas = isCanvas;
     }
 
     public List<Image> getImages() {
