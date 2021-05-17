@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Sign up</title>
+    <head th:replace=" partials/head :: head"/>
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+</head>
+<body>
+
+<nav th:replace=" partials/nav :: nav"/>
+
+<div class="">
+    <div class="container">
+
+        <div>
+            <h1 class="">Sign Up and Get Curated</h1>
+        </div>
+
+        <div class="container mb-4">
+            <form th:action="@{/sign-up}" method="POST" th:object="${user}">
+
+                <label for="username">Username</label>
+                <input id="username" th:field="*{username}" class="form-control mb-4" placeholder="Username"/>
+
+                <label for="password">Password</label>
+                <input id="password" type="password" th:field="*{password}" class="form-control"
+                       placeholder="Password"/>
+
+                <label for="display_name">Name</label>
+                <input id="display_name" th:field="*{display_name}" class="form-control mb-4" placeholder="Display Name"/>
+
+                <label for="zipcode">Zip Code</label>
+                <input id="zipcode" th:field="*{zipcode}" class="form-control mb-4" placeholder="Zip Code"/>
+
+                <label for="email">Email</label>
+                <input id="email" th:field="*{email}" class="form-control mb-4" placeholder="Email"/>
+
+                <label for="biography">Email</label>
+                <input id="biography" th:field="*{biography}" class="form-control mb-4"
+                       placeholder="What do you want the world to know?"/>
+
+                <label for="is_artist">Are you an Artist?</label>
+                <input id="is_artist" th:field="*{is_artist}" class="form-control mb-4" />
+
+                <label for="studio_name">Email</label>
+                <input id="studio_name" th:field="*{studio_name}" class="form-control mb-4" placeholder="Studio Name"/>
+
+                <div th:replace=" partials/style-list :: style-list"/>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="promo">
+                    <label class="form-check-label" for="promo">Sign me up for promotional emails!</label>
+                </div>
+
+                <input class="btn btn-block" value="Sign me up!" type="submit"/>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<footer th:replace="partials/foot :: foot"/>
+
+</body>
+</html>
