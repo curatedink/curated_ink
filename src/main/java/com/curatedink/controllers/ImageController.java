@@ -20,9 +20,9 @@ public class ImageController {
     }
 
     @GetMapping("/gallery")
-    @ResponseBody
-    public List<Image> getAllImages() {
-            return imagesDao.findAll();
+    public String getAllImages(Model vModel) {
+            vModel.addAttribute("images", imagesDao.findAll());
+            return "tattoos/gallery";
         }
 
     @GetMapping("/gallery/{id}")
