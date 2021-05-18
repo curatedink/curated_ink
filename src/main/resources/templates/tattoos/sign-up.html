@@ -29,7 +29,7 @@
                        placeholder="Password"/>
 
                 <label for="display_name">Name</label>
-                <input id="display_name" th:field="*{display_name}" class="form-control mb-4" placeholder="Display Name"/>
+                <input id="display_name" th:field="*{displayName}" class="form-control mb-4" placeholder="Display Name"/>
 
                 <label for="zipcode">Zip Code</label>
                 <input id="zipcode" th:field="*{zipcode}" class="form-control mb-4" placeholder="Zip Code"/>
@@ -42,10 +42,10 @@
                        placeholder="What do you want the world to know?"/>
 
                 <label for="is_artist">Are you an Artist?</label>
-                <input id="is_artist" th:field="*{is_artist}" class="form-control mb-4" />
+                <input id="is_artist" th:field="*{isArtist}" class="form-control mb-4" />
 
                 <label for="studio_name">Email</label>
-                <input id="studio_name" th:field="*{studio_name}" class="form-control mb-4" placeholder="Studio Name"/>
+                <input id="studio_name" th:field="*{studioName}" class="form-control mb-4" placeholder="Studio Name"/>
 
                 <div th:replace=" partials/style-list :: style-list"/>
 
