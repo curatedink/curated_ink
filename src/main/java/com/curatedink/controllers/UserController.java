@@ -13,16 +13,13 @@ public class UserController {
 //    private UserRepository users;
 //    private PasswordEncoder passwordEncoder;
 
+    // ------------------------------------------------------ User Sign-Up (Create):
 
     @GetMapping("/sign-up")
-    @ResponseBody
-    public String signUp(){
-        return "get req for sign up page";
-    }
-//    public String showSignupForm(Model model){
-//        model.addAttribute("user", new User());
-//        return "tattoos/sign-up";
-//    }
+    public String showSignupForm(Model model){
+        model.addAttribute("user", new User());
+        return "tattoos/sign-up";
+   }
 
 
 //    @PostMapping("/sign-up")
@@ -32,5 +29,8 @@ public class UserController {
 //        users.save(user);
 //        return "redirect:/login";
 //    }
+
+
+
 
 }
