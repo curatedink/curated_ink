@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HomeController {
-    @GetMapping("/landing")
-    @ResponseBody
+    @GetMapping("/")
     public String welcome() {
-        return "home";
+        return "tattoos/landing";
     }
 }
