@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Gallery</title>
+    <head th:replace=" partials/head :: head"/>
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+</head>
+<body>
+
+<nav th:replace=" partials/nav :: nav"/>
+
+
+<div>
+    <h1>Profile picture container </h1>
+</div>
+<div>
+    <h3>Artist Information</h3>
+    <div class="row">
+        <a th:href="@{/canvas-profile{id}(id=${user.id})}" class="btn btn-block">View My Canvas Profile</a>
+        <a th:href="@{/request-form}" class="btn btn-block">Request Work</a>
+    </div>
+</div>
+<div>
+    <div class="container">
+        <div class="row justify-space-between">
+
+<!--            ****Need to refactor to only show specific artist's work****-->
+
+            <div class="col-12 col-md-6" th:each="image : ${images}">
+                <div class="card-body">
+                    <img th:text="${image.imageUrl}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer th:replace="partials/foot :: foot"/>
+
+
+</body>
+</html>
