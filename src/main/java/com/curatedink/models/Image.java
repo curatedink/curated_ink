@@ -1,7 +1,6 @@
 package com.curatedink.models;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "images")
@@ -27,8 +26,8 @@ public class Image {
     @Column(nullable = false)
     private boolean isCanvas;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-//    private List<Image> images;
+    @ManyToOne
+    private User user;
 
 
     // ------------------------------------------------------ Constructors:
@@ -37,13 +36,17 @@ public class Image {
     public Image() {
     }
 
-    public Image(String imageUrl, String comment, String studioName, String creditedArtist, boolean isCanvas, List<Image> images) {
+    public Image(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public Image(String imageUrl, String comment, String studioName, String creditedArtist, boolean isCanvas, User user) {
         this.imageUrl = imageUrl;
         this.comment = comment;
         this.studioName = studioName;
         this.creditedArtist = creditedArtist;
         this.isCanvas = isCanvas;
-//        this.images = images;
+        this.user = user;
     }
 
 
@@ -98,12 +101,11 @@ public class Image {
         this.isCanvas = isCanvas;
     }
 
-//    public List<Image> getImages() {
-//        return images;
-//    }
+    public User getUser() {
+        return user;
+    }
 
-//    public void setImages(List<Image> images) {
-//        this.images = images;
-//    }
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
-
