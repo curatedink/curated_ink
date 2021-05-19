@@ -1,6 +1,7 @@
 package com.curatedink.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "styles")
@@ -13,6 +14,9 @@ public class Style {
 
     @Column(nullable = false)
     private String style;
+
+    @ManyToMany(mappedBy = "styles")
+    private List<Style> styles;
 
     // ------------------------------------------------------ Constructors:
 

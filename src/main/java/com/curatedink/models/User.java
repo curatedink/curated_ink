@@ -38,6 +38,14 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Image> images;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "style_user",
+            joinColumns = {@JoinColumn(name = "style_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")}
+    )
+    private List<Style> styles;
+
     // Constructors
     public User() {
     }
