@@ -16,7 +16,10 @@ public class Style {
     private String style;
 
     @ManyToMany(mappedBy = "styles")
-    private List<Style> styles;
+    private List<Image> images;
+
+    @ManyToMany(mappedBy = "styles")
+    private List<User> users;
 
     // ------------------------------------------------------ Constructors:
 

@@ -40,9 +40,9 @@ public class User {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "style_user",
-            joinColumns = {@JoinColumn(name = "style_id")},
-            inverseJoinColumns = {@JoinColumn(name = "user_id")}
+            name = "user_style",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "style_id")}
     )
     private List<Style> styles;
 
