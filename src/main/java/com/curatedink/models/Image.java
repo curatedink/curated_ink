@@ -24,8 +24,35 @@ public class Image {
     @Column(nullable = true)
     private String creditedArtist;
 
+    public boolean isCanvas() {
+        return isCanvas;
+    }
+
+    public void setCanvas(boolean canvas) {
+        isCanvas = canvas;
+    }
+
+    public boolean isProfileImage() {
+        return isProfileImage;
+    }
+
+    public void setProfileImage(boolean profileImage) {
+        isProfileImage = profileImage;
+    }
+
+    public List<Style> getStyles() {
+        return styles;
+    }
+
+    public void setStyles(List<Style> styles) {
+        this.styles = styles;
+    }
+
     @Column(nullable = false)
     private boolean isCanvas;
+
+    @Column(nullable = false)
+    private boolean isProfileImage;
 
     @ManyToOne
     private User user;
