@@ -46,6 +46,17 @@ public class User {
     )
     private List<Style> styles;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<User> users;
+
+    @ManyToOne
+    @JoinTable(
+            name = "followers",
+            joinColumns = {@JoinColumn(name = "follower_id")},
+            inverseJoinColumns = {@JoinColumn(name = "followed_id")}
+    )
+    private User user;
+
     // Constructors
     public User() {
     }
@@ -64,7 +75,7 @@ public class User {
         images = copy.images;
     }
 
-    public User(long id, String username, String password, String displayName, boolean isArtist, String studioName, String biography, int zipcode, String email, List<Image> images) {
+    public User(long id, String username, String password, String displayName, boolean isArtist, String studioName, String biography, int zipcode, String email, List<Image> images, List<User> users) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -75,6 +86,7 @@ public class User {
         this.zipcode = zipcode;
         this.email = email;
         this.images = images;
+        this.users = users;
     }
 
     public long getId() {
@@ -156,4 +168,13 @@ public class User {
     public void setImages(List<Image> images) {
         this.images = images;
     }
+
+    public List<Style> getStyles() {
+        return styles;
+    }
+
+    public void setStyles(List<Style> styles) {
+        this.styles = styles;
+    }
+
 }
