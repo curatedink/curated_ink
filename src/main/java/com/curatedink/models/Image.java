@@ -1,6 +1,7 @@
 package com.curatedink.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "images")
@@ -28,6 +29,14 @@ public class Image {
 
     @ManyToOne
     private User user;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="image_style",
+            joinColumns={@JoinColumn(name="image_id")},
+            inverseJoinColumns={@JoinColumn(name="style_id")}
+    )
+    private List<Style> styles;
 
 
     // ------------------------------------------------------ Constructors:
