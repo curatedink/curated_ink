@@ -18,6 +18,9 @@ public class Style {
     @ManyToMany(mappedBy = "styles")
     private List<Image> images;
 
+    @ManyToMany(mappedBy = "styles")
+    private List<User> users;
+
     // ------------------------------------------------------ Constructors:
 
     public Style() {
