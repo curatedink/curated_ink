@@ -1,120 +1,123 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" >
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 
-<div th:fragment="style-list">
-
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="1" id="biomechanical">
-        <label class="form-check-label" for="biomechanical">
-            Biomechanical
-        </label>
+<div th:fragment="style-list" class="row">
+    <div class="col-6">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="1" id="biomechanical">
+            <label class="form-check-label" for="biomechanical">
+                Biomechanical
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="2" id="blackandgrey">
+            <label class="form-check-label" for="blackandgrey">
+                Black and Grey
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="3" id="blackwork">
+            <label class="form-check-label" for="blackwork">
+                Blackwork
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="4" id="fineline">
+            <label class="form-check-label" for="fineline">
+                Fineline
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="5" id="geometric">
+            <label class="form-check-label" for="geometric">
+                Geometric
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="6" id="illustrative">
+            <label class="form-check-label" for="illustrative">
+                Illustrative
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="7" id="japanese">
+            <label class="form-check-label" for="japanese">
+                Japanese (Irezumi)
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="8" id="lettering">
+            <label class="form-check-label" for="lettering">
+                Lettering
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="9" id="portraiture">
+            <label class="form-check-label" for="portraiture">
+                Portraiture
+            </label>
+        </div>
     </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="2" id="blackandgrey">
-        <label class="form-check-label" for="blackandgrey">
-            Black and Grey
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="3" id="blackwork">
-        <label class="form-check-label" for="blackwork">
-            Blackwork
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="4" id="fineline">
-        <label class="form-check-label" for="fineline">
-            Fineline
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="5" id="geometric">
-        <label class="form-check-label" for="geometric">
-            Geometric
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="6" id="illustrative">
-        <label class="form-check-label" for="illustrative">
-            Illustrative
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="7" id="japanese">
-        <label class="form-check-label" for="japanese">
-            Japanese (Irezumi)
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="8" id="lettering">
-        <label class="form-check-label" for="lettering">
-            Lettering
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="9" id="portraiture">
-        <label class="form-check-label" for="portraiture">
-            Portraiture
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="10" id="neotraditional">
-        <label class="form-check-label" for="neotraditional">
-            Neo Traditional
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="11" id="newschool">
-        <label class="form-check-label" for="newschool">
-            New School
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="12" id="traditional">
-        <label class="form-check-label" for="traditional">
-            Old School (Traditional)
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="13" id="stickandpoke">
-        <label class="form-check-label" for="stickandpoke">
-            Stick and Poke
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="14" id="surrealism">
-        <label class="form-check-label" for="surrealism">
-            Surrealism
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="15" id="realism">
-        <label class="form-check-label" for="realism">
-            Realism
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="16" id="tribal">
-        <label class="form-check-label" for="tribal">
-            Tribal
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="17" id="trashpolka">
-        <label class="form-check-label" for="trashpolka">
-            Trash Polka
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="18" id="watercolor">
-        <label class="form-check-label" for="watercolor">
-            Watercolor
-        </label>
+    <div class="col-6">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="10" id="neotraditional">
+            <label class="form-check-label" for="neotraditional">
+                Neo Traditional
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="11" id="newschool">
+            <label class="form-check-label" for="newschool">
+                New School
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="12" id="traditional">
+            <label class="form-check-label" for="traditional">
+                Old School (Traditional)
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="13" id="stickandpoke">
+            <label class="form-check-label" for="stickandpoke">
+                Stick and Poke
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="14" id="surrealism">
+            <label class="form-check-label" for="surrealism">
+                Surrealism
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="15" id="realism">
+            <label class="form-check-label" for="realism">
+                Realism
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="16" id="tribal">
+            <label class="form-check-label" for="tribal">
+                Tribal
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="17" id="trashpolka">
+            <label class="form-check-label" for="trashpolka">
+                Trash Polka
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="18" id="watercolor">
+            <label class="form-check-label" for="watercolor">
+                Watercolor
+            </label>
+        </div>
     </div>
 
 </div>
