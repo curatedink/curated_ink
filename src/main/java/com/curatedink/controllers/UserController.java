@@ -38,17 +38,17 @@ public class UserController {
 
     // ------------------------------------------------------ Artist Edit Profile (Update):
 
-    @GetMapping("/users/{id}/artist-edit")
+    @GetMapping("/artist-edit/{id}")
     public String editArtistProfile(@PathVariable("id")Long id, Model model){
-        User userToEdit = userDao.getOne(id);
-        model.addAttribute("user", userToEdit);
+        User currentUser = userDao.getOne(1L); // Artist user
+        model.addAttribute("user", currentUser);
         return "users/artist-edit";
     }
 
-    @PostMapping("/users/{id}/artist-edit")
+    @PostMapping("/artist-edit/{id}")
     public String update(@ModelAttribute User user, @PathVariable Long id){
         userDao.save(user);
-        return "redirect:/users/" + id;
+        return "redirect:/users/artist-profile" + id;
     }
 
     // -----------------------------------------------------
