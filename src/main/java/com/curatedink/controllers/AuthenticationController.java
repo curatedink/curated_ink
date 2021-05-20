@@ -26,8 +26,8 @@ public class AuthenticationController {
 
     // Test Artist Profile:
     @PostMapping("/login")
-    public String login(Model model, @RequestParam String username, @RequestParam String password) {
-        User user = userDao.findByUsername(username);
+    public String login(Model model, @RequestParam String email, @RequestParam String password) {
+        User user = userDao.findByEmail(email);
         System.out.println(user.getDisplayName());
         model.addAttribute("user", user);
         boolean userType = user.getIsArtist();
