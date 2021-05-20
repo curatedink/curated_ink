@@ -4,9 +4,7 @@ import com.curatedink.models.User;
 import com.curatedink.repositories.UserRepo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserController {
@@ -38,6 +36,19 @@ public class UserController {
     }
 
 
+    // ------------------------------------------------------ Artist Edit Profile (Update):
 
+    @GetMapping("/users/{id}/artist-edit")
+    public String editArtistProfile(@PathVariable("id")Long id, Model model){
+        User userToEdit = userDao.getOne(id);
+        model.addAttribute("user", userToEdit);
+        return "users/artist-edit";
+    }
+
+    @PostMapping("/users/{id}/artist-edit")
+    public String update(@ModelAttribute User user){
+        userDao.save(user);
+        return "redirect:/users/" + user.getId();
+    }
 
 }
