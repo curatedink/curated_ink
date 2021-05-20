@@ -11,7 +11,7 @@ public class User {
     @Column(columnDefinition = "INT UNSIGNED")
     private long id;
 
-    @Column(nullable = false, unique = true)
+    @Column
     private String username;
 
     @Column(nullable = false, unique = true)
@@ -32,7 +32,7 @@ public class User {
     @Column
     private int zipcode;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
