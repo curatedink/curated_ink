@@ -1,17 +1,22 @@
 package com.curatedink.controllers;
 
 import com.curatedink.models.User;
+import com.curatedink.repositories.UserRepo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserController {
-//    private UserRepository users;
-//    private PasswordEncoder passwordEncoder;
+
+    // ------------------------------------------------------ Dependency Injection:
+    private final UserRepo userDao;
+//    private PasswordEncoder passwordEncoder; // Security
+
+
+    public UserController(UserRepo userDao) {
+        this.userDao = userDao;
+    }
 
     // ------------------------------------------------------ User Sign-Up (Create):
 
@@ -22,15 +27,30 @@ public class UserController {
    }
 
 
-//    @PostMapping("/sign-up")
-//    public String saveUser(@ModelAttribute User user){
-//        String hash = passwordEncoder.encode(user.getPassword());
-//        user.setPassword(hash);
-//        users.save(user);
-//        return "redirect:/login";
-//    }
+    @PostMapping("/sign-up")
+    public String saveUser(@ModelAttribute User user){
+//        String hash = passwordEncoder.encode(user.getPassword()); // Security
+//        user.setPassword(hash); // Security
+        userDao.save(user);
+        return "redirect:/login";
+    }
 
 
+    // ------------------------------------------------------ Artist Edit Profile (Update):
 
+    @GetMapping("/artist-edit/{id}")
+    public String editArtistProfile(@PathVariable("id")Long id, Model model){
+        User currentUser = userDao.getOne(1L); // Artist user
+        model.addAttribute("user", currentUser);
+        return "users/artist-edit";
+    }
+
+    @PostMapping("/artist-edit/{id}")
+    public String update(@ModelAttribute User user, @PathVariable Long id){
+        userDao.save(user);
+        return "redirect:/users/artist-profile" + id;
+    }
+
+    // -----------------------------------------------------
 
 }
