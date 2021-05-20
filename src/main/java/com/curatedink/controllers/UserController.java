@@ -2,6 +2,7 @@ package com.curatedink.controllers;
 
 import com.curatedink.models.User;
 import com.curatedink.repositories.UserRepo;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,13 +10,17 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class UserController {
 
+    // Use the following line when we need access to the logged in user:
+    //(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()
+
     // ------------------------------------------------------ Dependency Injection:
     private final UserRepo userDao;
-//    private PasswordEncoder passwordEncoder; // Security
+    private PasswordEncoder passwordEncoder; // Security
 
 
-    public UserController(UserRepo userDao) {
+    public UserController(UserRepo userDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
     // ------------------------------------------------------ User Sign-Up (Create):
@@ -29,8 +34,8 @@ public class UserController {
 
     @PostMapping("/sign-up")
     public String saveUser(@ModelAttribute User user){
-//        String hash = passwordEncoder.encode(user.getPassword()); // Security
-//        user.setPassword(hash); // Security
+        String hash = passwordEncoder.encode(user.getPassword()); // Security
+        user.setPassword(hash); // Security
         userDao.save(user);
         return "redirect:/login";
     }
