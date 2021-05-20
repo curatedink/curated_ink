@@ -46,9 +46,11 @@ public class UserController {
     }
 
     @PostMapping("/users/{id}/artist-edit")
-    public String update(@ModelAttribute User user){
+    public String update(@ModelAttribute User user, @PathVariable Long id){
         userDao.save(user);
-        return "redirect:/users/" + user.getId();
+        return "redirect:/users/" + id;
     }
+
+    // -----------------------------------------------------
 
 }
