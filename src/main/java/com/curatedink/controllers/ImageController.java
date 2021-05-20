@@ -16,17 +16,21 @@ public class ImageController {
         this.imagesRepo = imagesRepo;
     }
 
+// view all images
     @GetMapping("/gallery")
     public String getAllImages(Model vModel) {
             vModel.addAttribute("images", imagesRepo.findAll());
             return "tattoos/gallery";
         }
 
+// view image by id
     @GetMapping("/gallery/{id}")
     @ResponseBody
     public String getOneImage(@PathVariable long id, Model vModel) {
         vModel.addAttribute("image", imagesRepo.getOne(id));
         return "gallery/{id}";
     }
+
+//
 
 }
