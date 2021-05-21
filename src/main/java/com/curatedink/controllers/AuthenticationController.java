@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AuthenticationController {
+
+    private final UserRepo userDao;
+
     public AuthenticationController(UserRepo userDao) {
         this.userDao = userDao;
     }
@@ -19,24 +22,21 @@ public class AuthenticationController {
         return "tattoos/login";
     }
 
-    private final UserRepo userDao;
-
-
     // ----------------- For Testing Only. Remove below when setting up spring security
 
-    // Test Artist Profile:
-    @PostMapping("/login")
-    public String login(Model model, @RequestParam String username, @RequestParam String password) {
-        User user = userDao.findByUsername(username);
-        System.out.println(user.getDisplayName());
-        model.addAttribute("user", user);
-        boolean userType = user.getIsArtist();
-        if (userType) {
-            return "users/artist-profile";
-        } else {
-            return "users/canvas-profile";
-        }
-    }
+//    // Test Artist Profile:
+//    @PostMapping("/login")
+//    public String login(Model model, @RequestParam String email, @RequestParam String password) {
+//        User user = userDao.findByEmail(email);
+//        System.out.println(user.getDisplayName());
+//        model.addAttribute("user", user);
+//        boolean userType = user.getIsArtist();
+//        if (userType) {
+//            return "users/artist-profile";
+//        } else {
+//            return "users/canvas-profile";
+//        }
+//    }
 
 
     // ----------------------------------> Remove the above when implementing security

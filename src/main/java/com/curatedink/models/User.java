@@ -11,10 +11,10 @@ public class User {
     @Column(columnDefinition = "INT UNSIGNED")
     private long id;
 
-    @Column(nullable = false, unique = true)
+    @Column
     private String username;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false, unique = true)
@@ -32,7 +32,7 @@ public class User {
     @Column
     private int zipcode;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -61,6 +61,9 @@ public class User {
     public User() {
     }
 
+    // Copy Constructor
+    // Used for the authentication process (login/logout):
+    // Used in fulfill the the contract defined by the interfaces in the security package
     public User(User copy) {
         id = copy.id;
         email = copy.email;

@@ -18,7 +18,7 @@
 <div>
     <h3>Artist Information</h3>
     <div class="row">
-        <a th:href="@{/canvas-profile{id}(id=${user.id})}" class="btn btn-block">View My Canvas Profile</a>
+        <a th:href="@{/canvas-profile/{id}(id=${user.id})}" class="btn btn-block">View My Canvas Profile</a>
         <a th:href="@{/request-form}" class="btn btn-block">Request Work</a>
     </div>
 </div>
@@ -31,15 +31,53 @@
             <div class="col-12 col-md-6" th:each="image : ${images}">
                 <div class="card-body">
                     <img th:text="${image.imageUrl}"/>
+                    <a th:href="@{/artist-profile/{id}(id=${image.id})}" class="btn" id="detailed-portfolio"
+                            data-toggle="modal"
+                            data-target="#artist-detailed">
+                        View Details
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<!--<div class="modal fade" id="artist-detailed" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">-->
+<!--    <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--&lt;!&ndash;                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>&ndash;&gt;-->
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <div class="card" style="width: 18rem;">-->
+<!--&lt;!&ndash;                    <img th:text="${image.imageUrl}"/>&ndash;&gt;-->
+<!--                    <div class="card-body">-->
+<!--&lt;!&ndash;                        <h3 th:text="${image.studioName}" class="card-title"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <p th:text="${image.comment}" class="card-text" />&ndash;&gt;-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--&lt;!&ndash;                <a th:href="@{/portfolio-edit/{id}(id=${image.id})}"&ndash;&gt;-->
+<!--                   class="btn">Edit</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
 
 <footer th:replace="partials/foot :: foot"/>
 
+<!--<script>-->
+
+<!--    $('#detailed-portfolio').on('click', function() {-->
+<!--        $('#artist-detailed').show();-->
+<!--    });-->
+
+<!--</script>-->
 
 </body>
 </html>

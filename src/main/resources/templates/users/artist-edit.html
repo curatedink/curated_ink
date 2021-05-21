@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <head th:replace=" partials/head :: head"/>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<nav th:replace=" partials/nav :: nav"/>
+
+
+<div class="container">
+    <div>
+        <h1 class="mb-4">Update your profile</h1>
+    </div>
+
+    <div class="container mb-4">
+
+        <form th:action="@{'/users/artist-edit'}" th:method="post" th:object="${user}">
+
+            <label for="email">Email</label>
+            <input id="email" th:field="*{email}" class="form-control mb-4" placeholder="Email"/>
+
+<!--            <label for="password">Password</label>-->
+<!--            <input id="password" type="password" th:field="*{password}" class="form-control mb-4"-->
+<!--                   placeholder="Password"/>-->
+
+            <label for="display_name">Display Name</label>
+            <input id="display_name" th:field="*{displayName}" class="form-control mb-4" placeholder="Display Name"/>
+
+            <label for="zipcode">Zip Code</label>
+            <input id="zipcode" th:field="*{zipcode}" class="form-control mb-4" placeholder="Zip Code"/>
+
+            <label for="biography">Bio</label>
+            <input id="biography" th:field="*{biography}" class="form-control mb-4"
+                   placeholder="What do you want the world to know?"/>
+
+            <label for="studio_name">Studio Name</label>
+            <input id="studio_name" th:field="*{studioName}" class="form-control mb-4" placeholder="Studio Name"/>
+
+            <label>What styles do you specialize in?</label>
+            <div th:replace=" partials/style-list :: style-list"/>
+
+            <button class="btn btn-block" type="submit">Update Profile</button>
+            <form th:action="@{/users/delete/{id}(id=${user.id})}" th:method="post">
+                <button class="btn">Delete Profile</button>
+            </form>
+        </form>
+    </div>
+</div>
+
+
+<footer th:replace="partials/foot :: foot"/>
+</body>
+</html>

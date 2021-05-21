@@ -76,13 +76,13 @@ public class Image {
         this.imageUrl = imageUrl;
     }
 
-    public Image(String imageUrl, String comment, String studioName, String creditedArtist, boolean isCanvas, User user) {
+    public Image(String imageUrl, String comment, String studioName, String creditedArtist, boolean isCanvas) {
         this.imageUrl = imageUrl;
         this.comment = comment;
         this.studioName = studioName;
         this.creditedArtist = creditedArtist;
         this.isCanvas = isCanvas;
-        this.user = user;
+//        this.user = user;
     }
 
 
