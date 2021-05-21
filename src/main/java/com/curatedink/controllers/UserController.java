@@ -44,17 +44,21 @@ public class UserController {
 
     // ------------------------------------------------------ Artist Edit Profile (Update):
 
-    @GetMapping("/artist-edit/{id}")
-    public String editArtistProfile(@PathVariable("id")Long id, Model model){
-        User currentUser = userDao.getOne(1L); // Artist user
-        model.addAttribute("user", currentUser);
+    @GetMapping("/artist-edit")
+    public String editArtistProfile(Model model){
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userToEdit = userDao.getOne(currentUser.getId());
+        model.addAttribute("user", userToEdit);
         return "users/artist-edit";
     }
 
-    @PostMapping("/artist-edit/{id}")
-    public String update(@ModelAttribute User user, @PathVariable Long id){
-        userDao.save(user);
-        return "redirect:/users/artist-profile" + id;
+    @PostMapping("/users/artist-edit")
+    public String update(@ModelAttribute User userToEdit){
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        userToEdit.setId(currentUser.getId());
+        userToEdit.setPassword(passwordEncoder.encode(currentUser.getPassword()));
+        userDao.save(userToEdit);
+        return "redirect:/profile-page";
     }
 
     // -----------------------------------------------------

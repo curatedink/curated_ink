@@ -18,14 +18,14 @@
 
     <div class="container mb-4">
 
-        <form th:action="@{'/users/artist-edit/' + ${user.id}}" th:method="post" th:object="${user}">
+        <form th:action="@{'/users/artist-edit'}" th:method="post" th:object="${user}">
 
             <label for="email">Email</label>
             <input id="email" th:field="*{email}" class="form-control mb-4" placeholder="Email"/>
 
-            <label for="password">Password</label>
-            <input id="password" type="password" th:field="*{password}" class="form-control mb-4"
-                   placeholder="Password"/>
+<!--            <label for="password">Password</label>-->
+<!--            <input id="password" type="password" th:field="*{password}" class="form-control mb-4"-->
+<!--                   placeholder="Password"/>-->
 
             <label for="display_name">Display Name</label>
             <input id="display_name" th:field="*{displayName}" class="form-control mb-4" placeholder="Display Name"/>
