@@ -56,7 +56,8 @@ public class UserController {
     public String update(@ModelAttribute User userToEdit){
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         userToEdit.setId(currentUser.getId());
-        userToEdit.setPassword(passwordEncoder.encode(currentUser.getPassword()));
+        userToEdit.setPassword(currentUser.getPassword());
+        userToEdit.setUsername(currentUser.getUsername());
         userDao.save(userToEdit);
         return "redirect:/profile-page";
     }
