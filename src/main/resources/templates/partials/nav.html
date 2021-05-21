@@ -18,6 +18,16 @@
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
         <ul class="navbar-nav">
+            <li>
+                <form th:action="@{/gallery}" th:method="get" class="form-inline mr-sm-2">
+                    <button class="nav-link btn">Explore the Gallery</button>
+                </form>
+            </li>
+            <li>
+                <form th:action="@{/profile-page}" th:method="get" class="form-inline mr-sm-2">
+                    <button class="nav-link btn">View Your Profile</button>
+                </form>
+            </li>
             <li class="nav-item active">
                 <form th:action="@{/artist-upload}" th:method="post" class="form-inline mr-sm-2">
                     <button class="nav-link btn">Add a new image</button>
@@ -26,7 +36,7 @@
             <li class="nav-item">
 <!--                <a class="nav-link" th:href="@{/users/artist-edit/{id}(id=${user.id})}">Edit Profile</a>-->
                 <form th:action="@{/artist-edit/{id}}" th:method="post" class="form-inline mr-sm-2">
-                    <button class="nav-link btn">Edit Profile</button>
+                    <button class="nav-link btn">Edit Your Profile</button>
                 </form>
             </li>
             <li>
@@ -34,11 +44,7 @@
                     <button class="nav-link btn">Logout</button>
                 </form>
             </li>
-            <li>
-                <form th:action="@{/login}" th:method="get" class="form-inline mr-sm-2">
-                    <button class="nav-link btn">Login</button>
-                </form>
-            </li>
+
         </ul>
 
     </div>
