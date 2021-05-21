@@ -7,9 +7,9 @@ INSERT INTO users (biography, display_name, email, is_artist, password, studio_n
 ('canvas here', 'rob', 'rob@rob.com', false, '123', '', 'rob', 123);
 
 INSERT INTO images (comment, credited_artist, image_url, is_canvas, is_profile_image, studio_name) VALUES
-('nice pic', 'bob', 'https://images.pexels.com/photos/1645230/pexels-photo-1645230.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260', false, true, 'Ghibli'),
-('cool pic', 'bob', 'https://images.pexels.com/photos/1527009/pexels-photo-1527009.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', false, false, 'Ghibli'),
-('', 'jen', 'https://images.pexels.com/photos/4360178/pexels-photo-4360178.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260', true, false, 'Ross Studio');
+('nice pic', 'bob', 'https://i.imgur.com/oFIc11c.jpeg', false, true, 'Ghibli'),
+('cool pic', 'bob', 'https://i.imgur.com/FiuVx2J.jpeg', false, false, 'Ghibli'),
+('', 'jen', 'https://i.imgur.com/W9jF6Zw.jpeg', true, false, 'Ross Studio');
 
 INSERT INTO styles (style) VALUES
 ('Bio-mechanical'),
