@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <head th:replace=" partials/head :: head"/>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<nav th:replace=" partials/nav :: nav"/>
+
+
+<div class="container">
+    <div>
+        <h1 class="mb-4">Update your Image</h1>
+    </div>
+
+    <div class="container mb-4">
+
+        <form th:action="@{'/tattoos/canvas-image-edit/' + ${image.id}}" th:method="post" th:object="${image}">
+
+            <label for="imageUrl">Image URL</label>
+            <input id="imageUrl" th:field="*{imageUrl}" class="form-control mb-4" placeholder="Image URL"/>
+
+            <label for="comment">Comment</label>
+            <input id="comment" th:field="*{comment}" class="form-control mb-4"
+                   placeholder="Wanna leave a comment about the piece?"/>
+
+            <label for="creditedArtist">Artist Name</label>
+            <input id="creditedArtist" th:field="*{creditedArtist}" class="form-control mb-4"
+                   placeholder="Artist Name"/>
+
+            <label for="studioName">Studio Name</label>
+            <input id="studioName" th:field="*{studioName}" class="form-control mb-4" placeholder="Studio Name"/>
+
+            <label>What style is this work?</label>
+            <div th:replace=" partials/style-list :: style-list"/>
+
+            <button class="btn btn-block" type="submit">Update Image</button>
+            <form th:action="@{/tattoos/delete/{id}(id=${image.id})}" th:method="post">-->
+                <button class="btn">Delete Image</button>
+            </form>
+        </form>
+    </div>
+</div>
+
+
+<footer th:replace="partials/foot :: foot"/>
+</body>
+</html>
