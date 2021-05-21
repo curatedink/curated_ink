@@ -14,10 +14,10 @@ public class EmailService {
     @Value("${spring.mail.from}")
     private String from;
 
-    public void prepareAndSend(Ad ad, String subject, String body) {
+    public void prepareAndSend(User user, String subject, String body) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom(from);
-        msg.setTo(ad.getOwner().getEmail());
+        msg.setTo(user.getOwner().getEmail());
         msg.setSubject(subject);
         msg.setText(body);
 
