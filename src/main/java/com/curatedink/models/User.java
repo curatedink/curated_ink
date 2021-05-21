@@ -61,6 +61,9 @@ public class User {
     public User() {
     }
 
+    // Copy Constructor
+    // Used for the authentication process (login/logout):
+    // Used in fulfill the the contract defined by the interfaces in the security package
     public User(User copy) {
         id = copy.id;
         email = copy.email;

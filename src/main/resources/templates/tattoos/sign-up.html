@@ -21,12 +21,15 @@
         <div class="container mb-4">
             <form th:action="@{/sign-up}" method="POST" th:object="${user}">
 
-                <label for="email">Email</label>
-                <input id="email" th:field="*{email}" class="form-control mb-4" placeholder="Email"/>
+                <label for="username">Email</label>
+                <input id="username" th:field="*{username}" class="form-control mb-4" placeholder="Username"/>
 
                 <label for="password">Password</label>
                 <input id="password" type="password" th:field="*{password}" class="form-control mb-4"
                        placeholder="Password"/>
+
+                <label for="email">Email</label>
+                <input id="email" th:field="*{email}" class="form-control mb-4" placeholder="Email"/>
 
                 <label for="display_name">Display Name</label>
                 <input id="display_name" th:field="*{displayName}" class="form-control mb-4" placeholder="Display Name"/>
