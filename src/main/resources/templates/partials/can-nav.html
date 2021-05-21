@@ -19,12 +19,15 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <form th:action="@{/canvas-upload}" th:method="post" class="form-inline mr-sm-2">
+                <a href="/tattoos/canvas-upload" class="form-inline mr-sm-2">
                     <button class="nav-link btn">Add a new image</button>
-                </form>
+                </a>
+<!--                <form th:action="@{/canvas-upload}" th:method="post" class="form-inline mr-sm-2">-->
+<!--                    <button class="nav-link btn">Add a new image</button>-->
+<!--                </form>-->
             </li>
             <li class="nav-item">
-                <!--                <a class="nav-link" th:href="@{/users/artist-edit/{id}(id=${user.id})}">Edit Profile</a>-->
+<!--                <a class="nav-link" th:href="@{/users/artist-edit/{id}(id=${user.id})}">Edit Profile</a>-->
                 <form th:action="@{/canvas-edit/{id}}" th:method="post" class="form-inline mr-sm-2">
                     <button class="nav-link btn">Edit Profile</button>
                 </form>
