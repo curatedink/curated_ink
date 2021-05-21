@@ -1,3 +1,6 @@
+package com.curatedink.services;
+
+import com.curatedink.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
@@ -17,7 +20,7 @@ public class EmailService {
     public void prepareAndSend(User user, String subject, String body) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom(from);
-        msg.setTo(user.getOwner().getEmail());
+        msg.setTo(user.getEmail());
         msg.setSubject(subject);
         msg.setText(body);
 
