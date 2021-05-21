@@ -1,6 +1,7 @@
 package com.curatedink.controllers;
 
 import com.curatedink.models.User;
+import com.curatedink.repositories.ImageRepo;
 import com.curatedink.repositories.UserRepo;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,11 +17,13 @@ public class UserController {
 
     // ------------------------------------------------------ Dependency Injection:
     private final UserRepo userDao;
+    private final ImageRepo imagesDao;
     private PasswordEncoder passwordEncoder; // Security
 
 
-    public UserController(UserRepo userDao, PasswordEncoder passwordEncoder) {
+    public UserController(UserRepo userDao, ImageRepo imagesDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
+        this.imagesDao = imagesDao;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -70,7 +73,10 @@ public class UserController {
     public String pointToProfile(Model model) {
         // Grabbing the current user object with the next line
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long currentUserId = currentUser.getId();
         model.addAttribute("user", currentUser);
+        if (currentUserId == currentUser.getId())
+        model.addAttribute("images", imagesDao.findAll());
         boolean userType = currentUser.getIsArtist();
         if (userType) {
             return "users/artist-profile";
