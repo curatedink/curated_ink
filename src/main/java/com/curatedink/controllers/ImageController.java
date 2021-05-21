@@ -38,14 +38,14 @@ public class ImageController {
     }
 
     // create image
-    @GetMapping("/tattoos/artist-upload")
+    @GetMapping("tattoos/artist-upload")
     public String create(Model vModel) {
         vModel.addAttribute("image", new Image());
         return "tattoos/artist-upload";
     }
 
     // insert image into images table
-    @PostMapping("/tattoos/artist-upload")
+    @PostMapping("/artist-upload")
     public String insert(@ModelAttribute Image image) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User author = usersDao.getOne(principal.getId());
