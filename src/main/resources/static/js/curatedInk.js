@@ -1,0 +1,1 @@
+$('#artist-detailed').modal('show')
