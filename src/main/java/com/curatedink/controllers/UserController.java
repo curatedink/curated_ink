@@ -2,6 +2,7 @@ package com.curatedink.controllers;
 
 import com.curatedink.models.User;
 import com.curatedink.repositories.UserRepo;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,5 +58,20 @@ public class UserController {
     }
 
     // -----------------------------------------------------
+
+    // After logging in the user is directed here to then be directed according to their
+    // usertype (isArtist) value
+    @GetMapping("/profile-page")
+    public String pointToProfile(Model model) {
+        // Grabbing the current user object with the next line
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", currentUser);
+        boolean userType = currentUser.getIsArtist();
+        if (userType) {
+            return "users/artist-profile";
+        } else {
+            return "users/canvas-profile";
+        }
+    }
 
 }
