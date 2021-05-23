@@ -54,4 +54,24 @@ public class ImageController {
         return "redirect:/profile-page";
     }
 
+
+
+//    edit artist image
+    @GetMapping("/artist-image-edit/{id}")
+    public String editArtistImage(@PathVariable("id") long id, Model model) {
+        Image imageToEdit = imagesDao.getOne(id);
+        model.addAttribute("image", imageToEdit);
+        return "tattoos/artist-image-edit";
+    }
+
+    @PostMapping("/tattoos/artist-image-edit/{id}")
+    public String updateImage(@ModelAttribute Image imageToEdit) {
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        imageToEdit.setUser(currentUser);
+        imagesDao.save(imageToEdit);
+        return "redirect:/profile-page";
+    }
+
+
+
 }
