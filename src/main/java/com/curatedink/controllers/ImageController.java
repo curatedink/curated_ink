@@ -65,10 +65,18 @@ public class ImageController {
     }
 
     @PostMapping("/tattoos/artist-image-edit/{id}")
-    public String updateImage(@ModelAttribute Image imageToEdit) {
+    public String updateArtistImage(@ModelAttribute Image imageToEdit) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         imageToEdit.setUser(currentUser);
         imagesDao.save(imageToEdit);
+        return "redirect:/profile-page";
+    }
+
+
+    @PostMapping("/tattoos/delete/{id}")
+    public String deleteImage(@PathVariable("id") long id) {
+        Image imageToDelete = imagesDao.getOne(id);
+        imagesDao.delete(imageToDelete);
         return "redirect:/profile-page";
     }
 
