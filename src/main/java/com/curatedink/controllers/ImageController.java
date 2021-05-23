@@ -37,16 +37,33 @@ public class ImageController {
         return "tattoos/gallery";
     }
 
-    // create image
+    // create artist image
     @GetMapping("tattoos/artist-upload")
     public String create(Model vModel) {
         vModel.addAttribute("image", new Image());
         return "tattoos/artist-upload";
     }
 
-    // insert image into images table
+    // insert artist image into images table
     @PostMapping("/artist-upload")
     public String insert(@ModelAttribute Image image) {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User author = usersDao.getOne(principal.getId());
+        image.setUser(author);
+        imagesDao.save(image);
+        return "redirect:/profile-page";
+    }
+
+    // create canvas image
+    @GetMapping("tattoos/canvas-upload")
+    public String createCanvasImage(Model vModel) {
+        vModel.addAttribute("image", new Image());
+        return "tattoos/canvas-upload";
+    }
+
+    // insert canvas image into images table
+    @PostMapping("/canvas-upload")
+    public String insertCanvasImage(@ModelAttribute Image image) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User author = usersDao.getOne(principal.getId());
         image.setUser(author);
@@ -72,7 +89,7 @@ public class ImageController {
         return "redirect:/profile-page";
     }
 
-
+//   delete artist image
     @PostMapping("/tattoos/delete/{id}")
     public String deleteImage(@PathVariable("id") long id) {
         Image imageToDelete = imagesDao.getOne(id);
