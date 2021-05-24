@@ -24,20 +24,21 @@
 </div>
 <div>
     <div class="container">
-        <div class="row justify-space-between">
+        <div class="row md-6 justify-content-around">
 
             <!--            ****Need to refactor to only show specific artist's work****-->
 
-            <div class="col-12 col-md-6" th:each="image : ${images}">
+            <div class="card m-5" style="width: 24rem;" th:each="image : ${images}">
                 <div class="card-body">
-                    <img th:src="${image.imageUrl}"/>
+                    <img th:src="${image.imageUrl}" class="img-thumbnail rounded mx-auto d-block"/>
                     <a class="btn" id="detailed-portfolio"
                        data-toggle="modal"
-                       data-target="#artist-detailed">
+                       th:attr="data-target=${'#artist-detailed' + image.id}" >
                         View Details
                     </a>
                 </div>
-                <div class="modal fade" id="artist-detailed" tabindex="-1" role="dialog"
+                <div class="modal fade" id="artist-detailed" th:attr="id=${'artist-detailed' + image.id}"
+                     tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -51,7 +52,8 @@
                                 <div class="card" style="width: 18rem;">
                                     <img th:src="${image.imageUrl}"/>
                                     <div class="card-body">
-                                        <h3 th:text="${image.studioName}" class="card-title"/>
+                                        <h3 th:text="${image.creditedArtist}" class="card-title"/>
+                                        <h5 th:text="${image.studioName}" class="card-text"/>
                                         <p th:text="${image.comment}" class="card-text"/>
                                     </div>
                                 </div>
