@@ -30,14 +30,14 @@ public class UserController {
     // ------------------------------------------------------ User Sign-Up (Create):
 
     @GetMapping("/sign-up")
-    public String showSignupForm(Model model){
+    public String showSignupForm(Model model) {
         model.addAttribute("user", new User());
         return "tattoos/sign-up";
-   }
+    }
 
 
     @PostMapping("/sign-up")
-    public String saveUser(@ModelAttribute User user){
+    public String saveUser(@ModelAttribute User user) {
         String hash = passwordEncoder.encode(user.getPassword()); // Security
         user.setPassword(hash); // Security
         userDao.save(user);
@@ -48,7 +48,7 @@ public class UserController {
     // ------------------------------------------------------ Artist Edit Profile (Update):
 
     @GetMapping("/artist-edit")
-    public String editArtistProfile(Model model){
+    public String editArtistProfile(Model model) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userToEdit = userDao.getOne(currentUser.getId());
         model.addAttribute("user", userToEdit);
@@ -56,7 +56,28 @@ public class UserController {
     }
 
     @PostMapping("/users/artist-edit")
-    public String update(@ModelAttribute User userToEdit){
+    public String update(@ModelAttribute User userToEdit) {
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        userToEdit.setId(currentUser.getId());
+        userToEdit.setPassword(currentUser.getPassword());
+        userToEdit.setUsername(currentUser.getUsername());
+        userDao.save(userToEdit);
+        return "redirect:/profile-page";
+    }
+
+
+    // ------------------------------------------------------ Canvas Edit Profile (Update):
+
+    @GetMapping("/canvas-edit")
+    public String editCanvasProfile(Model model) {
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userToEdit = userDao.getOne(currentUser.getId());
+        model.addAttribute("user", userToEdit);
+        return "users/canvas-edit";
+    }
+
+    @PostMapping("/users/canvas-edit")
+    public String updateCanvas(@ModelAttribute User userToEdit) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         userToEdit.setId(currentUser.getId());
         userToEdit.setPassword(currentUser.getPassword());
@@ -73,10 +94,9 @@ public class UserController {
     public String pointToProfile(Model model) {
         // Grabbing the current user object with the next line
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Long currentUserId = currentUser.getId();
+        String currentUserId = String.valueOf(currentUser.getId());
         model.addAttribute("user", currentUser);
-        if (currentUserId == currentUser.getId())
-        model.addAttribute("images", imagesDao.findAll());
+        model.addAttribute("images", userDao.getOne(Long.valueOf(currentUserId)).getImages());
         boolean userType = currentUser.getIsArtist();
         if (userType) {
             return "users/artist-profile";
