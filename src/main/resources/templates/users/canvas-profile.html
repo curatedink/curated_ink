@@ -57,6 +57,9 @@
 <!--                                Might need to change this to take out the id portion-->
                                 <a th:href="@{/canvas-image-edit/{id}(id=${image.id})}"
                                    class="btn">Edit</a>
+                                <form th:action="@{/tattoos/delete/{id}(id=${image.id})}" th:method="post">
+                                    <button class="btn">Delete Image</button>
+                                </form>
                             </div>
                         </div>
                     </div>
