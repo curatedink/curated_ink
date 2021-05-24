@@ -26,7 +26,40 @@
 
             <div class="col-12 col-md-6" th:each="image : ${images}">
                 <div class="card-body">
-                    <img th:text="${image.imageUrl}"/>
+                    <img th:src="${image.imageUrl}"/>
+                    <a class="btn" id="detailed-work"
+                       data-toggle="modal"
+                       data-target="#canvas-detailed">
+                        View Details
+                    </a>
+                </div>
+                <div class="modal fade" id="canvas-detailed" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <!--                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>-->
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card" style="width: 18rem;">
+                                    <img th:src="${image.imageUrl}"/>
+                                    <div class="card-body">
+                                        <h3 th:text="${image.studioName}" class="card-title"/>
+                                        <p th:text="${image.comment}" class="card-text"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+
+<!--                                Might need to change this to take out the id portion-->
+                                <a th:href="@{/canvas-image-edit/{id}(id=${image.id})}"
+                                   class="btn">Edit</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -36,6 +69,12 @@
 
 <footer th:replace="partials/foot :: foot"/>
 
+<script>
 
+    $('#detailed-work').on('click', function() {
+        $('#canvas-detailed').show();
+    });
+
+</script>
 </body>
 </html>
