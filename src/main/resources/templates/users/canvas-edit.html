@@ -38,10 +38,12 @@
                    placeholder="What do you want the world to know?"/>
 
             <button class="btn btn-block" type="submit">Update Profile</button>
-            <form th:action="@{/users/delete}" th:method="post">
-                <button class="btn">Delete Profile</button>
-            </form>
         </form>
+
+        <form th:action="@{/users/delete}" th:method="post">
+        <button class="btn" type="submit">Delete Profile</button>
+        </form>
+
     </div>
 </div>
 

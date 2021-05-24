@@ -44,11 +44,12 @@
             <div th:replace=" partials/style-list :: style-list"/>
 
             <button class="btn btn-block" type="submit">Update Profile</button>
-            <form th:action="@{/users/delete/{id}(id=${user.id})}" th:method="post">
-                <button class="btn">Delete Profile</button>
-            </form>
         </form>
-    </div>
+
+        <form th:action="@{/users/delete}" th:method="post">
+            <button class="btn" type="submit">Delete Profile</button>
+        </form>
+</div>
 </div>
 
 
