@@ -17,20 +17,12 @@
             <h1 class="">Send email....</h1>
         </div>
 
-        <div class="mb-2">
-            <div th:if="${param.error}">
-                Invalid Username and Password.
-            </div>
-            <div th:if="${param.logout}">
-                You have been logged out.
-            </div>
-        </div>
 
         <div class="container mb-4">
 
             <form th:action="@{/send-email}" method="post">
                 <div class="mb-3">
-                    <input id="email" name="username" class="form-control" placeholder="Username" type="text"/>
+                    <input id="email" name="email" class="send-email" placeholder="Email" type="text"/>
                 </div>
 
                 <div>
