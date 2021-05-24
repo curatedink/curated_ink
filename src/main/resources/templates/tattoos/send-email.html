@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Login</title>
+    <title>Send Email Page</title>
 
     <head th:replace=" partials/head :: head"/>
     <link rel="stylesheet" th:href="@{/style.css}">
@@ -10,26 +10,29 @@
 </head>
 <body>
 
-<div class="">
+<div class="email-class">
     <div class="container">
 
         <div>
-            <h1 class="">Send email....</h1>
+            <h2 class="">Send Email</h2>
         </div>
 
 
         <div class="container mb-4">
 
             <form th:action="@{/send-email}" method="post">
-                <div class="mb-3">
-                    <input id="email" name="email" class="send-email" placeholder="Email" type="text"/>
-                </div>
 
-                <div>
-                    <input class="btn btn-block" type="submit" value="Send email"/>
-                </div>
+                    Name:<br>
+                    <input type="text" size="19" name="Contact-Name"><br><br>
+                    Email:<br>
+                    <input type="email" name="Contact-Email"><br><br>
+                    Message:<br>
+                    <textarea name="Contact-Message" rows="6″ cols="20″>
+                    </textarea>
+                    <br><br>
+                    <button type="submit" value="Submit">Send</button>
+
             </form>
-
         </div>
     </div>
 </div>
