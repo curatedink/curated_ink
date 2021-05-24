@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Login</title>
+
+    <head th:replace=" partials/head :: head"/>
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+</head>
+<body>
+
+<div class="">
+    <div class="container">
+
+        <div>
+            <h1 class="">Send email....</h1>
+        </div>
+
+        <div class="mb-2">
+            <div th:if="${param.error}">
+                Invalid Username and Password.
+            </div>
+            <div th:if="${param.logout}">
+                You have been logged out.
+            </div>
+        </div>
+
+        <div class="container mb-4">
+
+            <form th:action="@{/send-email}" method="post">
+                <div class="mb-3">
+                    <input id="email" name="username" class="form-control" placeholder="Username" type="text"/>
+                </div>
+
+                <div>
+                    <input class="btn btn-block" type="submit" value="Send email"/>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<footer th:include="partials/foot :: foot"/>
+
+</body>
+</html>
