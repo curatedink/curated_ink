@@ -105,4 +105,13 @@ public class UserController {
         }
     }
 
+    // ------------------------------------------------------ Delete a User:
+    // Keep an eye on issues with foreign keys
+    @PostMapping("/users/delete")
+    public String deleteUser(){
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        userDao.delete(userDao.getOne(currentUser.getId()));
+        return "redirect:/";
+    }
+
 }
