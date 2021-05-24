@@ -71,6 +71,21 @@ public class ImageController {
         return "redirect:/profile-page";
     }
 
+    //    edit canvas image
+    @GetMapping("/canvas-image-edit/{id}")
+    public String editCanvasImage(@PathVariable("id") long id, Model model) {
+        Image imageToEdit = imagesDao.getOne(id);
+        model.addAttribute("image", imageToEdit);
+        return "tattoos/canvas-image-edit";
+    }
+
+    @PostMapping("/tattoos/canvas-image-edit/{id}")
+    public String updateCanvasImage(@ModelAttribute Image imageToEdit) {
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        imageToEdit.setUser(currentUser);
+        imagesDao.save(imageToEdit);
+        return "redirect:/profile-page";
+    }
 
 
 //    edit artist image
@@ -89,7 +104,7 @@ public class ImageController {
         return "redirect:/profile-page";
     }
 
-//   delete artist image
+//   delete image
     @PostMapping("/tattoos/delete/{id}")
     public String deleteImage(@PathVariable("id") long id) {
         Image imageToDelete = imagesDao.getOne(id);
