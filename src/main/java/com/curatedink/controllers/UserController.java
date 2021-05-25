@@ -1,5 +1,6 @@
 package com.curatedink.controllers;
 
+import com.curatedink.models.Style;
 import com.curatedink.models.User;
 import com.curatedink.repositories.ImageRepo;
 import com.curatedink.repositories.UserRepo;
@@ -8,6 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -37,9 +40,10 @@ public class UserController {
 
 
     @PostMapping("/sign-up")
-    public String saveUser(@ModelAttribute User user) {
+    public String saveUser(@ModelAttribute User user, @RequestParam(name="style") List<Style> styles) {
         String hash = passwordEncoder.encode(user.getPassword()); // Security
         user.setPassword(hash); // Security
+        user.setStyles(styles);
         userDao.save(user);
         return "redirect:/login";
     }
@@ -56,11 +60,12 @@ public class UserController {
     }
 
     @PostMapping("/users/artist-edit")
-    public String update(@ModelAttribute User userToEdit) {
+    public String update(@ModelAttribute User userToEdit, @RequestParam(name="style") List<Style> styles) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         userToEdit.setId(currentUser.getId());
         userToEdit.setPassword(currentUser.getPassword());
         userToEdit.setUsername(currentUser.getUsername());
+        userToEdit.setStyles(styles);
         userDao.save(userToEdit);
         return "redirect:/profile-page";
     }
