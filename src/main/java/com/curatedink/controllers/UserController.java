@@ -4,6 +4,7 @@ import com.curatedink.models.Style;
 import com.curatedink.models.User;
 import com.curatedink.repositories.ImageRepo;
 import com.curatedink.repositories.UserRepo;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -119,4 +120,14 @@ public class UserController {
         return "redirect:/";
     }
 
+    // ------------------------------------------------------ Follow a User:
+
+    @PostMapping("users/follow/{id}") // put this action on the follow button
+    @ResponseStatus(value = HttpStatus.OK)
+    public void followUser(@PathVariable long id){
+        //get current user:
+        User principle = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = userDao.getOne(principle.getId());
+        // add the path variable id to the followed_id and the current user to the follower_id
+    }
 }
