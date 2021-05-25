@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Ooops, Not Found</title>
+
+    <head th:replace=" partials/head :: head"/>
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+</head>
+<body>
+    <h1>Page not found!!</h1>
+    <p>Watch a video instead</p>
+        <iframe
+                width="420"
+                height="315"
+                src="https://www.https://www.youtube.com/watch?v=PzK4ZXa2Tbc"
+                frameborder="0"
+                allowfullscreen="allowfullscreen"
+        >
+
+        </iframe>
+    <footer th:include="partials/foot :: foot"/>
+    </body>
+</html>
