@@ -18,35 +18,11 @@ public class Image {
     @Column(columnDefinition = "TEXT")
     private String comment;
 
-    @Column(nullable = true)
+    @Column
     private String studioName;
 
-    @Column(nullable = true)
+    @Column
     private String creditedArtist;
-
-    public boolean isCanvas() {
-        return isCanvas;
-    }
-
-    public void setCanvas(boolean canvas) {
-        isCanvas = canvas;
-    }
-
-    public boolean isProfileImage() {
-        return isProfileImage;
-    }
-
-    public void setProfileImage(boolean profileImage) {
-        isProfileImage = profileImage;
-    }
-
-    public List<Style> getStyles() {
-        return styles;
-    }
-
-    public void setStyles(List<Style> styles) {
-        this.styles = styles;
-    }
 
     @Column(nullable = false)
     private boolean isCanvas;
@@ -66,8 +42,7 @@ public class Image {
     private List<Style> styles;
 
 
-    // ------------------------------------------------------ Constructors:
-
+    // Constructors
 
     public Image() {
     }
@@ -76,18 +51,17 @@ public class Image {
         this.imageUrl = imageUrl;
     }
 
-    public Image(String imageUrl, String comment, String studioName, String creditedArtist, boolean isCanvas) {
+    public Image(String imageUrl, String comment, String studioName, String creditedArtist, boolean isCanvas, boolean isProfileImage) {
         this.imageUrl = imageUrl;
         this.comment = comment;
         this.studioName = studioName;
         this.creditedArtist = creditedArtist;
         this.isCanvas = isCanvas;
-//        this.user = user;
+        this.isProfileImage = isProfileImage;
     }
 
 
-    // ------------------------------------------------------ Getters & Setters:
-
+    // Getters & Setters
 
     public long getId() {
         return id;
@@ -137,11 +111,20 @@ public class Image {
         this.isCanvas = isCanvas;
     }
 
-    public User getUser() {
-        return user;
+    public boolean getIsProfileImage() {
+        return isProfileImage;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setIsProfileImage(boolean isProfileImage) {
+        this.isProfileImage = isProfileImage;
     }
+
+    public List<Style> getStyles() {
+        return styles;
+    }
+
+    public void setStyles(List<Style> styles) {
+        this.styles = styles;
+    }
+
 }
