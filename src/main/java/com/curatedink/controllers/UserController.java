@@ -85,7 +85,7 @@ public class UserController {
     public String welcome() {
     User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     User author = userDao.getOne(owner.getId());
-    emailService.prepareAndSend(subject, body);
+//    emailService.prepareAndSend(subject, body);
         return "artist-profile";
     }
 
