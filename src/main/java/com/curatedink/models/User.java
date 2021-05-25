@@ -46,16 +46,16 @@ public class User {
     )
     private List<Style> styles;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<User> users;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+//    private User user;
 
-    @ManyToOne
+    @OneToMany
     @JoinTable(
             name = "followers",
-            joinColumns = {@JoinColumn(name = "follower_id")},
+            joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "followed_id")}
     )
-    private User user;
+    private List<User> followingList;
 
     // Constructors
     public User() {
@@ -78,7 +78,7 @@ public class User {
         images = copy.images;
     }
 
-    public User(long id, String username, String password, String displayName, boolean isArtist, String studioName, String biography, int zipcode, String email, List<Image> images, List<User> users) {
+    public User(long id, String username, String password, String displayName, boolean isArtist, String studioName, String biography, int zipcode, String email, List<Image> images, List<User> followingList) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -89,7 +89,7 @@ public class User {
         this.zipcode = zipcode;
         this.email = email;
         this.images = images;
-        this.users = users;
+        this.followingList = followingList;
     }
 
     public long getId() {
@@ -180,19 +180,11 @@ public class User {
         this.styles = styles;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<User> getFollowingList() {
+        return followingList;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public void setFollowingList(List<User> followingList) {
+        this.followingList = followingList;
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -142,22 +143,16 @@ public class UserController {
     // ------------------------------------------------------ Follow a User:
 
     @PostMapping("/users/follow/{id}") // put this action on the follow button
-//    @ResponseStatus(value = HttpStatus.OK)
-    public String followUser(@PathVariable long id) {
+    public String followUser(@PathVariable long id){
         //get current user:
         User principle = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userDao.getOne(principle.getId());
         User userToFollow = userDao.getOne(id);
-        List<User> followers = userToFollow.getUsers();
-
-        followers.add(currentUser);
-
-        userToFollow.setUsers(followers);
-        currentUser.setUser(userToFollow);
-
+        List<User> following = currentUser.getFollowingList();
+        following.add(userToFollow);
+        currentUser.setFollowingList(following);
         userDao.save(currentUser);
-
-        return "redirect:/profile/" + id;
+        return "redirect:/posts";
     }
 
 }
