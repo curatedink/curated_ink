@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -41,7 +42,7 @@ public class UserController {
 
 
     @PostMapping("/sign-up")
-    public String saveUser(@ModelAttribute User user, @RequestParam(name="style") List<Style> styles) {
+    public String saveUser(@ModelAttribute User user, @RequestParam(name = "style") List<Style> styles) {
         String hash = passwordEncoder.encode(user.getPassword()); // Security
         user.setPassword(hash); // Security
         user.setStyles(styles);
@@ -61,7 +62,7 @@ public class UserController {
     }
 
     @PostMapping("/users/artist-edit")
-    public String update(@ModelAttribute User userToEdit, @RequestParam(name="style") List<Style> styles) {
+    public String update(@ModelAttribute User userToEdit, @RequestParam(name = "style") List<Style> styles) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         userToEdit.setId(currentUser.getId());
         userToEdit.setPassword(currentUser.getPassword());
@@ -116,7 +117,7 @@ public class UserController {
     public String pointToSpecificProfile(Model model, @PathVariable long id) {
         // Grabbing the current user object with the next line
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User profileOwner =  userDao.getOne(id);
+        User profileOwner = userDao.getOne(id);
 //        String currentUserId = String.valueOf(profileOwner.getId());
         model.addAttribute("user", profileOwner);
         model.addAttribute("images", profileOwner.getImages());
@@ -132,7 +133,7 @@ public class UserController {
     // ------------------------------------------------------ Delete a User:
     // Keep an eye on issues with foreign keys
     @PostMapping("/users/delete")
-    public String deleteUser(){
+    public String deleteUser() {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         userDao.delete(userDao.getOne(currentUser.getId()));
         return "redirect:/";
@@ -140,12 +141,23 @@ public class UserController {
 
     // ------------------------------------------------------ Follow a User:
 
-    @PostMapping("users/follow/{id}") // put this action on the follow button
-    @ResponseStatus(value = HttpStatus.OK)
-    public void followUser(@PathVariable long id){
+    @PostMapping("/users/follow/{id}") // put this action on the follow button
+//    @ResponseStatus(value = HttpStatus.OK)
+    public String followUser(@PathVariable long id) {
         //get current user:
         User principle = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userDao.getOne(principle.getId());
-        // add the path variable id to the followed_id and the current user to the follower_id
+        User userToFollow = userDao.getOne(id);
+        List<User> followers = userToFollow.getUsers();
+
+        followers.add(currentUser);
+
+        userToFollow.setUsers(followers);
+        currentUser.setUser(userToFollow);
+
+        userDao.save(currentUser);
+
+        return "redirect:/profile/" + id;
     }
+
 }
