@@ -111,6 +111,24 @@ public class UserController {
         }
     }
 
+
+    @GetMapping("/profile/{id}")
+    public String pointToSpecificProfile(Model model, @PathVariable long id) {
+        // Grabbing the current user object with the next line
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User profileOwner =  userDao.getOne(id);
+//        String currentUserId = String.valueOf(profileOwner.getId());
+        model.addAttribute("user", profileOwner);
+        model.addAttribute("images", profileOwner.getImages());
+        boolean userType = profileOwner.getIsArtist();
+        if (userType) {
+            return "users/artist";
+        } else {
+            return "users/canvas";
+        }
+    }
+
+
     // ------------------------------------------------------ Delete a User:
     // Keep an eye on issues with foreign keys
     @PostMapping("/users/delete")
