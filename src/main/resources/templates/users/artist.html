@@ -18,8 +18,11 @@
 <div>
     <h3>Artist Information</h3>
     <div class="row">
-        <button id="follow_me">Follow</button>
-        <a th:href="@{/canvas-profile/{id}(id=${user.id})}" class="btn btn-block">View My Canvas Profile</a>
+        <form th:action="@{/users/follow/{id}(id=${user.getId()})}" method="post">
+            <button id="follow_me" type="submit">Follow</button>
+        </form>
+<!--        <button id="follow_me">Follow</button>-->
+<!--        <a th:href="@{/canvas-profile/{id}(id=${user.id})}" class="btn btn-block">View My Canvas Profile</a>-->
         <a th:href="@{/request-form}" class="btn btn-block">Request Work</a>
     </div>
 </div>
@@ -63,11 +66,11 @@
 
                                 <!--                                Might need to change this to take out the id portion-->
 
-                                <a th:href="@{/artist-image-edit/{id}(id=${image.id})}"
-                                   class="btn">Edit</a>
-                                <form th:action="@{/tattoos/delete/{id}(id=${image.id})}" th:method="post">
-                                    <button class="btn">Delete Image</button>
-                                </form>
+<!--                                <a th:href="@{/artist-image-edit/{id}(id=${image.id})}"-->
+<!--                                   class="btn">Edit</a>-->
+<!--                                <form th:action="@{/tattoos/delete/{id}(id=${image.id})}" th:method="post">-->
+<!--                                    <button class="btn">Delete Image</button>-->
+<!--                                </form>-->
                             </div>
                         </div>
                     </div>

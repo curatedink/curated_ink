@@ -9,36 +9,31 @@
 </head>
 <body>
 
-<nav th:replace=" partials/nav :: nav"/>
+<nav th:replace=" partials/can-nav :: can-nav"/>
 
 
 <div>
     <h1>Profile picture container </h1>
 </div>
 <div>
-    <h3>Artist Information</h3>
-    <div class="row">
-        <button id="follow_me">Follow</button>
-        <a th:href="@{/canvas-profile/{id}(id=${user.id})}" class="btn btn-block">View My Canvas Profile</a>
-        <a th:href="@{/request-form}" class="btn btn-block">Request Work</a>
-    </div>
+    <h3>Canvas Information</h3>
 </div>
 <div>
     <div class="container">
         <div class="row md-6 justify-content-around">
 
-            <!--            ****Need to refactor to only show specific artist's work****-->
+            <!--            ****Need to refactor to only show specific canvas' tats****-->
 
-            <div class="card m-5" style="width: 24rem;" th:each="image : ${images}">
+            <div class="card m-5" style="width: 24rem;"  th:each="image : ${images}">
                 <div class="card-body">
                     <img th:src="${image.imageUrl}" class="img-thumbnail rounded mx-auto d-block"/>
-                    <a class="btn" id="detailed-portfolio"
+                    <a class="btn" id="detailed-work"
                        data-toggle="modal"
-                       th:attr="data-target=${'#artist-detailed' + image.id}" >
+                       th:attr="data-target=${'#canvas-detailed' + image.id}">
                         View Details
                     </a>
                 </div>
-                <div class="modal fade" id="artist-detailed" th:attr="id=${'artist-detailed' + image.id}"
+                <div class="modal fade" id="canvas-detailed" th:attr="id=${'canvas-detailed' + image.id}"
                      tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -62,8 +57,7 @@
                             <div class="modal-footer">
 
                                 <!--                                Might need to change this to take out the id portion-->
-
-                                <a th:href="@{/artist-image-edit/{id}(id=${image.id})}"
+                                <a th:href="@{/canvas-image-edit/{id}(id=${image.id})}"
                                    class="btn">Edit</a>
                                 <form th:action="@{/tattoos/delete/{id}(id=${image.id})}" th:method="post">
                                     <button class="btn">Delete Image</button>
@@ -82,11 +76,10 @@
 
 <script>
 
-    $('#detailed-portfolio').on('click', function() {
-        $('#artist-detailed').show();
+    $('#detailed-work').on('click', function() {
+        $('#canvas-detailed').show();
     });
 
 </script>
-
 </body>
 </html>
