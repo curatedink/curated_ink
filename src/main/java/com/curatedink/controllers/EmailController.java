@@ -18,12 +18,12 @@ public class EmailController {
 @GetMapping("/send-email")
     public String welcome() {
 
-        return "";
+        return "send-email";
     }
 
 @PostMapping("/send-email")
     public String insert() {
 
-    return "";
+        return "send/email";
     }
 }
