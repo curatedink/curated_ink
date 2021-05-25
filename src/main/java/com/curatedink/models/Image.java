@@ -51,13 +51,14 @@ public class Image {
         this.imageUrl = imageUrl;
     }
 
-    public Image(String imageUrl, String comment, String studioName, String creditedArtist, boolean isCanvas, boolean isProfileImage) {
+    public Image(String imageUrl, String comment, String studioName, String creditedArtist, boolean isCanvas, boolean isProfileImage, User user) {
         this.imageUrl = imageUrl;
         this.comment = comment;
         this.studioName = studioName;
         this.creditedArtist = creditedArtist;
         this.isCanvas = isCanvas;
         this.isProfileImage = isProfileImage;
+        this.user = user;
     }
 
 
@@ -117,6 +118,14 @@ public class Image {
 
     public void setIsProfileImage(boolean isProfileImage) {
         this.isProfileImage = isProfileImage;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public List<Style> getStyles() {
