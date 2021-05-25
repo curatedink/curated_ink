@@ -3,6 +3,10 @@
     <head>
         <meta charset="UTF-8"/>
         <title th:text="'Ooops, ' + ${error}"></title>
+
+        <head th:replace=" partials/head :: head"/>
+        <link rel="stylesheet" th:href="@{/style.css}">
+
     </head>
     <body>
         <th:block th:switch="${error}">
@@ -22,5 +26,7 @@
                 allowfullscreen="allowfullscreen"
         >
         </iframe>
+
+        <footer th:include="partials/foot :: foot"/>
     </body>
 </html>
