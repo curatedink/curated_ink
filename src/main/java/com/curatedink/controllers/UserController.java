@@ -152,7 +152,7 @@ public class UserController {
         following.add(userToFollow);
         currentUser.setFollowingList(following);
         userDao.save(currentUser);
-        return "redirect:/posts";
+        return "redirect:/profile/" + id;
     }
 
 }
