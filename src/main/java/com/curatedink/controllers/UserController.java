@@ -2,6 +2,7 @@ package com.curatedink.controllers;
 
 import com.curatedink.models.User;
 import com.curatedink.repositories.UserRepo;
+import com.curatedink.services.EmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -15,13 +16,15 @@ public class UserController {
     //(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()
 
     // ------------------------------------------------------ Dependency Injection:
+
     private final UserRepo userDao;
     private PasswordEncoder passwordEncoder; // Security
+    private final EmailService emailService;
 
-
-    public UserController(UserRepo userDao, PasswordEncoder passwordEncoder) {
+    public UserController(UserRepo userDao, PasswordEncoder passwordEncoder, EmailService emailService) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
+        this.emailService = emailService;
     }
 
     // ------------------------------------------------------ User Sign-Up (Create):
@@ -76,6 +79,14 @@ public class UserController {
         } else {
             return "users/canvas-profile";
         }
+    }
+
+    @PostMapping("/send-email")
+    public String welcome() {
+    User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User author = userDao.getOne(owner.getId());
+    emailService.prepareAndSend(subject, body);
+        return "artist-profile";
     }
 
 }
