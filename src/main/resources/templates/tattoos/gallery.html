@@ -48,6 +48,9 @@
                                             <h3 th:text="${image.creditedArtist}" class="card-title"/>
                                             <h5 th:text="${image.studioName}" class="card-text"/>
                                             <p th:text="${image.comment}" class="card-text"/>
+                                            <a th:href="@{/profile/{id}(id=${image.getUser().getId()})}" method="get">
+                                            <p th:text="${image.getUser().getUsername()}" class="card-text"/>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
