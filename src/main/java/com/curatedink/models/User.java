@@ -49,7 +49,7 @@ public class User {
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 //    private User user;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(
             name = "followers",
             joinColumns = {@JoinColumn(name = "user_id")},
