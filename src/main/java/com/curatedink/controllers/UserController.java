@@ -118,11 +118,11 @@ public class UserController {
 
     @PostMapping("/send-email")
     public String welcome() {
-    User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    User author = userDao.getOne(owner.getId());
+        User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User author = userDao.getOne(owner.getId());
 //    emailService.prepareAndSend(subject, body);
         return "artist-profile";
-
+    }
       
     @GetMapping("/profile/{id}")
     public String pointToSpecificProfile(Model model, @PathVariable long id) {
