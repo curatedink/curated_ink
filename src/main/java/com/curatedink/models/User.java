@@ -46,9 +46,6 @@ public class User {
     )
     private List<Style> styles;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-//    private User user;
-
     @ManyToMany
     @JoinTable(
             name = "followers",
@@ -56,6 +53,9 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "followed_id")}
     )
     private List<User> followingList;
+
+    @ManyToMany(mappedBy = "followingList")
+    private List<User> followerList;
 
     // Constructors
     public User() {
@@ -186,5 +186,13 @@ public class User {
 
     public void setFollowingList(List<User> followingList) {
         this.followingList = followingList;
+    }
+
+    public List<User> getFollowerList() {
+        return followerList;
+    }
+
+    public void setFollowerList(List<User> followerList) {
+        this.followerList = followerList;
     }
 }
