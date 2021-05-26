@@ -63,19 +63,55 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
-                                ...
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                   <div id="detailed-work"></div>
+                                </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
 
+                </div>
+            </div>
+        </div>
+    </div>
 
 
+    <footer th:replace="partials/foot :: foot"/>
+
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"
+    >
+    </script>
+    <script src="/js/curatedInk.js"></script>
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--previous modal-->
 
 
 <!--                <div class="card m-5" style="width: 24rem;" th:each="image : ${images}">-->
@@ -103,14 +139,14 @@
 <!--                                </div>-->
 <!--                                <div class="modal-body">-->
 <!--                                    <div class="card" style="width: 18rem;">-->
-<!--&lt;!&ndash;                                        <img th:src="${image.imageUrl}"/>&ndash;&gt;-->
+<!--                                        <img th:src="${image.imageUrl}"/>-->
 <!--                                        <div class="card-body">-->
-<!--&lt;!&ndash;                                            <h3 th:text="${image.creditedArtist}" class="card-title"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                                            <h5 th:text="${image.studioName}" class="card-text"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                                            <p th:text="${image.comment}" class="card-text"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                                            <a th:href="@{/profile/{id}(id=${image.getUser().getId()})}" method="get">&ndash;&gt;-->
-<!--&lt;!&ndash;                                                <p th:text="${image.getUser().getUsername()}" class="card-text"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                                            </a>&ndash;&gt;-->
+<!--                                            <h3 th:text="${image.creditedArtist}" class="card-title"/>-->
+<!--                                            <h5 th:text="${image.studioName}" class="card-text"/>-->
+<!--                                            <p th:text="${image.comment}" class="card-text"/>-->
+<!--                                            <a th:href="@{/profile/{id}(id=${image.getUser().getId()})}" method="get">-->
+<!--                                                <p th:text="${image.getUser().getUsername()}" class="card-text"/>-->
+<!--                                            </a>-->
 <!--                                        </div>-->
 <!--                                    </div>-->
 <!--                                </div>-->
@@ -120,29 +156,3 @@
 <!--                            </div>-->
 <!--                        </div>-->
 <!--                    </div>-->
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <footer th:replace="partials/foot :: foot"/>
-
-    <script
-            src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"
-    >
-    </script>
-    <!-- include the JS file with the AJAX request -->
-    <script src="/js/curatedInk.js"></script>
-
-        <script>
-
-            $('#detailed-work').on('click', function() {
-                $('#gallery-detailed').show();
-            });
-
-        </script>
-</body>
-</html>
