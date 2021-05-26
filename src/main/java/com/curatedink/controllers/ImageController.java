@@ -5,10 +5,13 @@ import com.curatedink.models.User;
 import com.curatedink.repositories.ImageRepo;
 import com.curatedink.repositories.StyleRepo;
 import com.curatedink.repositories.UserRepo;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class ImageController {
@@ -23,19 +26,41 @@ public class ImageController {
         this.stylesDao = stylesDao;
     }
 
-    // view all images
+
+    //     view all images
+//    @GetMapping("/gallery")
+//    public String getAllImages(Model vModel) {
+//        vModel.addAttribute("images", imagesDao.findAllByIsProfileImageIsFalse());
+//        return "tattoos/gallery";
+//    }
+
+
+    // view image by id
+//    @GetMapping("/gallery/{id}")
+//    public String getOneImage(@PathVariable long id, Model vModel) {
+//        vModel.addAttribute("image", imagesDao.getOne(id));
+//        return "tattoos/gallery";
+//    }
+
+
+    // json
+    @GetMapping(value = "/gallery.json")
+    public @ResponseBody List<Image> getAllImagesInJSONFormat() {
+        return imagesDao.findAllByIsProfileImageIsFalse();
+    }
+
     @GetMapping("/gallery")
-    public String getAllImages(Model vModel) {
-        vModel.addAttribute("images", imagesDao.findAllByIsProfileImageIsFalse());
+    public String getAllImagesWithAjax() {
         return "tattoos/gallery";
     }
 
-    // view image by id
-    @GetMapping("/gallery/{id}")
-    public String getOneImage(@PathVariable long id, Model vModel) {
-        vModel.addAttribute("image", imagesDao.getOne(id));
-        return "tattoos/gallery";
-    }
+
+//    @RequestMapping(value = "/gallery.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseBody
+//    public List<Image> getAllImagesInJSONFormat() {
+//        return imagesDao.findAllByIsProfileImageIsFalse();
+//    }
+
 
     //   delete image
     @PostMapping("/tattoos/delete/{id}")

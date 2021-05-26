@@ -1,5 +1,7 @@
 package com.curatedink.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -31,6 +33,7 @@ public class Image {
     private boolean isProfileImage;
 
     @ManyToOne
+    @JsonManagedReference
     private User user;
 
     @ManyToMany(cascade = CascadeType.ALL)

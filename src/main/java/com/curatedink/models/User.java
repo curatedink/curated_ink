@@ -1,5 +1,7 @@
 package com.curatedink.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -36,6 +38,7 @@ public class User {
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonBackReference
     private List<Image> images;
 
     @ManyToMany(cascade = CascadeType.ALL)
