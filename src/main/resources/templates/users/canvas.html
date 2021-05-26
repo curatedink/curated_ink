@@ -17,6 +17,11 @@
 </div>
 <div>
     <h3>Canvas Information</h3>
+    <div>
+        <form th:action="@{/users/follow/{id}(id=${user.getId()})}" method="post">
+            <button id="follow_me" type="submit" class="btn">Follow</button>
+        </form>
+    </div>
 </div>
 <div>
     <div class="container">
