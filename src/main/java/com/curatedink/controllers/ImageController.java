@@ -26,7 +26,7 @@ public class ImageController {
     // view all images
     @GetMapping("/gallery")
     public String getAllImages(Model vModel) {
-        vModel.addAttribute("images", imagesDao.findImagesByIsProfileImageFalse());
+        vModel.addAttribute("images", imagesDao.findAllByIsProfileImageIsFalse());
         return "tattoos/gallery";
     }
 
