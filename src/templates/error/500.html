@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <title th:text="'Ooops, ' + ${error}"></title>
+
+        <head th:replace=" partials/head :: head"/>
+        <link rel="stylesheet" th:href="@{/style.css}">
+
+    </head>
+    <body>
+        <th:block th:switch="${error}">
+            <div th:case="'Server Error'">
+                <h2>Internal Server Errors!</h2>
+            </div>
+            <div th:case="'Server Error'">
+                <h2>The server encounter internal errors.</h2>
+            </div>
+        </th:block>
+        <p>Watch a video instead</p>
+        <iframe
+                width="420"
+                height="315"
+                src="https://www.youtube.com/"
+                frameborder="0"
+                allowfullscreen="allowfullscreen"
+        >
+        </iframe>
+
+        <footer th:include="partials/foot :: foot"/>
+    </body>
+</html>
