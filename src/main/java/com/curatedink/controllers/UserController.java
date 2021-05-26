@@ -1,13 +1,20 @@
 package com.curatedink.controllers;
 
+import com.curatedink.models.Style;
 import com.curatedink.models.User;
+import com.curatedink.repositories.ImageRepo;
 import com.curatedink.repositories.UserRepo;
 import com.curatedink.services.EmailService;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -18,11 +25,13 @@ public class UserController {
     // ------------------------------------------------------ Dependency Injection:
 
     private final UserRepo userDao;
+    private final ImageRepo imagesDao;
     private PasswordEncoder passwordEncoder; // Security
     private final EmailService emailService;
 
-    public UserController(UserRepo userDao, PasswordEncoder passwordEncoder, EmailService emailService) {
+    public UserController(UserRepo userDao, ImageRepo imagesDao, PasswordEncoder passwordEncoder, EmailService emailService) {
         this.userDao = userDao;
+        this.imagesDao = imagesDao;
         this.passwordEncoder = passwordEncoder;
         this.emailService = emailService;
     }
@@ -30,16 +39,17 @@ public class UserController {
     // ------------------------------------------------------ User Sign-Up (Create):
 
     @GetMapping("/sign-up")
-    public String showSignupForm(Model model){
+    public String showSignupForm(Model model) {
         model.addAttribute("user", new User());
         return "tattoos/sign-up";
-   }
+    }
 
 
     @PostMapping("/sign-up")
-    public String saveUser(@ModelAttribute User user){
+    public String saveUser(@ModelAttribute User user, @RequestParam(name = "style") List<Style> styles) {
         String hash = passwordEncoder.encode(user.getPassword()); // Security
         user.setPassword(hash); // Security
+        user.setStyles(styles);
         userDao.save(user);
         return "redirect:/login";
     }
@@ -48,7 +58,7 @@ public class UserController {
     // ------------------------------------------------------ Artist Edit Profile (Update):
 
     @GetMapping("/artist-edit")
-    public String editArtistProfile(Model model){
+    public String editArtistProfile(Model model) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userToEdit = userDao.getOne(currentUser.getId());
         model.addAttribute("user", userToEdit);
@@ -56,10 +66,33 @@ public class UserController {
     }
 
     @PostMapping("/users/artist-edit")
-    public String update(@ModelAttribute User userToEdit){
+    public String update(@ModelAttribute User userToEdit, @RequestParam(name = "style") List<Style> styles) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         userToEdit.setId(currentUser.getId());
-        userToEdit.setPassword(passwordEncoder.encode(currentUser.getPassword()));
+        userToEdit.setPassword(currentUser.getPassword());
+        userToEdit.setUsername(currentUser.getUsername());
+        userToEdit.setStyles(styles);
+        userDao.save(userToEdit);
+        return "redirect:/profile-page";
+    }
+
+
+    // ------------------------------------------------------ Canvas Edit Profile (Update):
+
+    @GetMapping("/canvas-edit")
+    public String editCanvasProfile(Model model) {
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userToEdit = userDao.getOne(currentUser.getId());
+        model.addAttribute("user", userToEdit);
+        return "users/canvas-edit";
+    }
+
+    @PostMapping("/users/canvas-edit")
+    public String updateCanvas(@ModelAttribute User userToEdit) {
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        userToEdit.setId(currentUser.getId());
+        userToEdit.setPassword(currentUser.getPassword());
+        userToEdit.setUsername(currentUser.getUsername());
         userDao.save(userToEdit);
         return "redirect:/profile-page";
     }
@@ -72,7 +105,9 @@ public class UserController {
     public String pointToProfile(Model model) {
         // Grabbing the current user object with the next line
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String currentUserId = String.valueOf(currentUser.getId());
         model.addAttribute("user", currentUser);
+        model.addAttribute("images", userDao.getOne(Long.valueOf(currentUserId)).getImages());
         boolean userType = currentUser.getIsArtist();
         if (userType) {
             return "users/artist-profile";
@@ -87,6 +122,47 @@ public class UserController {
     User author = userDao.getOne(owner.getId());
 //    emailService.prepareAndSend(subject, body);
         return "artist-profile";
+
+      
+    @GetMapping("/profile/{id}")
+    public String pointToSpecificProfile(Model model, @PathVariable long id) {
+        // Grabbing the current user object with the next line
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User profileOwner = userDao.getOne(id);
+//        String currentUserId = String.valueOf(profileOwner.getId());
+        model.addAttribute("user", profileOwner);
+        model.addAttribute("images", profileOwner.getImages());
+        boolean userType = profileOwner.getIsArtist();
+        if (userType) {
+            return "users/artist";
+        } else {
+            return "users/canvas";
+        }
+    }
+
+
+    // ------------------------------------------------------ Delete a User:
+    // Keep an eye on issues with foreign keys
+    @PostMapping("/users/delete")
+    public String deleteUser() {
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        userDao.delete(userDao.getOne(currentUser.getId()));
+        return "redirect:/";
+    }
+
+    // ------------------------------------------------------ Follow a User:
+
+    @PostMapping("/users/follow/{id}") // put this action on the follow button
+    public String followUser(@PathVariable long id){
+        //get current user:
+        User principle = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = userDao.getOne(principle.getId());
+        User userToFollow = userDao.getOne(id);
+        List<User> following = currentUser.getFollowingList();
+        following.add(userToFollow);
+        currentUser.setFollowingList(following);
+        userDao.save(currentUser);
+        return "redirect:/profile/" + id;
     }
 
 }

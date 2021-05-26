@@ -20,13 +20,51 @@
 </div>
 <div>
     <div class="container">
-        <div class="row justify-space-between">
+        <div class="row md-6 justify-content-around">
 
             <!--            ****Need to refactor to only show specific canvas' tats****-->
 
-            <div class="col-12 col-md-6" th:each="image : ${images}">
+            <div class="card m-5" style="width: 24rem;"  th:each="image : ${images}">
                 <div class="card-body">
-                    <img th:text="${image.imageUrl}"/>
+                    <img th:src="${image.imageUrl}" class="img-thumbnail rounded mx-auto d-block"/>
+                    <a class="btn" id="detailed-work"
+                       data-toggle="modal"
+                       th:attr="data-target=${'#canvas-detailed' + image.id}">
+                        View Details
+                    </a>
+                </div>
+                <div class="modal fade" id="canvas-detailed" th:attr="id=${'canvas-detailed' + image.id}"
+                     tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <!--                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>-->
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card" style="width: 18rem;">
+                                    <img th:src="${image.imageUrl}"/>
+                                    <div class="card-body">
+                                        <h3 th:text="${image.creditedArtist}" class="card-title"/>
+                                        <h5 th:text="${image.studioName}" class="card-text"/>
+                                        <p th:text="${image.comment}" class="card-text"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+
+<!--                                Might need to change this to take out the id portion-->
+                                <a th:href="@{/canvas-image-edit/{id}(id=${image.id})}"
+                                   class="btn">Edit</a>
+                                <form th:action="@{/tattoos/delete/{id}(id=${image.id})}" th:method="post">
+                                    <button class="btn">Delete Image</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -36,6 +74,12 @@
 
 <footer th:replace="partials/foot :: foot"/>
 
+<script>
 
+    $('#detailed-work').on('click', function() {
+        $('#canvas-detailed').show();
+    });
+
+</script>
 </body>
 </html>

@@ -26,7 +26,7 @@ public class ImageController {
     // view all images
     @GetMapping("/gallery")
     public String getAllImages(Model vModel) {
-        vModel.addAttribute("images", imagesDao.findAll());
+        vModel.addAttribute("images", imagesDao.findImagesByIsProfileImageFalse());
         return "tattoos/gallery";
     }
 
@@ -37,14 +37,23 @@ public class ImageController {
         return "tattoos/gallery";
     }
 
-    // create image
+    //   delete image
+    @PostMapping("/tattoos/delete/{id}")
+    public String deleteImage(@PathVariable("id") long id) {
+        Image imageToDelete = imagesDao.getOne(id);
+        imagesDao.delete(imageToDelete);
+        return "redirect:/profile-page";
+    }
+
+
+    // create artist image
     @GetMapping("tattoos/artist-upload")
     public String create(Model vModel) {
         vModel.addAttribute("image", new Image());
         return "tattoos/artist-upload";
     }
 
-    // insert image into images table
+    // save artist image to images table
     @PostMapping("/artist-upload")
     public String insert(@ModelAttribute Image image) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -53,5 +62,59 @@ public class ImageController {
         imagesDao.save(image);
         return "redirect:/profile-page";
     }
+
+
+    // create canvas image
+    @GetMapping("tattoos/canvas-upload")
+    public String createCanvasImage(Model vModel) {
+        vModel.addAttribute("image", new Image());
+        return "tattoos/canvas-upload";
+    }
+
+    // save canvas image to images table
+    @PostMapping("/canvas-upload")
+    public String insertCanvasImage(@ModelAttribute Image image) {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User author = usersDao.getOne(principal.getId());
+        image.setUser(author);
+        imagesDao.save(image);
+        return "redirect:/profile-page";
+    }
+
+
+    // edit canvas image
+    @GetMapping("/canvas-image-edit/{id}")
+    public String editCanvasImage(@PathVariable("id") long id, Model model) {
+        Image imageToEdit = imagesDao.getOne(id);
+        model.addAttribute("image", imageToEdit);
+        return "tattoos/canvas-image-edit";
+    }
+    // save canvas image edit
+    @PostMapping("/tattoos/canvas-image-edit/{id}")
+    public String updateCanvasImage(@ModelAttribute Image imageToEdit) {
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        imageToEdit.setUser(currentUser);
+        imagesDao.save(imageToEdit);
+        return "redirect:/profile-page";
+    }
+
+
+    // edit artist image
+    @GetMapping("/artist-image-edit/{id}")
+    public String editArtistImage(@PathVariable("id") long id, Model model) {
+        Image imageToEdit = imagesDao.getOne(id);
+        model.addAttribute("image", imageToEdit);
+        return "tattoos/artist-image-edit";
+    }
+
+    // save artist image edit
+    @PostMapping("/tattoos/artist-image-edit/{id}")
+    public String updateArtistImage(@ModelAttribute Image imageToEdit) {
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        imageToEdit.setUser(currentUser);
+        imagesDao.save(imageToEdit);
+        return "redirect:/profile-page";
+    }
+
 
 }
