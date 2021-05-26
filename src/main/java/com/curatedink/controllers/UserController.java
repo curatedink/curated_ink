@@ -116,6 +116,7 @@ public class UserController {
         }
     }
 
+
     @PostMapping("/send-email")
     public String welcome() {
         User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -123,22 +124,7 @@ public class UserController {
 //    emailService.prepareAndSend(subject, body);
         return "artist-profile";
     }
-      
-    @GetMapping("/profile/{id}")
-    public String pointToSpecificProfile(Model model, @PathVariable long id) {
-        // Grabbing the current user object with the next line
-        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User profileOwner = userDao.getOne(id);
-//        String currentUserId = String.valueOf(profileOwner.getId());
-        model.addAttribute("user", profileOwner);
-        model.addAttribute("images", profileOwner.getImages());
-        boolean userType = profileOwner.getIsArtist();
-        if (userType) {
-            return "users/artist";
-        } else {
-            return "users/canvas";
-        }
-    }
+
 
 
     // ------------------------------------------------------ Delete a User:
@@ -151,6 +137,23 @@ public class UserController {
     }
 
     // ------------------------------------------------------ Follow a User:
+
+    // Visit another users page:
+    @GetMapping("/profile/{id}")
+    public String viewAnotherUserProfile(Model model, @PathVariable long id) {
+        User profileOwner = userDao.getOne(id);
+        model.addAttribute("user", profileOwner);
+        List<User> followingList = profileOwner.getFollowingList();
+        model.addAttribute("followingList", followingList);
+        List<User> followerList = profileOwner.getFollowerList();
+        model.addAttribute("followerList", followerList);
+        boolean userType = profileOwner.getIsArtist();
+        if (userType) {
+            return "users/artist";
+        } else {
+            return "users/canvas";
+        }
+    }
 
     @PostMapping("/users/follow/{id}") // put this action on the follow button
     public String followUser(@PathVariable long id){
