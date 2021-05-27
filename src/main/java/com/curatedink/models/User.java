@@ -1,6 +1,8 @@
 package com.curatedink.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,6 +19,7 @@ public class User {
     private String username;
 
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
 
     @Column(nullable = false, unique = true)
@@ -50,6 +53,7 @@ public class User {
     private List<Style> styles;
 
     @ManyToMany
+    @JsonManagedReference
     @JoinTable(
             name = "followers",
             joinColumns = {@JoinColumn(name = "user_id")},
@@ -58,6 +62,7 @@ public class User {
     private List<User> followingList;
 
     @ManyToMany(mappedBy = "followingList")
+    @JsonBackReference
     private List<User> followerList;
 
     // Constructors

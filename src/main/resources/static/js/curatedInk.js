@@ -22,6 +22,7 @@
     request.done(function (images) {
         let html = '';
         images.forEach(function (image) {
+            //logic for curated - if image.user.followers = user.id from list of followers...
             html += '<div class="card m-5" style="width: 24rem;">';
             html += '<div class="card-body">';
             html += '<img class="img-thumbnail rounded mx-auto d-block" src=" ' + image.imageUrl + '"' + '/>';

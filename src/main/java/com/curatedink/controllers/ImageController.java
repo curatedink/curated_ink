@@ -27,7 +27,7 @@ public class ImageController {
     }
 
 
-    //     view all images
+//         view all images
 //    @GetMapping("/gallery")
 //    public String getAllImages(Model vModel) {
 //        vModel.addAttribute("images", imagesDao.findAllByIsProfileImageIsFalse());
