@@ -5,10 +5,13 @@ import com.curatedink.models.User;
 import com.curatedink.repositories.ImageRepo;
 import com.curatedink.repositories.StyleRepo;
 import com.curatedink.repositories.UserRepo;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class ImageController {
@@ -23,19 +26,56 @@ public class ImageController {
         this.stylesDao = stylesDao;
     }
 
-    // view all images
+
+//         view all images
+//    @GetMapping("/gallery")
+//    public String getAllImages(Model vModel) {
+//        vModel.addAttribute("images", imagesDao.findAllByIsProfileImageIsFalse());
+//        return "tattoos/gallery";
+//    }
+
+
+    // view image by id
+//    @GetMapping("/gallery/{id}")
+//    public String getOneImage(@PathVariable long id, Model vModel) {
+//        vModel.addAttribute("image", imagesDao.getOne(id));
+//        return "tattoos/gallery";
+//    }
+
+
+    // json - world gallery
+    @GetMapping(value = "/gallery.json")
+    public @ResponseBody List<Image> getAllImagesInJSONFormat() {
+        return imagesDao.findAllByIsProfileImageIsFalse();
+    }
+
     @GetMapping("/gallery")
-    public String getAllImages(Model vModel) {
-        vModel.addAttribute("images", imagesDao.findAllByIsProfileImageIsFalse());
+    public String getAllImagesWithAjax() {
         return "tattoos/gallery";
     }
 
-    // view image by id
-    @GetMapping("/gallery/{id}")
-    public String getOneImage(@PathVariable long id, Model vModel) {
-        vModel.addAttribute("image", imagesDao.getOne(id));
-        return "tattoos/gallery";
+    //curated-gallery
+
+    @GetMapping(value = "/curated-gallery.json")
+    public @ResponseBody List<User> getAllCurrentUserFollowingInJSONFormat() {
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userToGetFollowers = usersDao.getOne(currentUser.getId());
+//        return usersDao.findUsersByFollowingList(userToGetFollowers.getFollowingList());
+        System.out.println(userToGetFollowers.getFollowingList());
+        List<User> followingList = userToGetFollowers.getFollowingList();
+        for(User user : followingList) {
+            System.out.println(user.getId());
+        }
+        return followingList;
     }
+
+
+//    @RequestMapping(value = "/gallery.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseBody
+//    public List<Image> getAllImagesInJSONFormat() {
+//        return imagesDao.findAllByIsProfileImageIsFalse();
+//    }
+
 
     //   delete image
     @PostMapping("/tattoos/delete/{id}")

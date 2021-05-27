@@ -14,74 +14,132 @@
 
 <div class="">
     <div class="container">
+        <div class="row md-6 justify-content-around">
+            <div class="container">
 
-        <div>
-            <h1 class="mb-4">World Gallery</h1>
-        </div>
-        <div>
-            <label>Search by Tattoo Style, Artist, or Shop</label>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search"
-                       aria-label="Search">
-                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search the Gallery</button>
-            </form>
-        </div>
-        <div class="container">
-            <div class="row md-6 justify-content-around">
+                <div>
+                    <h1 class="mt-3 mb-4">Explore The Art</h1>
+                </div>
 
-                <div class="card m-5" style="width: 24rem;"  th:each="image : ${images}">
-                    <div class="card-body">
-                        <img th:src="${image.imageUrl}" class="img-thumbnail rounded mx-auto d-block"/>
-                        <a class="btn" id="detailed-work"
-                           data-toggle="modal"
-                           th:attr="data-target=${'#gallery-detailed' + image.id}">
-                            View Details
-                        </a>
+
+                <nav class="mt-5">
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="world-gallery-tab" data-toggle="tab"
+                           href="#world-gallery"
+                           role="tab" aria-controls="world-gallery" aria-selected="true">World Gallery</a>
+                        <a class="nav-item nav-link" id="curated-gallery-view-tab" data-toggle="tab"
+                           href="#curated-gallery-view"
+                           role="tab"
+                           aria-controls="curated-gallery-view" aria-selected="false">Curated Gallery</a>
                     </div>
-                    <div class="modal fade" id="gallery-detailed" th:attr="id=${'gallery-detailed' + image.id}"
-                         tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <!--                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>-->
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="card" style="width: 18rem;">
-                                        <img th:src="${image.imageUrl}"/>
-                                        <div class="card-body">
-                                            <h3 th:text="${image.creditedArtist}" class="card-title"/>
-                                            <h5 th:text="${image.studioName}" class="card-text"/>
-                                            <p th:text="${image.comment}" class="card-text"/>
-                                            <a th:href="@{/profile/{id}(id=${image.getUser().getId()})}" method="get">
-                                            <p th:text="${image.getUser().getUsername()}" class="card-text"/>
-                                            </a>
-                                        </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="world-gallery" role="tabpanel"
+                         aria-labelledby="world-gallery-tab">
+                        <div class="mr-0">
+                            <label>Search by Tattoo Style, Artist, or Shop</label>
+                            <form class="form-inline my-2 my-lg-0">
+                                <input class="form-control mr-sm-2" type="search" placeholder="Search"
+                                       aria-label="Search">
+                                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search the Gallery
+                                </button>
+                            </form>
+                        </div>
+                        <div id="images"></div>
+                    </div>
+                    <div class="tab-pane fade" id="curated-gallery-view" role="tabpanel"
+                         aria-labelledby="curated-gallery-tab">
+                        <div id="curated-gallery">    </div>
+                    </div>
+                </div>
+
+
+                <div class="modal fade" id="gallery-detailed"
+                     tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5>Modal</h5>
+                                <!--                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>-->
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <div id="detailed-work"></div>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
+                            </div>
+                            <div class="modal-footer">
 
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+
+            <footer th:replace="partials/foot :: foot"/>
+
+            <script
+                    src="https://code.jquery.com/jquery-3.1.1.min.js"
+                    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+                    crossorigin="anonymous"
+            >
+            </script>
+            <script src="/js/curatedInk.js"></script>
 
 
-    <footer th:replace="partials/foot :: foot"/>
-
-    <script>
-
-        $('#gallery-work').on('click', function() {
-            $('#gallery-detailed').show();
-        });
-
-    </script>
+            </script>
 </body>
 </html>
+
+
+<!--previous modal-->
+
+
+<!--                <div class="card m-5" style="width: 24rem;" th:each="image : ${images}">-->
+<!--                    <div class="card-body">-->
+<!--                        <img th:src="${image.imageUrl}" class="img-thumbnail rounded mx-auto d-block"/>-->
+<!--                        <a class="btn" id="detailed-work"-->
+<!--                           data-toggle="modal"-->
+<!--                           th:attr="data-target=${'#gallery-detailed' + image.id}">-->
+<!--                            View Details-->
+<!--                        </a>-->
+<!--                    </div>-->
+
+
+<!--                    <div class="modal fade" id="gallery-detailed"-->
+<!--                                th:attr="id=${'gallery-detailed' + image.id}"-->
+<!--                         tabindex="-1" role="dialog"-->
+<!--                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">-->
+<!--                        <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--                            <div class="modal-content">-->
+<!--                                <div class="modal-header">-->
+<!--                                    &lt;!&ndash;                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>&ndash;&gt;-->
+<!--                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                                        <span aria-hidden="true">&times;</span>-->
+<!--                                    </button>-->
+<!--                                </div>-->
+<!--                                <div class="modal-body">-->
+<!--                                    <div class="card" style="width: 18rem;">-->
+<!--                                        <img th:src="${image.imageUrl}"/>-->
+<!--                                        <div class="card-body">-->
+<!--                                            <h3 th:text="${image.creditedArtist}" class="card-title"/>-->
+<!--                                            <h5 th:text="${image.studioName}" class="card-text"/>-->
+<!--                                            <p th:text="${image.comment}" class="card-text"/>-->
+<!--                                            <a th:href="@{/profile/{id}(id=${image.getUser().getId()})}" method="get">-->
+<!--                                                <p th:text="${image.getUser().getUsername()}" class="card-text"/>-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="modal-footer">-->
+
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
