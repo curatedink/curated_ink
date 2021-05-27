@@ -43,7 +43,7 @@ public class ImageController {
 //    }
 
 
-    // json
+    // json - world gallery
     @GetMapping(value = "/gallery.json")
     public @ResponseBody List<Image> getAllImagesInJSONFormat() {
         return imagesDao.findAllByIsProfileImageIsFalse();
@@ -52,6 +52,21 @@ public class ImageController {
     @GetMapping("/gallery")
     public String getAllImagesWithAjax() {
         return "tattoos/gallery";
+    }
+
+    //curated-gallery
+
+    @GetMapping(value = "/curated-gallery.json")
+    public @ResponseBody List<User> getAllCurrentUserFollowingInJSONFormat() {
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userToGetFollowers = usersDao.getOne(currentUser.getId());
+//        return usersDao.findUsersByFollowingList(userToGetFollowers.getFollowingList());
+        System.out.println(userToGetFollowers.getFollowingList());
+        List<User> followingList = userToGetFollowers.getFollowingList();
+        for(User user : followingList) {
+            System.out.println(user.getId());
+        }
+        return followingList;
     }
 
 
