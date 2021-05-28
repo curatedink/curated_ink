@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -58,25 +60,24 @@ public class ImageController {
 
     @GetMapping(value = "/curated-gallery.json")
     @ResponseBody
-    public List<User> getAllCurrentUserFollowingInJSONFormat() {
-        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User userToGetFollowers = usersDao.getOne(currentUser.getId());
-//        Long userId = usersDao.findById(userToGetFollowers);
-//        List<User> listOfFollowers = userToGetFollowers.getFollowingList();
-//        return usersDao.findUsersByFollowingList(userToGetFollowers.getFollowingList());
-//        System.out.println(userToGetFollowers.getFollowingList());
-//        List<User> followingList = userToGetFollowers.getFollowingList();
-//        for(User user : followingList) {
-//            System.out.println(user.getId());
-//            System.out.println(user.getImages());
-//        }
-//        System.out.println(listOfFollowers);
+    public List<Object> getAllCurrentUserFollowingInJSONFormat() {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = usersDao.getOne(principal.getId());
 
-        List<User> followerImages = userToGetFollowers.getFollowingList();
-        for (User user : followerImages) {
-            user.getImages();
+
+        List<User> currentUserFollowingList = currentUser.getFollowingList();
+        List<Image> allImages = imagesDao.findAllByIsProfileImageIsFalse();
+        List<Object> followedImages = new ArrayList <Object>();
+//        List<Image> followedImages = Arrays.asList();
+//        for (Image image : allImages) {
+//            System.out.println(image.getUser().getId());
+//        }
+        for (User user : currentUserFollowingList) {
+            followedImages.add(user.getImages());
+            System.out.println(user.getImages());
         }
-        return followerImages;
+        System.out.println(followedImages);
+        return followedImages;
     }
 
 

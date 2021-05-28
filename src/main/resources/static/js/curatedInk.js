@@ -30,7 +30,7 @@
             // for (let i = 0; i < lengthOfFollowerList; i++){
 
             console.log(image);
-            console.log(image.username);
+            // console.log(image.username);
             // console.log(image.user, "Image.user");
             // console.log(image.user.followerList, "Image.user.followerList");
             // console.log(image.user.followerList[0], "Image.user.followerList[0]");

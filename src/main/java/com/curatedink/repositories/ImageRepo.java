@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface ImageRepo extends JpaRepository<Image, Long> {
     List<Image> findAllByIsProfileImageIsFalse();
-    List<Image> findImagesByUser();
+//    List<Image> findImagesByUser();
 //    List<Image> findImageByUserFollowingList(List <User> random);
 }
