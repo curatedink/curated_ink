@@ -57,16 +57,26 @@ public class ImageController {
     //curated-gallery
 
     @GetMapping(value = "/curated-gallery.json")
-    public @ResponseBody List<User> getAllCurrentUserFollowingInJSONFormat() {
+    @ResponseBody
+    public List<User> getAllCurrentUserFollowingInJSONFormat() {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userToGetFollowers = usersDao.getOne(currentUser.getId());
+//        Long userId = usersDao.findById(userToGetFollowers);
+//        List<User> listOfFollowers = userToGetFollowers.getFollowingList();
 //        return usersDao.findUsersByFollowingList(userToGetFollowers.getFollowingList());
-        System.out.println(userToGetFollowers.getFollowingList());
-        List<User> followingList = userToGetFollowers.getFollowingList();
-        for(User user : followingList) {
-            System.out.println(user.getId());
+//        System.out.println(userToGetFollowers.getFollowingList());
+//        List<User> followingList = userToGetFollowers.getFollowingList();
+//        for(User user : followingList) {
+//            System.out.println(user.getId());
+//            System.out.println(user.getImages());
+//        }
+//        System.out.println(listOfFollowers);
+
+        List<User> followerImages = userToGetFollowers.getFollowingList();
+        for (User user : followerImages) {
+            user.getImages();
         }
-        return followingList;
+        return followerImages;
     }
 
 

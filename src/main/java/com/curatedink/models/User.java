@@ -53,16 +53,16 @@ public class User {
     private List<Style> styles;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JsonBackReference
     @JoinTable(
             name = "followers",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "followed_id")}
     )
+    @JsonIgnore
     private List<User> followingList;
 
     @ManyToMany(mappedBy = "followingList")
-    @JsonManagedReference
+    @JsonIgnore
     private List<User> followerList;
 
     // Constructors
