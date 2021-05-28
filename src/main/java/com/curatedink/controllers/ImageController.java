@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -57,16 +59,25 @@ public class ImageController {
     //curated-gallery
 
     @GetMapping(value = "/curated-gallery.json")
-    public @ResponseBody List<User> getAllCurrentUserFollowingInJSONFormat() {
-        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User userToGetFollowers = usersDao.getOne(currentUser.getId());
-//        return usersDao.findUsersByFollowingList(userToGetFollowers.getFollowingList());
-        System.out.println(userToGetFollowers.getFollowingList());
-        List<User> followingList = userToGetFollowers.getFollowingList();
-        for(User user : followingList) {
-            System.out.println(user.getId());
+    @ResponseBody
+    public List<Object> getAllCurrentUserFollowingInJSONFormat() {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = usersDao.getOne(principal.getId());
+
+
+        List<User> currentUserFollowingList = currentUser.getFollowingList();
+        List<Image> allImages = imagesDao.findAllByIsProfileImageIsFalse();
+        List<Object> followedImages = new ArrayList <Object>();
+//        List<Image> followedImages = Arrays.asList();
+//        for (Image image : allImages) {
+//            System.out.println(image.getUser().getId());
+//        }
+        for (User user : currentUserFollowingList) {
+            followedImages.add(user.getImages());
+            System.out.println(user.getImages());
         }
-        return followingList;
+        System.out.println(followedImages);
+        return followedImages;
     }
 
 
