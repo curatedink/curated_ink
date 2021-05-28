@@ -17,17 +17,12 @@
     });
 })(jQuery);
 
+
 (function ($) {
     let request = $.ajax({'url': '/curated-gallery.json'});
     request.done(function (images) {
         let html = '';
-        let lengthOfArray = images.length;
-        // console.log(images, "curated");
-        // for (let i = 0; i < lengthOfArray; i++) {
         images.forEach(function (image) {
-
-            console.log(image[0].imageUrl);
-
             html += '<div class="card m-5" style="width: 24rem;">';
             html += '<div class="card-body">';
             html += '<img class="img-thumbnail rounded mx-auto d-block" src=" ' + image[0].imageUrl + '"' + '/>';
@@ -41,8 +36,6 @@
         $('#curated-gallery').html(html);
     });
 })(jQuery);
-
-// console.log(images);
 
 
 (function ($) {
@@ -59,4 +52,37 @@
         });
         $('#detailed-work').html(html);
     });
+})(jQuery);
+
+
+(function ($) {
+    let request = $.ajax({'url': '/gallery.json'});
+    request.done(function (images) {
+        $("#txt-search").keyup(function () {
+            let searchField = $(this).val();
+            if (searchField === '') {
+                $('#search-gallery').html('');
+                return;
+            }
+            let regex = new RegExp(searchField, "i");
+            let html = '<div class="row">';
+            let count = 1;
+            $.each(images, function (key, val) {
+                if ((val.creditedArtist.search(regex) != -1) || (val.studioName.search(regex) != -1)) {
+                    html += '<div class="m-5" style="width: 24rem;">';
+                    html += '<div class="">';
+                    html += '<img class="img-thumbnail rounded mx-auto d-block" src=" ' + val.imageUrl + '"' + '/>';
+                    html += '<p class="ml-2">' + val.creditedArtist + '</p>';
+                    html += '</div>';
+                    html += '</div>';
+                    if (count % 2 == 0) {
+                        html += '</div><div class ="row">'
+                    }
+                    count++;
+                }
+            });
+            html += '</div>';
+            $('#search-gallery').html(html);
+        });
+    })
 })(jQuery);
