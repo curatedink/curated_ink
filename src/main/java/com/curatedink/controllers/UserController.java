@@ -137,16 +137,29 @@ public class UserController {
     }
 
     // ------------------------------------------------------ Follow a User:
-
+        // NEED TO CLEAN THIS UP
     // Visit another users page:
     @GetMapping("/profile/{id}")
     public String viewAnotherUserProfile(Model model, @PathVariable long id) {
+        // Get current user and pass it forward:
+        User principle = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = userDao.getOne(principle.getId());
+        model.addAttribute(currentUser);
+
+        // Get selected image profile owner and pass it forward
         User profileOwner = userDao.getOne(id);
         model.addAttribute("user", profileOwner);
         List<User> followingList = profileOwner.getFollowingList();
-        model.addAttribute("followingList", followingList);
         List<User> followerList = profileOwner.getFollowerList();
+
+        //Checking to see if the current user is on the viewed profile users following list
+        boolean showButton = !followerList.contains(currentUser);
+        System.out.println(showButton); // TEST GOOD
+        model.addAttribute("showButton", showButton);
+
+        model.addAttribute("followingList", followingList);
         model.addAttribute("followerList", followerList);
+
         boolean userType = profileOwner.getIsArtist();
         if (userType) {
             return "users/artist";
@@ -156,10 +169,10 @@ public class UserController {
     }
 
     @PostMapping("/users/follow/{id}") // put this action on the follow button
-    public String followUser(@PathVariable long id){
+    public String followUser(@PathVariable long id, @ModelAttribute User currentUser){
         //get current user:
-        User principle = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User currentUser = userDao.getOne(principle.getId());
+//        User principle = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User currentUser = userDao.getOne(principle.getId());
         User userToFollow = userDao.getOne(id);
         List<User> following = currentUser.getFollowingList();
         following.add(userToFollow);
