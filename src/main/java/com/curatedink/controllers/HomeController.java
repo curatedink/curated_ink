@@ -10,9 +10,4 @@ public class HomeController {
         return "tattoos/landing";
     }
 
-    @GetMapping("/filestack")
-        public String filestack () {
-            return "tattoos/filestack";
-        }
-
 }
