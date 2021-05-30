@@ -21,6 +21,9 @@
         <div class="container mb-4">
             <form th:action="@{/canvas-upload}" method="POST" th:object="${image}">
 
+                <label for="filepicker">Upload Image</label>
+                <input id="filepicker" class="form-control" type="filepicker" data-fp-apikey="AGt2kVl06SY2LL382w1SQz" onchange="alert(event.fpfile.url)" />
+
                 <label for="imageUrl">Image URL</label>
                 <input id="imageUrl" th:field="*{imageUrl}" class="form-control mb-4" placeholder="Image URL"/>
 
