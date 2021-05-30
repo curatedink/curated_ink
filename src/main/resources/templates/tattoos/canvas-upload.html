@@ -22,25 +22,7 @@
         <div class="container mb-4">
             <form th:action="@{/canvas-upload}" method="POST" th:object="${image}">
 
-                <label for="uploadImage"></label>
                 <input type="button" class="form-control mb-4" value="Upload Image" id="uploadImage" onclick="openPicker()">
-                <script>
-                    const FILESTACK_API_KEY = "AGt2kVl06SY2LL382w1SQz";
-                    const client = filestack.init(FILESTACK_API_KEY);
-                    const options = {
-                        onFileUploadFinished: file => {
-                            return console.log("url");
-                        }
-                    };
-                    function openPicker() {
-                        client.pick({
-                            accept: 'image/*',
-                            maxFiles: 1,
-                        }).then(function (result) {
-                            console.log(JSON.stringify(result));
-                        });
-                    }
-                </script>
 
                 <label for="imageUrl">Image URL</label>
                 <input id="imageUrl" th:field="*{imageUrl}" class="form-control mb-4" placeholder="Image URL"/>
