@@ -86,3 +86,5 @@
         });
     })
 })(jQuery);
+
+console.log('fileStackApiKey', FILESTACK_API_KEY);
