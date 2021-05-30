@@ -1,3 +1,10 @@
+const client = filestack.init(FILESTACK_API_KEY);
+const options = {
+    onFileUploadFinished: file => {
+        return console.log("url");
+    }
+};
+
 (function ($) {
     let request = $.ajax({'url': '/gallery.json'});
     request.done(function (images) {
