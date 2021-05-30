@@ -64,28 +64,15 @@ public class ImageController {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = usersDao.getOne(principal.getId());
 
-
         List<User> currentUserFollowingList = currentUser.getFollowingList();
         List<Image> allImages = imagesDao.findAllByIsProfileImageIsFalse();
         List<Object> followedImages = new ArrayList <Object>();
-//        List<Image> followedImages = Arrays.asList();
-//        for (Image image : allImages) {
-//            System.out.println(image.getUser().getId());
-//        }
+
         for (User user : currentUserFollowingList) {
             followedImages.add(user.getImages());
-            System.out.println(user.getImages());
         }
-        System.out.println(followedImages);
         return followedImages;
     }
-
-
-//    @RequestMapping(value = "/gallery.json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseBody
-//    public List<Image> getAllImagesInJSONFormat() {
-//        return imagesDao.findAllByIsProfileImageIsFalse();
-//    }
 
 
     //   delete image
@@ -122,6 +109,7 @@ public class ImageController {
         return "tattoos/canvas-upload";
     }
 
+
     // save canvas image to images table
     @PostMapping("/canvas-upload")
     public String insertCanvasImage(@ModelAttribute Image image) {
@@ -140,6 +128,8 @@ public class ImageController {
         model.addAttribute("image", imageToEdit);
         return "tattoos/canvas-image-edit";
     }
+
+
     // save canvas image edit
     @PostMapping("/tattoos/canvas-image-edit/{id}")
     public String updateCanvasImage(@ModelAttribute Image imageToEdit) {

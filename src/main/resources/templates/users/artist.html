@@ -14,12 +14,16 @@
 
 <div>
     <h1>Profile picture container </h1>
+    <img src="/../static/img/38208.jpg" th:src="@{img/38208.jpg}" width="1000"
+         class="img-thumbnail rounded img-responsive mt-2"
+         alt="Tattoo Gun">
 </div>
 <div>
-    <h3>Artist Information</h3>
     <div class="m-4">
-        <h3 th:text="${user.username}" class="card-title"/>
-        <h5 th:text="${user.studioName}" class="card-text"/>
+        <h1 th:text="${user.username}" class="card-title"/>
+<!--        <h5 th:text="${user.studioName}" class="card-text">Current Studio</h5>-->
+        <h5>Current Studio: <span th:text="${user.studioName}"></span></h5>
+        <p m-2>About: <span th:text="${user.biography}"></span></p>
     </div>
     <div class="row container">
 
