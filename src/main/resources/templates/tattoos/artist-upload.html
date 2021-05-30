@@ -23,8 +23,9 @@
 
                 <input type="button" class="form-control mb-4" value="Upload Image" id="uploadImage" onclick="openPicker()">
 
+                <script>document.getElementById(imageUrl).value=imageUrl</script>
                 <label for="imageUrl">Image URL</label>
-                <input id="imageUrl" th:field="*{imageUrl}" class="form-control mb-4" placeholder="Image URL"/>
+                <input id="imageUrl" th:field="*{imageUrl}" class="form-control mb-4" placeholder="Image URL" value=""/>
 
                 <label for="comment">Comment</label>
                 <input id="comment" th:field="*{comment}" class="form-control mb-4"

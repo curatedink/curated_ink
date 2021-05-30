@@ -7,7 +7,7 @@
             accept: 'image/*',
             maxFiles: 1,
         }).then(function (result) {
-            // console.log(JSON.stringify(result));
+            console.log(JSON.stringify(result));
             imageUrl = result.url;
             console.log(imageUrl);
         });
