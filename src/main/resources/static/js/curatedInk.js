@@ -1,16 +1,15 @@
- const fsApiKey = "AGt2kVl06SY2LL382w1SQz";
-    const client = filestack.init(fsApiKey);
-    const options = {
-        onFileUploadFinished: file => {
-            return console.log("url");
-        }
-    };
+"use strict;"
+
+    const client = filestack.init("AGt2kVl06SY2LL382w1SQz");
+    let imageUrl = "";
     function openPicker() {
         client.pick({
             accept: 'image/*',
             maxFiles: 1,
         }).then(function (result) {
-            console.log(JSON.stringify(result));
+            // console.log(JSON.stringify(result));
+            imageUrl = result.url;
+            console.log(imageUrl);
         });
     }
 
