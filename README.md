@@ -1,4 +1,3 @@
 # curatedink
 
-- Update application.properties
-- Create keys.js
+- Update application.properties to match example.properties
