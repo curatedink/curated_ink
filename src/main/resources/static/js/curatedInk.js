@@ -1,14 +1,19 @@
 (function ($) {
     let request = $.ajax({'url': '/gallery.json'});
     request.done(function (images) {
+
         let html = '';
         // console.log(images);
         images.forEach(function (image) {
+            let imageUserId = image.user.id;
             html += '<div class="card m-5" style="width: 24rem;">';
             html += '<div class="card-body">';
             html += '<img class="img-thumbnail rounded mx-auto d-block" src=" ' + image.imageUrl + '"' + '/>';
+            // html += '<p>' + image.user.id + '</p>'
             html += '</div>';
-            html += '<a class="btn" data-index-number=${image.id} data-target="#gallery-detailed"' +
+            // html += <a href={/profile/}
+            html += '<a class="btn detailed-modal" data-index-number="image.id" itemID={image.id}' +
+                ' data-target="#gallery-detailed"' +
                 ' data-toggle="modal">View' +
                 ' Details</a>'
             html += '</div>';
@@ -41,16 +46,21 @@
 (function ($) {
     let request = $.ajax({'url': '/gallery.json'});
     request.done(function (images) {
+        $(".detailed-modal").click(function () {
+        let imageId = $(this).attr(itemID);
         let html = '';
-        images.forEach(function (image) {
-            html += '<div class="m-5" style="width: 24rem;">';
-            // html += '<div class="">';
-            html += '<img class="img-thumbnail rounded mx-auto d-block" src=" ' + image.imageUrl + '"' + '/>';
-            html += '<p class="ml-2">' + image.creditedArtist + '</p>';
-            html += '</div>';
-            // html += '</div>';
+        $.each(images, function (key, val) {
+            if (val.id == imageId) {
+                html += '<div class="m-5" style="width: 24rem;">';
+                // html += '<div class="">';
+                html += '<img class="img-thumbnail rounded mx-auto d-block" src=" ' + image.imageUrl + '"' + '/>';
+                html += '<p class="ml-2">' + image.creditedArtist + '</p>';
+                html += '</div>';
+                // html += '</div>';
+            }
         });
         $('#detailed-work').html(html);
+        })
     });
 })(jQuery);
 
