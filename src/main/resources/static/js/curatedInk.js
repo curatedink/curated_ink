@@ -8,7 +8,7 @@
             maxFiles: 1,
         }).then(function (result) {
             console.log(JSON.stringify(result));
-            imageUrl = result.url;
+            imageUrl = result.filesUploaded[0].url;
             console.log(imageUrl);
         });
     }
