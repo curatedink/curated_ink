@@ -1,3 +1,5 @@
+const fsApiKey = FILESTACK_API_KEY;
+
 (function ($) {
     let request = $.ajax({'url': '/gallery.json'});
     request.done(function (images) {
