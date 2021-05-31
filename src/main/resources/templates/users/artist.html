@@ -11,30 +11,33 @@
 
 <nav th:replace=" partials/nav :: nav"/>
 
-
-<div>
-    <h1>Profile picture container </h1>
-    <img src="/../static/img/38208.jpg" th:src="@{img/38208.jpg}" width="1000"
-         class="img-thumbnail rounded img-responsive mt-2"
-         alt="Tattoo Gun">
+<div class="cover">
+    <div class="bg-cover">
+        <!--    <h1>Profile picture container </h1>-->
+        <!--    <img src="/../resources/static/img/38208.jpg" width="100" height="auto"-->
+        <!--         class=""-->
+        <!--         alt="Tattoo Gun">-->
+    </div>
 </div>
-<div>
-    <div class="m-4">
-        <h1 th:text="${user.username}" class="card-title"/>
-<!--        <h5 th:text="${user.studioName}" class="card-text">Current Studio</h5>-->
+<div class="col">
+    <h1 th:text="${user.username}" class="card-title"/>
+<div class="row container">
+    <div class="col-9 m-4">
+        <!--        <h5 th:text="${user.studioName}" class="card-text">Current Studio</h5>-->
         <h5>Current Studio: <span th:text="${user.studioName}"></span></h5>
         <p m-2>About: <span th:text="${user.biography}"></span></p>
     </div>
-    <div class="row container">
+    <div class="col mt-5">
 
         <form th:if="${showButton}" th:action="@{/users/follow/{id}(id=${user.getId()})}" method="post">
-            <button id="follow_me" type="submit" class="btn" >Follow</button>
+            <button id="follow_me" type="submit" class="btn">Follow</button>
         </form>
 
-<!--        <button id="follow_me">Follow</button>-->
-<!--        <a th:href="@{/canvas-profile/{id}(id=${user.id})}" class="btn btn-block">View My Canvas Profile</a>-->
+        <!--        <button id="follow_me">Follow</button>-->
+        <!--        <a th:href="@{/canvas-profile/{id}(id=${user.id})}" class="btn btn-block">View My Canvas Profile</a>-->
         <a th:href="@{/request-form}" class="btn">Request Work</a>
     </div>
+</div>
 </div>
 <div>
     <div class="container">
@@ -47,7 +50,7 @@
                     <img th:src="${image.imageUrl}" class="img-thumbnail rounded mx-auto d-block"/>
                     <a class="btn" id="detailed-portfolio"
                        data-toggle="modal"
-                       th:attr="data-target=${'#artist-detailed' + image.id}" >
+                       th:attr="data-target=${'#artist-detailed' + image.id}">
                         View Details
                     </a>
                 </div>
@@ -76,11 +79,11 @@
 
                                 <!--                                Might need to change this to take out the id portion-->
 
-<!--                                <a th:href="@{/artist-image-edit/{id}(id=${image.id})}"-->
-<!--                                   class="btn">Edit</a>-->
-<!--                                <form th:action="@{/tattoos/delete/{id}(id=${image.id})}" th:method="post">-->
-<!--                                    <button class="btn">Delete Image</button>-->
-<!--                                </form>-->
+                                <!--                                <a th:href="@{/artist-image-edit/{id}(id=${image.id})}"-->
+                                <!--                                   class="btn">Edit</a>-->
+                                <!--                                <form th:action="@{/tattoos/delete/{id}(id=${image.id})}" th:method="post">-->
+                                <!--                                    <button class="btn">Delete Image</button>-->
+                                <!--                                </form>-->
                             </div>
                         </div>
                     </div>
@@ -95,7 +98,7 @@
 
 <script>
 
-    $('#detailed-portfolio').on('click', function() {
+    $('#detailed-portfolio').on('click', function () {
         $('#artist-detailed').show();
     });
 
