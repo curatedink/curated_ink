@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<nav th:fragment="can-nav" class="navbar navbar-expand-lg navbar-light">
+<nav th:fragment="can-nav" class="navbar navbar-light">
     <a class="navbar-brand" href="/">CURATED INK</a>
     <img src="" width="" height="auto" alt="">
     </a>
@@ -26,17 +26,6 @@
                 <li class="nav-item">
                     <form th:action="@{/profile-page}" th:method="get" class="form-inline mr-sm-2">
                         <button class="nav-link btn">View Your Profile</button>
-                    </form>
-                </li>
-                <li class="nav-item">
-                    <a href="/tattoos/canvas-upload" class="form-inline mr-sm-2">
-                        <button class="nav-link btn">Add a new image</button>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <!--                <a class="nav-link" th:href="@{/users/artist-edit/{id}(id=${user.id})}">Edit Profile</a>-->
-                    <form th:action="@{/canvas-edit}" th:method="get" class="form-inline mr-sm-2">
-                        <button class="nav-link btn">Edit Profile</button>
                     </form>
                 </li>
                 <li class="nav-item">
