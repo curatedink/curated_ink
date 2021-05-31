@@ -12,13 +12,36 @@
 <nav th:replace=" partials/can-nav :: can-nav"/>
 
 
-<div>
-    <h1>Profile picture container </h1>
+<!--Container for cover image and profile image-->
+<div class="cover">
+    <div class="bg-cover">
+        <!--    <h1>Profile picture container </h1>-->
+        <!--    <img src="/../resources/static/img/38208.jpg" width="100" height="auto"-->
+        <!--         class=""-->
+        <!--         alt="Tattoo Gun">-->
+    </div>
 </div>
-<div>
-    <h3>Canvas Information</h3>
+
+
+<!--Canvas Information-->
+<div class="col">
+    <h1>Hey there,<span th:text="${user.username}"></span>!</h1>
+    <div class="row container">
+        <div class="col-9 m-4">
+            <p m-2>About: <span th:text="${user.biography}"></span></p>
+        </div>
+        <div>
+            <a th:href="@{/tattoos/canvas-upload}" class="btn">Add a new image</a>
+            <form th:action="@{/canvas-edit}" th:method="get" class="form-inline mr-sm-2">
+                <button class="btn">Edit Your Profile</button>
+            </form>
+        </div>
+    </div>
 </div>
-<div>
+
+
+<!--Canvas' Images-->
+<div class="mt-4">
     <div class="container">
         <div class="row md-6 justify-content-around">
 
@@ -33,6 +56,8 @@
                         View Details
                     </a>
                 </div>
+
+<!--                Modal for Details-->
                 <div class="modal fade" id="canvas-detailed" th:attr="id=${'canvas-detailed' + image.id}"
                      tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -45,17 +70,16 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <div class="card" style="width: 18rem;">
+                                <div class="card" style="width: 100%;">
                                     <img th:src="${image.imageUrl}"/>
                                     <div class="card-body">
-                                        <h3 th:text="${image.creditedArtist}" class="card-title"/>
-                                        <h5 th:text="${image.studioName}" class="card-text"/>
-                                        <p th:text="${image.comment}" class="card-text"/>
+                                        <h3>Artist: <span th:text="${image.creditedArtist}"></span></h3>
+                                        <h5>Studio: <span th:text="${image.studioName}"></span></h5>
+                                        <p>About the Work: <span th:text="${image.comment}"></span></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-
 <!--                                Might need to change this to take out the id portion-->
                                 <a th:href="@{/canvas-image-edit/{id}(id=${image.id})}"
                                    class="btn">Edit</a>

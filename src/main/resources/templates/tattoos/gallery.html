@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>Gallery</title>
@@ -27,14 +28,16 @@
                         <a class="nav-item nav-link active" id="world-gallery-tab" data-toggle="tab"
                            href="#world-gallery"
                            role="tab" aria-controls="world-gallery" aria-selected="true">World Gallery</a>
-                        <a class="nav-item nav-link" id="curated-gallery-view-tab" data-toggle="tab"
-                           href="#curated-gallery-view"
-                           role="tab"
-                           aria-controls="curated-gallery-view" aria-selected="false">Curated Gallery</a>
-                        <a class="nav-item nav-link" id="search-gallery-view-tab" data-toggle="tab"
-                           href="#search-gallery-view"
-                           role="tab"
-                           aria-controls="search-gallery-view" aria-selected="false">Search The Gallery</a>
+                        <div sec:authorize="isAuthenticated()">
+                            <a class="nav-item nav-link" id="curated-gallery-view-tab" data-toggle="tab"
+                               href="#curated-gallery-view"
+                               role="tab"
+                               aria-controls="curated-gallery-view" aria-selected="false">Curated Gallery</a>
+                            <a class="nav-item nav-link" id="search-gallery-view-tab" data-toggle="tab"
+                               href="#search-gallery-view"
+                               role="tab"
+                               aria-controls="search-gallery-view" aria-selected="false">Search The Gallery</a>
+                        </div>
                     </div>
                 </nav>
 

@@ -24,6 +24,7 @@
                 <input type="button" class="form-control mb-4" value="Upload Image" id="uploadImage" onclick="openPicker()">
 
                 <label for="imageUrl">Image URL</label>
+
                 <script>document.getElementById(imageUrl).value=imageUrl</script> <!-- imageUrl is not defined -->
                 <input id="imageUrl" th:field="*{imageUrl}" class="form-control mb-4" placeholder="Image URL" value=""/>
 
