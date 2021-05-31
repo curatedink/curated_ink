@@ -40,8 +40,8 @@
 </div>
 
 
-
-<div>
+<!--Canvas' Images-->
+<div class="mt-4">
     <div class="container">
         <div class="row md-6 justify-content-around">
 
@@ -56,6 +56,8 @@
                         View Details
                     </a>
                 </div>
+
+<!--                Modal for Details-->
                 <div class="modal fade" id="canvas-detailed" th:attr="id=${'canvas-detailed' + image.id}"
                      tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -68,17 +70,16 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <div class="card" style="width: 18rem;">
+                                <div class="card" style="width: 100%;">
                                     <img th:src="${image.imageUrl}"/>
                                     <div class="card-body">
-                                        <h3 th:text="${image.creditedArtist}" class="card-title"/>
-                                        <h5 th:text="${image.studioName}" class="card-text"/>
-                                        <p th:text="${image.comment}" class="card-text"/>
+                                        <h3>Artist: <span th:text="${image.creditedArtist}"></span></h3>
+                                        <h5>Studio: <span th:text="${image.studioName}"></span></h5>
+                                        <p>About the Work: <span th:text="${image.comment}"></span></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-
 <!--                                Might need to change this to take out the id portion-->
                                 <a th:href="@{/canvas-image-edit/{id}(id=${image.id})}"
                                    class="btn">Edit</a>
