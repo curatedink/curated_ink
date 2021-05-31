@@ -16,12 +16,14 @@
                     <img src="js/404.jpg" alt="Error 404 Picture"
                          width="60%" height="40%">
                 </div>
+                <a href="/">
+                    <button>Back to Main</button>
+                </a>
             </div>
             <div th:case="'Forbidden'">
                 <h1>You don't have permission to view this page.</h1>
             </div>
+
         </th:block>
-
-
     </body>
 </html>
