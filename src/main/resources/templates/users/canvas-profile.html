@@ -12,12 +12,35 @@
 <nav th:replace=" partials/can-nav :: can-nav"/>
 
 
-<div>
-    <h1>Profile picture container </h1>
+<!--Container for cover image and profile image-->
+<div class="cover">
+    <div class="bg-cover">
+        <!--    <h1>Profile picture container </h1>-->
+        <!--    <img src="/../resources/static/img/38208.jpg" width="100" height="auto"-->
+        <!--         class=""-->
+        <!--         alt="Tattoo Gun">-->
+    </div>
 </div>
-<div>
-    <h3>Canvas Information</h3>
+
+
+<!--Canvas Information-->
+<div class="col">
+    <h1>Hey there,<span th:text="${user.username}"></span>!</h1>
+    <div class="row container">
+        <div class="col-9 m-4">
+            <p m-2>About: <span th:text="${user.biography}"></span></p>
+        </div>
+        <div>
+            <a th:href="@{/tattoos/canvas-upload}" class="btn">Add a new image</a>
+            <form th:action="@{/canvas-edit}" th:method="get" class="form-inline mr-sm-2">
+                <button class="btn">Edit Your Profile</button>
+            </form>
+        </div>
+    </div>
 </div>
+
+
+
 <div>
     <div class="container">
         <div class="row md-6 justify-content-around">
