@@ -12,24 +12,43 @@
 <nav th:replace=" partials/can-nav :: can-nav"/>
 
 
-<div>
-    <h1>Profile picture container </h1>
-</div>
-<div>
-    <h3>Canvas Information</h3>
-    <div>
-        <form th:action="@{/users/follow/{id}(id=${user.getId()})}" method="post">
-            <button id="follow_me" type="submit" class="btn">Follow</button>
-        </form>
+<!--Container for cover image and profile image-->
+<div class="cover">
+    <div class="bg-cover">
+        <!--    <h1>Profile picture container </h1>-->
+        <!--    <img src="/../resources/static/img/38208.jpg" width="100" height="auto"-->
+        <!--         class=""-->
+        <!--         alt="Tattoo Gun">-->
     </div>
 </div>
+
+
+<!--Canvas Information-->
+<div class="col">
+    <h1 th:text="${user.username}" class="card-title"/>
+    <div class="row container">
+        <div class="col-9 m-4">
+            <p m-2>About: <span th:text="${user.biography}"></span></p>
+        </div>
+
+        <!--    div for buttons-->
+        <div class="col mt-5">
+            <form th:if="${showButton}" th:action="@{/users/follow/{id}(id=${user.getId()})}" method="post">
+                <button id="follow_me" type="submit" class="btn">Follow</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--Canvas' Images-->
 <div>
     <div class="container">
         <div class="row md-6 justify-content-around">
 
             <!--            ****Need to refactor to only show specific canvas' tats****-->
 
-            <div class="card m-5" style="width: 24rem;"  th:each="image : ${images}">
+            <div class="card m-5" style="width: 24rem;" th:each="image : ${images}">
                 <div class="card-body">
                     <img th:src="${image.imageUrl}" class="img-thumbnail rounded mx-auto d-block"/>
                     <a class="btn" id="detailed-work"
@@ -50,23 +69,17 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <div class="card" style="width: 18rem;">
+                                <div class="card" style="width: 100%;">
                                     <img th:src="${image.imageUrl}"/>
                                     <div class="card-body">
-                                        <h3 th:text="${image.creditedArtist}" class="card-title"/>
-                                        <h5 th:text="${image.studioName}" class="card-text"/>
-                                        <p th:text="${image.comment}" class="card-text"/>
+                                        <h3>Artist: <span th:text="${image.creditedArtist}"></span></h3>
+                                        <h5>Studio: <span th:text="${image.studioName}"></span></h5>
+                                        <p>About the Work: <span th:text="${image.comment}"></span></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
 
-                                <!--                                Might need to change this to take out the id portion-->
-                                <a th:href="@{/canvas-image-edit/{id}(id=${image.id})}"
-                                   class="btn">Edit</a>
-                                <form th:action="@{/tattoos/delete/{id}(id=${image.id})}" th:method="post">
-                                    <button class="btn">Delete Image</button>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -81,7 +94,7 @@
 
 <script>
 
-    $('#detailed-work').on('click', function() {
+    $('#detailed-work').on('click', function () {
         $('#canvas-detailed').show();
     });
 
