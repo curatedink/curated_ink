@@ -6,6 +6,7 @@ import com.curatedink.models.User;
 import com.curatedink.repositories.ImageRepo;
 import com.curatedink.repositories.UserRepo;
 import com.curatedink.services.EmailService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,6 +31,9 @@ public class UserController {
     private PasswordEncoder passwordEncoder; // Security
     private final EmailService emailService;
 
+    @Value("${filestackApiKey}")
+    private String filestackApiKey;
+
     public UserController(UserRepo userDao, ImageRepo imagesDao, PasswordEncoder passwordEncoder, EmailService emailService) {
 
 
@@ -44,6 +48,7 @@ public class UserController {
     @GetMapping("/sign-up")
     public String showSignupForm(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("filestackApiKey", filestackApiKey);
         return "tattoos/sign-up";
     }
 
@@ -65,6 +70,7 @@ public class UserController {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userToEdit = userDao.getOne(currentUser.getId());
         model.addAttribute("user", userToEdit);
+        model.addAttribute("filestackApiKey", filestackApiKey);
         return "users/artist-edit";
     }
 
@@ -87,6 +93,7 @@ public class UserController {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userToEdit = userDao.getOne(currentUser.getId());
         model.addAttribute("user", userToEdit);
+        model.addAttribute("filestackApiKey", filestackApiKey);
         return "users/canvas-edit";
     }
 

@@ -6,6 +6,7 @@ import com.curatedink.models.User;
 import com.curatedink.repositories.ImageRepo;
 import com.curatedink.repositories.StyleRepo;
 import com.curatedink.repositories.UserRepo;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,9 @@ public class ImageController {
     private final ImageRepo imagesDao;
     private final UserRepo usersDao;
     private final StyleRepo stylesDao;
+
+    @Value("${filestackApiKey}")
+    private String filestackApiKey;
 
     public ImageController(ImageRepo imagesDao, UserRepo usersDao, StyleRepo stylesDao) {
         this.imagesDao = imagesDao;
@@ -88,8 +92,9 @@ public class ImageController {
 
     // create artist image
     @GetMapping("tattoos/artist-upload")
-    public String create(Model vModel) {
-        vModel.addAttribute("image", new Image());
+    public String create(Model model) {
+        model.addAttribute("image", new Image());
+        model.addAttribute("filestackApiKey", filestackApiKey);
         return "tattoos/artist-upload";
     }
 
@@ -107,8 +112,9 @@ public class ImageController {
 
     // create canvas image
     @GetMapping("tattoos/canvas-upload")
-    public String createCanvasImage(Model vModel) {
-        vModel.addAttribute("image", new Image());
+    public String createCanvasImage(Model model) {
+        model.addAttribute("image", new Image());
+        model.addAttribute("filestackApiKey", filestackApiKey);
         return "tattoos/canvas-upload";
     }
 
@@ -130,6 +136,7 @@ public class ImageController {
     public String editCanvasImage(@PathVariable("id") long id, Model model) {
         Image imageToEdit = imagesDao.getOne(id);
         model.addAttribute("image", imageToEdit);
+        model.addAttribute("filestackApiKey", filestackApiKey);
         return "tattoos/canvas-image-edit";
     }
 
@@ -150,6 +157,7 @@ public class ImageController {
     public String editArtistImage(@PathVariable("id") long id, Model model) {
         Image imageToEdit = imagesDao.getOne(id);
         model.addAttribute("image", imageToEdit);
+        model.addAttribute("filestackApiKey", filestackApiKey);
         return "tattoos/artist-image-edit";
     }
 
