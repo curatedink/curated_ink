@@ -31,6 +31,8 @@ public class UserController {
     private final EmailService emailService;
 
     public UserController(UserRepo userDao, ImageRepo imagesDao, PasswordEncoder passwordEncoder, EmailService emailService) {
+
+
         this.userDao = userDao;
         this.imagesDao = imagesDao;
         this.passwordEncoder = passwordEncoder;
@@ -118,14 +120,6 @@ public class UserController {
     }
 
 
-    @PostMapping("/send-email")
-    public String welcome() {
-        User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User author = userDao.getOne(owner.getId());
-//    emailService.prepareAndSend(subject, body);
-        return "artist-profile";
-    }
-
 
 
     // ------------------------------------------------------ Delete a User:
@@ -186,4 +180,23 @@ public class UserController {
         return "redirect:/profile/" + id;
     }
 
+    @GetMapping("/send-email")
+    public String email() {
+
+        return "tattoos/send-email";
+    }
+
+    @PostMapping("/send-email")
+    public String sendEmail() {
+    User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User author = userDao.getOne(owner.getId());
+    String email = "email@email.com";
+    String subject = "subject";
+    String body = "body of email";
+    emailService.prepareAndSend(author, email, subject, body);
+        return "redirect:/";
+    }
+
+
 }
+
