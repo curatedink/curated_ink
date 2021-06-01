@@ -1,17 +1,4 @@
-"use strict;"
-
-    const client = filestack.init("AGt2kVl06SY2LL382w1SQz");
-    let imageUrl = "";
-    function openPicker() {
-        client.pick({
-            accept: 'image/*',
-            maxFiles: 1,
-        }).then(function (result) {
-            console.log(JSON.stringify(result));
-            imageUrl = result.filesUploaded[0].url;
-            console.log(imageUrl);
-        });
-    }
+"use strict";
 
 (function ($) {
     let request = $.ajax({'url': '/gallery.json'});
