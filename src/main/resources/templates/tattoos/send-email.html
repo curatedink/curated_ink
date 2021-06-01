@@ -5,23 +5,18 @@
     <title>Send Email Page</title>
 
     <head th:replace=" partials/head :: head"/>
-<!--    <link rel="stylesheet" th:href="@{/style.css}">-->
+    <link rel="stylesheet" th:href="@{/style.css}">
 
 </head>
 <body>
 
 <div class="email-class">
     <div class="container">
-
         <div>
             <h2 class="">Send Email</h2>
         </div>
-
-
         <div class="container mb-4">
-
             <form th:action="@{/send-email}" method="post">
-
                     Name:<br>
                     <input type="text" size="19" name="Contact-Name"><br><br>
                     Email:<br>
@@ -30,10 +25,8 @@
                     <textarea name="Contact-Message" rows="6″ cols="20″>
                     </textarea>
                     <br><br>
-
 <!--                add the functionality here for the send button to work correctly.   ----->
                     <button type="submit" value="Submit">Send</button>
-
             </form>
         </div>
     </div>
