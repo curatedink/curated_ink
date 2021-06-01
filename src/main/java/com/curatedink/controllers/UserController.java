@@ -1,5 +1,6 @@
 package com.curatedink.controllers;
 
+import com.curatedink.models.Image;
 import com.curatedink.models.Style;
 import com.curatedink.models.User;
 import com.curatedink.repositories.ImageRepo;
@@ -30,6 +31,8 @@ public class UserController {
     private final EmailService emailService;
 
     public UserController(UserRepo userDao, ImageRepo imagesDao, PasswordEncoder passwordEncoder, EmailService emailService) {
+
+
         this.userDao = userDao;
         this.imagesDao = imagesDao;
         this.passwordEncoder = passwordEncoder;
@@ -88,11 +91,12 @@ public class UserController {
     }
 
     @PostMapping("/users/canvas-edit")
-    public String updateCanvas(@ModelAttribute User userToEdit) {
+    public String updateCanvas(@ModelAttribute User userToEdit, @RequestParam(name = "style") List<Style> styles) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         userToEdit.setId(currentUser.getId());
         userToEdit.setPassword(currentUser.getPassword());
         userToEdit.setUsername(currentUser.getUsername());
+        userToEdit.setStyles(styles);
         userDao.save(userToEdit);
         return "redirect:/profile-page";
     }
@@ -116,14 +120,6 @@ public class UserController {
         }
     }
 
-
-    @PostMapping("/send-email")
-    public String welcome() {
-        User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User author = userDao.getOne(owner.getId());
-//    emailService.prepareAndSend(subject, body);
-        return "artist-profile";
-    }
 
 
 
@@ -160,6 +156,10 @@ public class UserController {
         model.addAttribute("followingList", followingList);
         model.addAttribute("followerList", followerList);
 
+        // Passing the profile owners images to their page
+        List<Image> images = profileOwner.getImages();
+        model.addAttribute("images", images);
+
         boolean userType = profileOwner.getIsArtist();
         if (userType) {
             return "users/artist";
@@ -169,10 +169,10 @@ public class UserController {
     }
 
     @PostMapping("/users/follow/{id}") // put this action on the follow button
-    public String followUser(@PathVariable long id, @ModelAttribute User currentUser){
+    public String followUser(@PathVariable long id){
         //get current user:
-//        User principle = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User currentUser = userDao.getOne(principle.getId());
+        User principle = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = userDao.getOne(principle.getId());
         User userToFollow = userDao.getOne(id);
         List<User> following = currentUser.getFollowingList();
         following.add(userToFollow);
@@ -181,4 +181,23 @@ public class UserController {
         return "redirect:/profile/" + id;
     }
 
+    @GetMapping("/send-email")
+    public String email() {
+
+        return "tattoos/send-email";
+    }
+
+    @PostMapping("/send-email")
+    public String sendEmail() {
+    User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User author = userDao.getOne(owner.getId());
+    String email = "email@email.com";
+    String subject = "subject";
+    String body = "body of email";
+    emailService.prepareAndSend(author, email, subject, body);
+        return "redirect:/";
+    }
+
+
 }
+
