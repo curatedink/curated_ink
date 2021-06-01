@@ -91,11 +91,12 @@ public class UserController {
     }
 
     @PostMapping("/users/canvas-edit")
-    public String updateCanvas(@ModelAttribute User userToEdit) {
+    public String updateCanvas(@ModelAttribute User userToEdit, @RequestParam(name = "style") List<Style> styles) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         userToEdit.setId(currentUser.getId());
         userToEdit.setPassword(currentUser.getPassword());
         userToEdit.setUsername(currentUser.getUsername());
+        userToEdit.setStyles(styles);
         userDao.save(userToEdit);
         return "redirect:/profile-page";
     }

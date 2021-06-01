@@ -1,6 +1,7 @@
 package com.curatedink.controllers;
 
 import com.curatedink.models.Image;
+import com.curatedink.models.Style;
 import com.curatedink.models.User;
 import com.curatedink.repositories.ImageRepo;
 import com.curatedink.repositories.StyleRepo;
@@ -94,10 +95,11 @@ public class ImageController {
 
     // save artist image to images table
     @PostMapping("/artist-upload")
-    public String insert(@ModelAttribute Image image) {
+    public String insert(@ModelAttribute Image image, @RequestParam(name = "style") List<Style> styles) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User author = usersDao.getOne(principal.getId());
         image.setUser(author);
+        image.setStyles(styles);
         imagesDao.save(image);
         return "redirect:/profile-page";
     }
@@ -113,10 +115,11 @@ public class ImageController {
 
     // save canvas image to images table
     @PostMapping("/canvas-upload")
-    public String insertCanvasImage(@ModelAttribute Image image) {
+    public String insertCanvasImage(@ModelAttribute Image image, @RequestParam(name = "style") List<Style> styles) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User author = usersDao.getOne(principal.getId());
         image.setUser(author);
+        image.setStyles(styles);
         imagesDao.save(image);
         return "redirect:/profile-page";
     }
@@ -133,9 +136,10 @@ public class ImageController {
 
     // save canvas image edit
     @PostMapping("/tattoos/canvas-image-edit/{id}")
-    public String updateCanvasImage(@ModelAttribute Image imageToEdit) {
+    public String updateCanvasImage(@ModelAttribute Image imageToEdit, @RequestParam(name = "style") List<Style> styles) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         imageToEdit.setUser(currentUser);
+        imageToEdit.setStyles(styles);
         imagesDao.save(imageToEdit);
         return "redirect:/profile-page";
     }
@@ -151,9 +155,10 @@ public class ImageController {
 
     // save artist image edit
     @PostMapping("/tattoos/artist-image-edit/{id}")
-    public String updateArtistImage(@ModelAttribute Image imageToEdit) {
+    public String updateArtistImage(@ModelAttribute Image imageToEdit, @RequestParam(name = "style") List<Style> styles) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         imageToEdit.setUser(currentUser);
+        imageToEdit.setStyles(styles);
         imagesDao.save(imageToEdit);
         return "redirect:/profile-page";
     }
