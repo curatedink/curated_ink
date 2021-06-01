@@ -22,16 +22,22 @@
 
             <form th:action="@{/send-email}" method="post">
 
-<!--                <label for=""></label>-->
-                    <input id="text" type="text" size="19" name="Contact-Name">
+                Name:<br>
+                <input id="text" type="text" size="19" name="Contact-Name">
+                <br>
 
-                    <input id="email"  type="email" name="Contact-Email">
+                Email:<br>
+                <input id="email"  type="email" name="Contact-Email">
+                <br>
 
-                    <textarea id="message" name="Contact-Message" rows="6″ cols="20″></textarea>
+                Message:<br>
+                <textarea id="message" name="Contact-Message" rows="6″ cols="20″></textarea>
+                <br>
 
-                    <button type="submit" value="Submit">Send</button>
+                <button type="submit" value="Submit">Send</button>
 
             </form>
+
         </div>
     </div>
 </div>
