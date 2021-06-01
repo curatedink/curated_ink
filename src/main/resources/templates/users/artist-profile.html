@@ -15,10 +15,15 @@
 <!--Container for cover image and profile image-->
 <div class="cover">
     <div class="bg-cover">
-        <!--    <h1>Profile picture container </h1>-->
-        <!--    <img src="/../resources/static/img/38208.jpg" width="100" height="auto"-->
-        <!--         class=""-->
-        <!--         alt="Tattoo Gun">-->
+            <img src="/../img/38208.jpg" width="200" height="auto"
+                 class=""
+                 alt="Tattoo Gun">
+    </div>
+    <div th:each="image : ${images}">
+        <img th:if="${image.isProfileImage}"
+             th:src="${image.imageUrl}"
+             alt="Artist Profile Image"
+             class="img-thumbnail rounded mx-auto d-block"/>
     </div>
 </div>
 
@@ -33,10 +38,15 @@
             <p m-2>About: <span th:text="${user.biography}"></span></p>
         </div>
         <div>
-        <a th:href="@{/tattoos/artist-upload}" class="btn">Add a new image</a>
-        <form th:action="@{/artist-edit}" th:method="get" class="form-inline mr-sm-2">
-            <button class="btn">Edit Profile</button>
-        </form>
+            <a th:href="@{/tattoos/artist-upload}" class="btn">Add a new image</a>
+            <a class="btn" id="portfolioImage"
+               data-toggle="modal"
+               th:attr="data-target=${'#artistProfileImage' + user.id}">
+                Add a Profile Image
+            </a>
+            <form th:action="@{/artist-edit}" th:method="get" class="form-inline mr-sm-2">
+                <button class="btn">Edit Profile</button>
+            </form>
         </div>
     </div>
 </div>
@@ -54,12 +64,12 @@
                     <img th:src="${image.imageUrl}" class="img-thumbnail rounded mx-auto d-block"/>
                     <a class="btn" id="detailed-portfolio"
                        data-toggle="modal"
-                       th:attr="data-target=${'#artist-detailed' + image.id}" >
+                       th:attr="data-target=${'#artist-detailed' + image.id}">
                         View Details
                     </a>
                 </div>
 
-<!--                Modal for Details-->
+                <!--                Modal for Details-->
                 <div class="modal fade" id="artist-detailed" th:attr="id=${'artist-detailed' + image.id}"
                      tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -92,6 +102,32 @@
                         </div>
                     </div>
                 </div>
+
+
+<!--                Modal for Profile Image-->
+                <div class="modal fade" id="artistProfileImage" th:attr="id=${'artistProfileImage' + user.id}"
+                     tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Profile Image</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>File Stack goes here.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <form th:action="@{/profile-image}" th:method="post">
+                                    <button class="btn">Add Profile Image</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -102,10 +138,13 @@
 
 <script>
 
-    $('#detailed-portfolio').on('click', function() {
+    $('#detailed-portfolio').on('click', function () {
         $('#artist-detailed').show();
     });
 
+    $('#artistProfileImage').on('click', function () {
+        $('#artistProfileImage').show();
+    });
 </script>
 
 </body>
