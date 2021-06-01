@@ -163,5 +163,16 @@ public class ImageController {
         return "redirect:/profile-page";
     }
 
+    // Profile image
+    @PostMapping("/profile-image")
+    public String addProfileImage(){
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User author = usersDao.getOne(principal.getId());
+        Image image = new Image();
+        image.setUser(author);
+        image.setIsProfileImage(true);
+        imagesDao.save(image);
+        return "redirect:/profile-page";
+    }
 
 }
