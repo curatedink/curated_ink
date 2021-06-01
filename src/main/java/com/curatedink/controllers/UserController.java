@@ -190,9 +190,10 @@ public class UserController {
     public String sendEmail() {
     User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     User author = userDao.getOne(owner.getId());
-    String subject = "test";
+    String email = "email@email.com";
+    String subject = "subject";
     String body = "body of email";
-    emailService.prepareAndSend(author, subject, body);
+    emailService.prepareAndSend(author, email, subject, body);
         return "redirect:/";
     }
 
