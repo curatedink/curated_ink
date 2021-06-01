@@ -1,5 +1,6 @@
 package com.curatedink.controllers;
 
+import com.curatedink.models.Image;
 import com.curatedink.models.Style;
 import com.curatedink.models.User;
 import com.curatedink.repositories.ImageRepo;
@@ -159,6 +160,10 @@ public class UserController {
 
         model.addAttribute("followingList", followingList);
         model.addAttribute("followerList", followerList);
+
+        // Passing the profile owners images to their page
+        List<Image> images = profileOwner.getImages();
+        model.addAttribute("images", images);
 
         boolean userType = profileOwner.getIsArtist();
         if (userType) {

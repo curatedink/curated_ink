@@ -58,11 +58,11 @@ public class User {
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "followed_id")}
     )
-    @JsonManagedReference
+    @JsonIgnore
     private List<User> followingList;
 
     @ManyToMany(mappedBy = "followingList")
-    @JsonBackReference
+    @JsonIgnore
     private List<User> followerList;
 
     // Constructors
