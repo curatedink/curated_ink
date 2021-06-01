@@ -69,7 +69,8 @@ public class ImageController {
         List<Object> followedImages = new ArrayList <Object>();
 
         for (User user : currentUserFollowingList) {
-            followedImages.add(user.getImages());
+            followedImages.addAll(user.getImages());
+            System.out.println(followedImages);
         }
         return followedImages;
     }
