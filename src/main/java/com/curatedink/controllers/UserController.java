@@ -169,10 +169,10 @@ public class UserController {
     }
 
     @PostMapping("/users/follow/{id}") // put this action on the follow button
-    public String followUser(@PathVariable long id, @ModelAttribute User currentUser){
+    public String followUser(@PathVariable long id){
         //get current user:
-//        User principle = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User currentUser = userDao.getOne(principle.getId());
+        User principle = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = userDao.getOne(principle.getId());
         User userToFollow = userDao.getOne(id);
         List<User> following = currentUser.getFollowingList();
         following.add(userToFollow);
