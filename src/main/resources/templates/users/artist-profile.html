@@ -13,17 +13,18 @@
 
 
 <!--Container for cover image and profile image-->
-<div class="cover">
-    <div class="bg-cover">
-            <img src="/../img/38208.jpg" width="200" height="auto"
-                 class=""
-                 alt="Tattoo Gun">
-    </div>
+<div class="row cover d-flex justify-content-between align-items-end">
     <div th:each="image : ${images}">
         <img th:if="${image.isProfileImage}"
              th:src="${image.imageUrl}"
              alt="Artist Profile Image"
-             class="img-thumbnail rounded mx-auto d-block"/>
+             class=""
+             style="width: 18rem;"/>
+    </div>
+    <div>
+            <img src="/../img/tattoo-gun.jpg" width="400" height="auto"
+                 class="align-self-end"
+                 alt="Tattoo Gun">
     </div>
 </div>
 
