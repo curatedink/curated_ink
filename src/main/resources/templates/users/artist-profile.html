@@ -31,25 +31,27 @@
 
 <!--Artist Information-->
 <div class="col">
-    <h1>Hey there,<span th:text="${user.username}"></span>!</h1>
+    <h1 class="profile-heading" th:text="${user.username}"></h1>
     <div class="row container">
-        <div class="col-9 m-4">
-            <!--        <h5 th:text="${user.studioName}" class="card-text">Current Studio</h5>-->
-            <h5>Current Studio: <span th:text="${user.studioName}"></span></h5>
-            <p m-2>About: <span th:text="${user.biography}"></span></p>
+        <div class="col-9">
+            <p class="sub-text">Current Studio</p>
+            <p class="profile-text" th:text="${user.studioName}"></p>
+            <p class="sub-text">About</p>
+            <p class="profile-text" th:text="${user.biography}"></p>
         </div>
-        <div>
-            <a th:href="@{/tattoos/artist-upload}" class="btn">Add a new image</a>
-            <a class="btn" id="portfolioImage"
+    </div>
+        <div class="row d-flex justify-content-around mt-4">
+            <a th:href="@{/tattoos/artist-upload}" class="profile-btn">Add a new image</a>
+            <a class="profile-btn" id="portfolioImage"
                data-toggle="modal"
                th:attr="data-target=${'#artistProfileImage' + user.id}">
                 Add a Profile Image
             </a>
             <form th:action="@{/artist-edit}" th:method="get" class="form-inline mr-sm-2">
-                <button class="btn">Edit Profile</button>
+                <button class="profile-btn">Edit Profile</button>
             </form>
         </div>
-    </div>
+
 </div>
 
 
@@ -60,10 +62,10 @@
 
             <!--            ****Need to refactor to only show specific artist's work****-->
 
-            <div class="card m-5" style="width: 24rem;" th:each="image : ${images}">
+            <div class="card-border" style="width: 24rem;" th:each="image : ${images}">
                 <div class="card-body">
-                    <img th:src="${image.imageUrl}" class="img-thumbnail rounded mx-auto d-block"/>
-                    <a class="btn" id="detailed-portfolio"
+                    <img th:src="${image.imageUrl}" class="img-thumbnail thumbnail mx-auto d-block"/>
+                    <a class="card-btn m-2" id="detailed-portfolio"
                        data-toggle="modal"
                        th:attr="data-target=${'#artist-detailed' + image.id}">
                         View Details
