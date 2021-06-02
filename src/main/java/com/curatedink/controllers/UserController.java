@@ -203,14 +203,14 @@ public class UserController {
     @PostMapping("/send-email")
     public String sendEmail(
             @ModelAttribute User profileOwner,
-            @RequestParam(name = "emailTo") String emailTo,
+            @RequestParam(name = "ownerUsername") String username,
             @RequestParam(name = "emailSubject") String emailSubject,
             @RequestParam(name = "emailBody") String emailBody
     ) {
     User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     User emailFrom = userDao.getOne(owner.getId());
-//    String emailTo = profileOwner.getEmail();
-    emailService.prepareAndSend(emailFrom, emailTo, emailSubject, emailBody);
+    User userToEmail = userDao.findByUsername(username);
+    emailService.prepareAndSend(emailFrom, userToEmail.getEmail(), emailSubject, emailBody);
         return "redirect:/profile-page";
     }
 
