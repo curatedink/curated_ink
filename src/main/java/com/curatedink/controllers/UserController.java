@@ -117,6 +117,9 @@ public class UserController {
         // Grabbing the current user object with the next line
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String currentUserId = String.valueOf(currentUser.getId());
+        Image image = new Image();
+        model.addAttribute("image", image);
+        model.addAttribute("filestackApiKey", filestackApiKey);
         model.addAttribute("user", currentUser);
         model.addAttribute("images", userDao.getOne(Long.valueOf(currentUserId)).getImages());
         boolean userType = currentUser.getIsArtist();
