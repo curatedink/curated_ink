@@ -1,3 +1,5 @@
+"use strict";
+
 (function ($) {
     let request = $.ajax({'url': '/gallery.json'});
     request.done(function (images) {

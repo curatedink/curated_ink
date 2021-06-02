@@ -8,6 +8,7 @@
 
 </head>
 <body>
+<script type="text/javascript" src="https://static.filestackapi.com/v3/filestack.js"></script>
 
 <nav th:replace=" partials/can-nav :: can-nav"/>
 
@@ -20,6 +21,8 @@
 
         <div class="container mb-4">
             <form th:action="@{/canvas-upload}" method="POST" th:object="${image}">
+
+                <input type="button" class="form-control mb-4" value="Upload Image" id="uploadImage" onclick="openPicker()">
 
                 <label for="imageUrl">Image URL</label>
                 <input id="imageUrl" th:field="*{imageUrl}" class="form-control mb-4" placeholder="Image URL"/>
