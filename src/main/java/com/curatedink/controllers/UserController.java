@@ -8,6 +8,7 @@ import com.curatedink.repositories.UserRepo;
 import com.curatedink.services.EmailService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -191,21 +192,26 @@ public class UserController {
         return "redirect:/profile/" + id;
     }
 
-    @GetMapping("/send-email")
-    public String email() {
-
+    @GetMapping("/send-email/{id}")
+    public String email(@PathVariable long id, Model model) {
+        // Get selected image profile owner and pass it forward
+        User profileOwner = userDao.getOne(id);
+        model.addAttribute("profileOwner", profileOwner);
         return "tattoos/send-email";
     }
 
     @PostMapping("/send-email")
-    public String sendEmail() {
+    public String sendEmail(
+            @ModelAttribute User profileOwner,
+            @RequestParam(name = "emailTo") String emailTo,
+            @RequestParam(name = "emailSubject") String emailSubject,
+            @RequestParam(name = "emailBody") String emailBody
+    ) {
     User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    User author = userDao.getOne(owner.getId());
-    String email = "email@email.com";
-    String subject = "subject";
-    String body = "body of email";
-    emailService.prepareAndSend(author, email, subject, body);
-        return "redirect:/";
+    User emailFrom = userDao.getOne(owner.getId());
+//    String emailTo = profileOwner.getEmail();
+    emailService.prepareAndSend(emailFrom, emailTo, emailSubject, emailBody);
+        return "redirect:/profile-page";
     }
 
 

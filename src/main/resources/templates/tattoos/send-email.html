@@ -17,19 +17,19 @@
             <h2 class="">Send Email</h2>
         </div>
 
-
         <div class="container mb-4">
+            <form th:action="@{/send-email}" method="POST">
 
-            <form th:action="@{/send-email}" method="post">
+                    <label for="emailTo">To: </label>
+                    <input id="emailTo" name="emailTo" class="form-control mb-4">
 
-<!--                <label for=""></label>-->
-                    <input id="text" type="text" size="19" name="Contact-Name">
+                    <label for="emailSubject">Subject:</label>
+                    <input id="emailSubject" name="emailSubject" class="form-control mb-4">
 
-                    <input id="email"  type="email" name="Contact-Email">
+                    <label for="emailBody">Body:</label>
+                    <textarea id="emailBody" name="emailBody" class="form-control mb-4" rows="6" cols="20"></textarea>
 
-                    <textarea id="message" name="Contact-Message" rows="6″ cols="20″></textarea>
-
-                    <button type="submit" value="Submit">Send</button>
+                    <input class="btn btn-block" type="submit"></input>
 
             </form>
         </div>
