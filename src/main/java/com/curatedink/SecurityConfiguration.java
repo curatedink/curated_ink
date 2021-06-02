@@ -52,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/tattoos/artist-upload",
+                        "/tattoos/artist-upload", "/profile/{id}",
                         "/tattoos/canvas-upload",// only authenticated users can create ads
                         "/users/artist-edit/{id}" // only authenticated users can edit ads
                 )
