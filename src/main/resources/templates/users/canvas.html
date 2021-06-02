@@ -13,15 +13,20 @@
 
 
 <!--Container for cover image and profile image-->
-<div class="cover">
-    <div class="bg-cover">
-        <!--    <h1>Profile picture container </h1>-->
-        <!--    <img src="/../resources/static/img/38208.jpg" width="100" height="auto"-->
-        <!--         class=""-->
-        <!--         alt="Tattoo Gun">-->
+<div class="row cover d-flex justify-content-between align-items-end">
+    <div th:each="image : ${images}">
+        <img th:if="${image.isProfileImage}"
+             th:src="${image.imageUrl}"
+             alt="Canvas Profile Image"
+             class=""
+             style="width: 18rem;"/>
+    </div>
+    <div>
+        <img src="/../img/tattoo-gun.jpg" width="400" height="auto"
+             class="align-self-end"
+             alt="Easel with Canvas">
     </div>
 </div>
-
 
 <!--Canvas Information-->
 <div class="col">
