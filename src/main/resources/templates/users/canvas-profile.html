@@ -13,12 +13,18 @@
 
 
 <!--Container for cover image and profile image-->
-<div class="cover">
-    <div class="bg-cover">
-        <!--    <h1>Profile picture container </h1>-->
-        <!--    <img src="/../resources/static/img/38208.jpg" width="100" height="auto"-->
-        <!--         class=""-->
-        <!--         alt="Tattoo Gun">-->
+<div class="row cover d-flex justify-content-between align-items-end">
+    <div th:each="image : ${images}">
+        <img th:if="${image.isProfileImage}"
+             th:src="${image.imageUrl}"
+             alt="Canvas Profile Image"
+             class=""
+             style="width: 18rem;"/>
+    </div>
+    <div>
+        <img src="/../img/canvas.png" width="250" height="auto"
+             class="align-self-end"
+             alt="Easel with Canvas">
     </div>
 </div>
 
@@ -32,6 +38,11 @@
         </div>
         <div>
             <a th:href="@{/tattoos/canvas-upload}" class="btn">Add a new image</a>
+            <a class="btn" id="portfolioImage"
+               data-toggle="modal"
+               th:attr="data-target=${'#canvasProfileImage' + user.id}">
+                Add a Profile Image
+            </a>
             <form th:action="@{/canvas-edit}" th:method="get" class="form-inline mr-sm-2">
                 <button class="btn">Edit Your Profile</button>
             </form>
@@ -90,6 +101,35 @@
                         </div>
                     </div>
                 </div>
+
+                <!--                Modal for Profile Image-->
+                <div class="modal fade" id="canvasProfileImage" th:object="${image}"
+                     th:attr="id=${'canvasProfileImage' + user.id}"
+                     tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Profile Image</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form th:action="@{/profile-image}" th:method="post">
+                                    <label for="uploadImage"></label>
+                                    <button class="form-control mb-4" id="uploadImage" name="uploadImage" type="button">Upload Image</button>
+                                    <input id="filestackImageUrl" name="filestackImageUrl" value="replace" th:field="*{imageUrl}" type="hidden">
+
+                                    <button class="btn">Add Profile Image</button>
+                                </form>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -98,12 +138,34 @@
 
 <footer th:replace="partials/foot :: foot"/>
 
+
+<script type="text/javascript" src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+<script th:inline="javascript">
+    const options = {
+        onUploadDone:
+            function (result) {
+                $("#filestackImageUrl").val(result.filesUploaded[0].url);
+            }
+    }
+    let filestackApiKey = [[${filestackApiKey}]]
+    const client = filestack.init(filestackApiKey);
+    $("#uploadImage").click(function () {
+        client.picker(options).open()
+    });
+</script>
+
+
 <script>
 
     $('#detailed-work').on('click', function() {
         $('#canvas-detailed').show();
     });
 
+    $('#canvasProfileImage').on('click', function () {
+        $('#canvasProfileImage').show();
+    });
 </script>
+
+
 </body>
 </html>
