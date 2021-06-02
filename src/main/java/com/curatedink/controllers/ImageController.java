@@ -173,11 +173,12 @@ public class ImageController {
 
     // Profile image
     @PostMapping("/profile-image")
-    public String addProfileImage(){
+    public String addProfileImage(@ModelAttribute Image image){
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User author = usersDao.getOne(principal.getId());
-        Image image = new Image();
         image.setUser(author);
+        image.setCreditedArtist("profileImage");
+        image.setStudioName("profileImage");
         image.setIsProfileImage(true);
         imagesDao.save(image);
         return "redirect:/profile-page";

@@ -106,7 +106,8 @@
 
 
 <!--                Modal for Profile Image-->
-                <div class="modal fade" id="artistProfileImage" th:attr="id=${'artistProfileImage' + user.id}"
+                <div class="modal fade" id="artistProfileImage" th:object="${image}"
+                     th:attr="id=${'artistProfileImage' + user.id}"
                      tabindex="-1" role="dialog">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -117,12 +118,15 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <p>File Stack goes here.</p>
-                            </div>
-                            <div class="modal-footer">
                                 <form th:action="@{/profile-image}" th:method="post">
+                                    <label for="uploadImage"></label>
+                                    <button class="form-control mb-4" id="uploadImage" name="uploadImage" type="button">Upload Image</button>
+                                    <input id="filestackImageUrl" name="filestackImageUrl" value="replace" th:field="*{imageUrl}" type="hidden">
+
                                     <button class="btn">Add Profile Image</button>
                                 </form>
+                            <div class="modal-footer">
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -137,6 +141,23 @@
 
 <footer th:replace="partials/foot :: foot"/>
 
+
+<script type="text/javascript" src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+<script th:inline="javascript">
+    const options = {
+        onUploadDone:
+            function (result) {
+                $("#filestackImageUrl").val(result.filesUploaded[0].url);
+            }
+    }
+    let filestackApiKey = [[${filestackApiKey}]]
+    const client = filestack.init(filestackApiKey);
+    $("#uploadImage").click(function () {
+        client.picker(options).open()
+    });
+</script>
+
+
 <script>
 
     $('#detailed-portfolio').on('click', function () {
@@ -147,6 +168,8 @@
         $('#artistProfileImage').show();
     });
 </script>
+
+
 
 </body>
 </html>
