@@ -22,10 +22,9 @@
         <div class="container mb-4">
             <form th:action="@{/canvas-upload}" method="POST" th:object="${image}">
 
-                <input type="button" class="form-control mb-4" value="Upload Image" id="uploadImage" onclick="openPicker()">
-
-                <label for="imageUrl">Image URL</label>
-                <input id="imageUrl" th:field="*{imageUrl}" class="form-control mb-4" placeholder="Image URL"/>
+                <label for="uploadImage"></label>
+                <button class="form-control mb-4" id="uploadImage" name="uploadImage" type="button">Upload Image</button>
+                <input id="filestackImageUrl" name="filestackImageUrl" value="replace" th:field="*{imageUrl}" type="hidden">
 
                 <label for="comment">Comment</label>
                 <input id="comment" th:field="*{comment}" class="form-control mb-4"
@@ -49,6 +48,21 @@
 </div>
 
 <footer th:replace="partials/foot :: foot"/>
+<script type="text/javascript" src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+<script th:inline="javascript">
+    const options = {
+        onUploadDone:
+            function (result) {
+                $("#filestackImageUrl").val(result.filesUploaded[0].url);
+            }
+    }
+    let filestackApiKey = [[${filestackApiKey}]]
+    const client = filestack.init(filestackApiKey);
+
+    $("#uploadImage").click(function () {
+        client.picker(options).open()
+    });
+</script>
 
 </body>
 </html>
