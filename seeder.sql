@@ -24,7 +24,7 @@ INSERT INTO styles (style) VALUES
 ('Neo Traditional'),
 ('New School'),
 ('Old School (Traditional)'),
-('Stick and Poke'),
+('Other'),
 ('Surrealism'),
 ('Realism'),
 ('Tribal'),
