@@ -79,11 +79,14 @@
             let count = 1;
             $.each(images, function (key, val) {
                 if ((val.creditedArtist.search(regex) != -1) || (val.studioName.search(regex) != -1)) {
-                    html += '<div class="m-5" style="width: 24rem;">';
-                    html += '<div class="">';
-                    html += '<img class="img-thumbnail rounded mx-auto d-block" src=" ' + val.imageUrl + '"' + '/>';
-                    html += '<p class="ml-2">' + val.creditedArtist + '</p>';
-                    html += '<p class="ml-2">' + val.studioName + '</p>';
+                    let profileLink = /*[[@{/profile/}]]*/'/profile/';
+                    html += '<div class="shadow-lg p-3 mb-5 bg-white rounded" style="width: 22rem;">';
+                    html += '<div class="card-body">';
+                    html += '<img class="img-thumbnail thumbnail mx-auto d-block" src=" ' + val.imageUrl + '"' + '/>';
+                    html += '<p class="sub-text">Artist: </p>';
+                    html += '<p class="profile-text">' + val.creditedArtist + '</p>';
+                    html += '<p class="sub-text">Studio: </p>';
+                    html += '<p class="profile-text" >' + val.studioName + '</p>';
                     html += '</div>';
                     html += '</div>';
                     if (count % 2 == 0) {
