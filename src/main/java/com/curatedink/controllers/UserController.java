@@ -4,6 +4,7 @@ import com.curatedink.models.Image;
 import com.curatedink.models.Style;
 import com.curatedink.models.User;
 import com.curatedink.repositories.ImageRepo;
+import com.curatedink.repositories.StyleRepo;
 import com.curatedink.repositories.UserRepo;
 import com.curatedink.services.MailtrapService;
 import com.curatedink.services.SendGridService;
@@ -31,6 +32,7 @@ public class UserController {
     private final ImageRepo imagesDao;
     private PasswordEncoder passwordEncoder; // Security
     private final MailtrapService mailtrapService;
+    private final StyleRepo stylesDao;
 
     @Value("${filestackApiKey}")
     private String filestackApiKey;
@@ -40,14 +42,13 @@ public class UserController {
 
     SendGridService sendGridService;
 
-    public UserController(UserRepo userDao, ImageRepo imagesDao, PasswordEncoder passwordEncoder, MailtrapService mailtrapService, SendGridService sendGridService) {
-
-
+    public UserController(UserRepo userDao, ImageRepo imagesDao, PasswordEncoder passwordEncoder, StyleRepo stylesDao, MailtrapService mailtrapService, SendGridService sendGridService) {
         this.userDao = userDao;
         this.imagesDao = imagesDao;
         this.passwordEncoder = passwordEncoder;
         this.mailtrapService = mailtrapService;
         this.sendGridService = sendGridService;
+        this.stylesDao = stylesDao;
     }
 
     // ------------------------------------------------------ User Sign-Up (Create):
@@ -64,6 +65,13 @@ public class UserController {
     public String saveUser(@ModelAttribute User user, @RequestParam(name = "style") List<Style> styles) {
         String hash = passwordEncoder.encode(user.getPassword()); // Security
         user.setPassword(hash); // Security
+
+        // Conditional logic to select "other" if no style is selected
+//        System.out.println(styles);
+//        if(styles.isEmpty()){
+//            styles.add(stylesDao.getOne(13L));
+//        }
+//        System.out.println(user.getStyles());
         user.setStyles(styles);
         userDao.save(user);
         return "redirect:/login";

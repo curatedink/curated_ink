@@ -31,24 +31,26 @@
 
 <!--Artist Information-->
 <div class="col">
-    <h1 th:text="${user.username}" class="card-title"/>
-<div class="row container">
-    <div class="col-9 m-4">
-        <h5>Current Studio: <span th:text="${user.studioName}"></span></h5>
-        <p m-2>About: <span th:text="${user.biography}"></span></p>
+    <h1 th:text="${user.username}" class="profile-heading"/>
+    <div class="row container">
+        <div class="col-9">
+            <p class="sub-text">Current Studio</p>
+            <p class="profile-text" th:text="${user.studioName}"></p>
+            <p class="sub-text">About</p>
+            <p class="profile-text" th:text="${user.biography}"></p>
+        </div>
     </div>
+        <!--    div for buttons-->
+        <div class="row d-flex justify-content-around mt-4">
+            <form th:if="${showButton}" th:action="@{/users/follow/{id}(id=${user.getId()})}" method="post">
+                <button id="follow_me" type="submit" class="button type1">Follow</button>
+            </form>
+            <!--        <button id="follow_me">Follow</button>-->
+            <!--        <a th:href="@{/canvas-profile/{id}(id=${user.id})}" class="btn btn-block">View My Canvas Profile</a>-->
+            <a th:href="@{/send-email/{id}(id=${user.getId()})}" class="button type1">Request Work</a>
+        </div>
 
-<!--    div for buttons-->
-    <div class="col mt-5">
-        <form th:if="${showButton}" th:action="@{/users/follow/{id}(id=${user.getId()})}" method="post">
-            <button id="follow_me" type="submit" class="btn">Follow</button>
-        </form>
-        <!--        <button id="follow_me">Follow</button>-->
-        <!--        <a th:href="@{/canvas-profile/{id}(id=${user.id})}" class="btn btn-block">View My Canvas Profile</a>-->
-        <a th:href="@{/send-email/{id}(id=${user.getId()})}" class="btn">Request Work</a>
-    </div>
 
-</div>
 </div>
 
 
@@ -59,17 +61,19 @@
 
             <!--            ****Need to refactor to only show specific artist's work****-->
 
-            <div class="card m-5" style="width: 24rem;" th:each="image : ${images}">
+            <div class="shadow-lg p-3 mb-5 bg-white rounded" style="width: 18rem;" th:each="image : ${images}">
                 <div class="card-body">
-                    <img th:src="${image.imageUrl}" class="img-thumbnail rounded mx-auto d-block"/>
-                    <a class="btn" id="detailed-portfolio"
-                       data-toggle="modal"
-                       th:attr="data-target=${'#artist-detailed' + image.id}">
-                        View Details
-                    </a>
+                    <img th:src="${image.imageUrl}" class="img-thumbnail thumbnail mx-auto d-block"/>
+                    <div class="card-footer footer">
+                        <a class="button type1" id="detailed-portfolio"
+                           data-toggle="modal"
+                           th:attr="data-target=${'#artist-detailed' + image.id}">
+                            View Details
+                        </a>
+                    </div>
                 </div>
 
-<!--                Modal for Details-->
+                <!--                Modal for Details-->
                 <div class="modal fade" id="artist-detailed" th:attr="id=${'artist-detailed' + image.id}"
                      tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

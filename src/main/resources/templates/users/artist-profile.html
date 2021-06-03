@@ -31,43 +31,47 @@
 
 <!--Artist Information-->
 <div class="col">
-    <h1>Hey there,<span th:text="${user.username}"></span>!</h1>
+    <h1 class="profile-heading" th:text="${user.username}"></h1>
     <div class="row container">
-        <div class="col-9 m-4">
-            <!--        <h5 th:text="${user.studioName}" class="card-text">Current Studio</h5>-->
-            <h5>Current Studio: <span th:text="${user.studioName}"></span></h5>
-            <p m-2>About: <span th:text="${user.biography}"></span></p>
+        <div class="col-9">
+            <p class="sub-text">Current Studio</p>
+            <p class="profile-text" th:text="${user.studioName}"></p>
+            <p class="sub-text">About</p>
+            <p class="profile-text" th:text="${user.biography}"></p>
         </div>
-        <div>
-            <a th:href="@{/tattoos/artist-upload}" class="btn">Add a new image</a>
-            <a class="btn" id="portfolioImage"
+    </div>
+        <div class="row d-flex justify-content-around mt-4">
+            <a th:href="@{/tattoos/artist-upload}" class="button type1">Add a new image</a>
+            <a class="button type1" id="portfolioImage"
                data-toggle="modal"
-               th:attr="data-target=${'#artistProfileImage' + user.id}">
+               th:attr="data-target=${'#artistProfileImage'}">
                 Add a Profile Image
             </a>
             <form th:action="@{/artist-edit}" th:method="get" class="form-inline mr-sm-2">
-                <button class="btn">Edit Profile</button>
+                <button class="button type1">Edit Profile</button>
             </form>
         </div>
-    </div>
+
 </div>
 
 
 <!--Artist's Images-->
-<div class="mt-4">
+<div class="m-4">
     <div class="container">
         <div class="row md-6 justify-content-around">
 
             <!--            ****Need to refactor to only show specific artist's work****-->
 
-            <div class="card m-5" style="width: 24rem;" th:each="image : ${images}">
+            <div class="shadow-lg p-3 mb-5 bg-white rounded" style="width: 18rem;" th:each="image : ${images}">
                 <div class="card-body">
-                    <img th:src="${image.imageUrl}" class="img-thumbnail rounded mx-auto d-block"/>
-                    <a class="btn" id="detailed-portfolio"
+                    <img th:src="${image.imageUrl}" class="img-thumbnail thumbnail mx-auto d-block"/>
+                   <div class="card-footer footer">
+                    <a class="button type1" id="detailed-portfolio"
                        data-toggle="modal"
                        th:attr="data-target=${'#artist-detailed' + image.id}">
                         View Details
                     </a>
+                   </div>
                 </div>
 
                 <!--                Modal for Details-->
@@ -104,10 +108,10 @@
                     </div>
                 </div>
 
-
+            </div>
 <!--                Modal for Profile Image-->
+                <!--                     th:attr="id=${'artistProfileImage'}"-->
                 <div class="modal fade" id="artistProfileImage" th:object="${image}"
-                     th:attr="id=${'artistProfileImage' + user.id}"
                      tabindex="-1" role="dialog">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -123,7 +127,7 @@
                                     <button class="form-control mb-4" id="uploadImage" name="uploadImage" type="button">Upload Image</button>
                                     <input id="filestackImageUrl" name="filestackImageUrl" value="replace" th:field="*{imageUrl}" type="hidden">
 
-                                    <button class="btn">Add Profile Image</button>
+                                    <button class="btn" type="submit">Add Profile Image</button>
                                 </form>
                             <div class="modal-footer">
                             </div>
@@ -133,7 +137,7 @@
                 </div>
 
 
-            </div>
+
         </div>
     </div>
 </div>
@@ -167,6 +171,7 @@
     $('#artistProfileImage').on('click', function () {
         $('#artistProfileImage').show();
     });
+
 </script>
 
 
