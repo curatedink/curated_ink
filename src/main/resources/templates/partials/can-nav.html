@@ -7,36 +7,32 @@
 </head>
 <body>
 
-<nav th:fragment="can-nav" class="navbar navbar-light">
-    <a class="navbar-brand" href="/">CURATED INK</a>
-    <img src="" width="" height="auto" alt="">
-    </a>
+<nav th:fragment="can-nav" class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand nav-brand" href="/">CURATED INK</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div sec:authorize="isAuthenticated()">
-        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-            <ul class="navbar-nav">
-                <li class="nav-item">
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent" sec:authorize="isAuthenticated()">
+            <ul class="navbar-nav mr-auto d-flex align-items-end">
+                <li class="nav-item nav-text">
                     <form th:action="@{/gallery}" th:method="get" class="form-inline mr-sm-2">
                         <button class="nav-link btn">Explore the Gallery</button>
                     </form>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item nav-text">
                     <form th:action="@{/profile-page}" th:method="get" class="form-inline mr-sm-2">
                         <button class="nav-link btn">View Your Profile</button>
                     </form>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item nav-text">
                     <form th:action="@{/logout}" th:method="post" class="form-inline mr-sm-2">
                         <button class="nav-link btn">Logout</button>
                     </form>
                 </li>
             </ul>
-
         </div>
-    </div>
 </nav>
 
 </body>
