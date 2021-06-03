@@ -40,7 +40,7 @@
             <p class="profile-text" th:text="${user.biography}"></p>
         </div>
     </div>
-        <div class="row d-flex justify-content-around">
+        <div class="row d-flex justify-content-around mt-4">
             <a th:href="@{/tattoos/artist-upload}" class="button type1">Add a new image</a>
             <a class="button type1" id="portfolioImage"
                data-toggle="modal"
@@ -56,13 +56,13 @@
 
 
 <!--Artist's Images-->
-<div class="mt-4">
+<div class="m-4">
     <div class="container">
         <div class="row md-6 justify-content-around">
 
             <!--            ****Need to refactor to only show specific artist's work****-->
 
-            <div class="shadow-lg p-3 mb-5 bg-white rounded" style="width: 24rem;" th:each="image : ${images}">
+            <div class="shadow-lg p-3 mb-5 bg-white rounded" style="width: 18rem;" th:each="image : ${images}">
                 <div class="card-body">
                     <img th:src="${image.imageUrl}" class="img-thumbnail thumbnail mx-auto d-block"/>
                    <div class="card-footer footer">
