@@ -19,3 +19,54 @@
     margin-bottom: 4em;
 }
 
+.profile-heading {
+    font-family: 'Anton', sans-serif;
+    font-size: 5em;
+    text-transform: uppercase;
+    margin-top: 1em;
+}
+
+.sub-text {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 1.5em;
+    color: #7F7B82;
+    margin-bottom: -.5em;
+}
+
+.profile-text {
+    font-family: 'Anton', sans-serif;
+    font-size: 2em;
+    text-transform: uppercase;
+    /*margin-top: 1em;*/
+}
+
+.profile-btn {
+    font-family: 'Open Sans', sans-serif;
+    font-size: .8em;
+    color: black;
+    text-transform: uppercase;
+    border: solid black .5px;
+    background-color: white;
+    padding: .5em;
+}
+
+.card-border {
+    border: solid black .1px;
+    margin: 2em;
+}
+
+.thumbnail {
+    border: 0;
+}
+
+.card-btn {
+    font-family: 'Open Sans', sans-serif;
+    font-size: .8em;
+    color: black;
+    text-align: center;
+    text-transform: uppercase;
+    /*border: solid black .5px;*/
+    background-color: white;
+    padding: .5em;
+}

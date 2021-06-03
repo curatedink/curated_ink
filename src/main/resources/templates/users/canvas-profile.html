@@ -40,7 +40,7 @@
             <a th:href="@{/tattoos/canvas-upload}" class="btn">Add a new image</a>
             <a class="btn" id="portfolioImage"
                data-toggle="modal"
-               th:attr="data-target=${'#canvasProfileImage' + user.id}">
+               th:attr="data-target=${'#canvasProfileImage'}">
                 Add a Profile Image
             </a>
             <form th:action="@{/canvas-edit}" th:method="get" class="form-inline mr-sm-2">
@@ -101,10 +101,10 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
                 <!--                Modal for Profile Image-->
                 <div class="modal fade" id="canvasProfileImage" th:object="${image}"
-                     th:attr="id=${'canvasProfileImage' + user.id}"
+
                      tabindex="-1" role="dialog">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -130,7 +130,7 @@
                 </div>
 
 
-            </div>
+
         </div>
     </div>
 </div>
