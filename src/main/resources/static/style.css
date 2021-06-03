@@ -4,8 +4,6 @@
 /*font-family: 'Open Sans', sans-serif;*/
 
 
-
-
 .bg-cover {
     background-image: url("/../resources/static/img/38208.jpg");
     height: 100%;
@@ -52,17 +50,6 @@
     font-family: 'Anton', sans-serif;
     font-size: 2em;
     text-transform: uppercase;
-    /*margin-top: 1em;*/
-}
-
-.profile-btn {
-    font-family: 'Open Sans', sans-serif;
-    font-size: .8em;
-    color: black;
-    text-transform: uppercase;
-    border: solid black .5px;
-    background-color: white;
-    padding: .5em;
 }
 
 .card-border {
@@ -74,93 +61,66 @@
     border: 0;
 }
 
-a:hover, a:visited, a:link, a:active
-{
+a:hover, a:visited, a:link, a:active {
     text-decoration: none;
     color: black;
 }
 
-.card-btn {
-    font-family: 'Open Sans', sans-serif;
-    font-size: .8em;
-    color: black;
-    text-align: center;
-    text-transform: uppercase;
-    /*border: solid black .5px;*/
-    background-color: white;
-    padding: .5em;
-}
-
-.custom-btn {
-    padding: 20px 45px;
-    font-family: 'Open Sans', sans-serif;
-    font-size: .8em;
-    color: black;
-    font-weight: 500;
-    background: transparent;
-    outline: none !important;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.button {
     position: relative;
-    display: inline-block;
-}
-
-.btn-4 {
-    width: 130px;
-    height: 40px;
-    line-height: 42px;
-    padding: 0;
+    padding: 1em 1.5em;
     border: none;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+    font-family: 'Open Sans', sans-serif;
+    text-transform: uppercase;
+    font-size: 1em;
+    font-weight: 300;
+    margin: 1em 0.8em;
 }
-.btn-4 span {
-    position: relative;
+
+.button.type1 {
+    color: black;
+}
+
+.button.type1.type1::after, .button.type1.type1::before {
+    content: "";
     display: block;
-    width: 100%;
-    height: 100%;
-}
-.btn-4:before,
-.btn-4:after {
     position: absolute;
-    content: "";
-    right: 0;
-    top: 0;
-    background: #000;
-    transition: all 0.3s ease;
-}
-.btn-4:before {
-    height: 50%;
-    width: 2px;
-}
-.btn-4:after {
     width: 20%;
-    height: 2px;
+    height: 20%;
+    border: 2px solid;
+    transition: all 0.6s ease;
+    border-radius: 2px;
 }
-.btn-4:hover:before {
-    height: 100%;
-}
-.btn-4:hover:after {
-    width: 100%;
-}
-.btn-4 span:before,
-.btn-4 span:after {
-    position: absolute;
-    content: "";
-    left: 0;
+
+.button.type1.type1::after {
     bottom: 0;
-    background: #000;
-    transition: all 0.3s ease;
+    right: 0;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-bottom-color: black;
+    border-right-color: black;
 }
-.btn-4 span:before {
-    width: 2px;
-    height: 50%;
+
+.button.type1.type1::before {
+    top: 0;
+    left: 0;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    border-top-color: black;
+    border-left-color: black;
 }
-.btn-4 span:after {
-    width: 20%;
-    height: 2px;
-}
-.btn-4 span:hover:before {
+
+.button.type1.type1:hover:after, .button.type1.type1:hover:before {
+    width: 100%;
     height: 100%;
 }
-.btn-4 span:hover:after {
-    width: 100%;
+
+.footer {
+    background-color: transparent;
+    margin-top: 1em;
+    align-content: center;
+    border: none;
 }

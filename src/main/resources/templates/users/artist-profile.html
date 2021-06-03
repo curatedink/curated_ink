@@ -40,15 +40,15 @@
             <p class="profile-text" th:text="${user.biography}"></p>
         </div>
     </div>
-        <div class="row d-flex justify-content-around mt-4">
-            <a th:href="@{/tattoos/artist-upload}" class="custom-btn btn-4">Add a new image</a>
-            <a class="profile-btn" id="portfolioImage"
+        <div class="row d-flex justify-content-around">
+            <a th:href="@{/tattoos/artist-upload}" class="button type1">Add a new image</a>
+            <a class="button type1" id="portfolioImage"
                data-toggle="modal"
                th:attr="data-target=${'#artistProfileImage' + user.id}">
                 Add a Profile Image
             </a>
             <form th:action="@{/artist-edit}" th:method="get" class="form-inline mr-sm-2">
-                <button class="profile-btn">Edit Profile</button>
+                <button class="button type1">Edit Profile</button>
             </form>
         </div>
 
@@ -62,14 +62,16 @@
 
             <!--            ****Need to refactor to only show specific artist's work****-->
 
-            <div class="card-border" style="width: 24rem;" th:each="image : ${images}">
+            <div class="shadow-lg p-3 mb-5 bg-white rounded" style="width: 24rem;" th:each="image : ${images}">
                 <div class="card-body">
                     <img th:src="${image.imageUrl}" class="img-thumbnail thumbnail mx-auto d-block"/>
-                    <a class="card-btn m-2" id="detailed-portfolio"
+                   <div class="card-footer footer">
+                    <a class="button type1 " id="detailed-portfolio"
                        data-toggle="modal"
                        th:attr="data-target=${'#artist-detailed' + image.id}">
                         View Details
                     </a>
+                   </div>
                 </div>
 
                 <!--                Modal for Details-->
