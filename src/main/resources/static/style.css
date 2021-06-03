@@ -38,6 +38,16 @@
     font-weight: 300;
 }
 
+.gallery-heading {
+    font-family: 'Anton', sans-serif;
+    text-align: center;
+    color: black;
+    font-size: 4em;
+    padding-top: 1em;
+    text-transform: uppercase;
+    margin-bottom: 1em;
+}
+
 .cover {
     height: 22em;
     margin-bottom: 4em;
@@ -133,6 +143,12 @@ a:hover, a:visited, a:link, a:active {
 .footer {
     background-color: transparent;
     margin-top: 1em;
+    align-content: center;
+    border: none;
+}
+
+.footer-gallery {
+    background-color: transparent;
     align-content: center;
     border: none;
 }
