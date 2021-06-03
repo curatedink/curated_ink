@@ -4,19 +4,16 @@ import com.curatedink.models.Image;
 import com.curatedink.models.Style;
 import com.curatedink.models.User;
 import com.curatedink.repositories.ImageRepo;
+import com.curatedink.repositories.StyleRepo;
 import com.curatedink.repositories.UserRepo;
 import com.curatedink.services.EmailService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -31,17 +28,19 @@ public class UserController {
     private final ImageRepo imagesDao;
     private PasswordEncoder passwordEncoder; // Security
     private final EmailService emailService;
+    private final StyleRepo stylesDao;
 
     @Value("${filestackApiKey}")
     private String filestackApiKey;
 
-    public UserController(UserRepo userDao, ImageRepo imagesDao, PasswordEncoder passwordEncoder, EmailService emailService) {
+    public UserController(UserRepo userDao, ImageRepo imagesDao, PasswordEncoder passwordEncoder, EmailService emailService, StyleRepo stylesDao) {
 
 
         this.userDao = userDao;
         this.imagesDao = imagesDao;
         this.passwordEncoder = passwordEncoder;
         this.emailService = emailService;
+        this.stylesDao = stylesDao;
     }
 
     // ------------------------------------------------------ User Sign-Up (Create):
@@ -58,6 +57,13 @@ public class UserController {
     public String saveUser(@ModelAttribute User user, @RequestParam(name = "style") List<Style> styles) {
         String hash = passwordEncoder.encode(user.getPassword()); // Security
         user.setPassword(hash); // Security
+
+        // Conditional logic to select "other" if no style is selected
+//        System.out.println(styles);
+//        if(styles.isEmpty()){
+//            styles.add(stylesDao.getOne(13L));
+//        }
+//        System.out.println(user.getStyles());
         user.setStyles(styles);
         userDao.save(user);
         return "redirect:/login";
