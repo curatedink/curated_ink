@@ -9,7 +9,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service("mailService")
-public class EmailService {
+public class MailtrapService {
 
     @Autowired
     public JavaMailSender emailSender;
