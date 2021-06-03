@@ -5,18 +5,18 @@ import com.curatedink.models.Style;
 import com.curatedink.models.User;
 import com.curatedink.repositories.ImageRepo;
 import com.curatedink.repositories.UserRepo;
-import com.curatedink.services.EmailService;
+import com.curatedink.services.MailtrapService;
+import com.curatedink.services.SendGridService;
+import com.sendgrid.Content;
+import com.sendgrid.Email;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -30,18 +30,23 @@ public class UserController {
     private final UserRepo userDao;
     private final ImageRepo imagesDao;
     private PasswordEncoder passwordEncoder; // Security
-    private final EmailService emailService;
+    private final MailtrapService mailtrapService;
 
     @Value("${filestackApiKey}")
     private String filestackApiKey;
 
-    public UserController(UserRepo userDao, ImageRepo imagesDao, PasswordEncoder passwordEncoder, EmailService emailService) {
+    @Value("spring.sendgrid.api-key")
+    private String sendgridApiKey;
+
+    SendGridService sendGridService;
+
+    public UserController(UserRepo userDao, ImageRepo imagesDao, PasswordEncoder passwordEncoder, MailtrapService mailtrapService) {
 
 
         this.userDao = userDao;
         this.imagesDao = imagesDao;
         this.passwordEncoder = passwordEncoder;
-        this.emailService = emailService;
+        this.mailtrapService = mailtrapService;
     }
 
     // ------------------------------------------------------ User Sign-Up (Create):
@@ -205,14 +210,29 @@ public class UserController {
             @ModelAttribute User profileOwner,
             @RequestParam(name = "ownerUsername") String username,
             @RequestParam(name = "emailSubject") String emailSubject,
-            @RequestParam(name = "emailBody") String emailBody
+            @RequestParam(name = "emailBody") Content emailBody
     ) {
-    User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    User emailFrom = userDao.getOne(owner.getId());
-    User userToEmail = userDao.findByUsername(username);
-    emailService.prepareAndSend(emailFrom, userToEmail.getEmail(), emailSubject, emailBody);
+        User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User emailFrom = userDao.getOne(owner.getId());
+        User userToEmail = userDao.findByUsername(username);
+        sendGridService.sendEmail(emailFrom.toString(), userToEmail.getEmail(), emailSubject, emailBody);
         return "redirect:/profile-page";
     }
+
+// Mailtrap API
+//    @PostMapping("/send-email")
+//    public String sendEmail(
+//            @ModelAttribute User profileOwner,
+//            @RequestParam(name = "ownerUsername") String username,
+//            @RequestParam(name = "emailSubject") String emailSubject,
+//            @RequestParam(name = "emailBody") String emailBody
+//    ) {
+//    User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//    User emailFrom = userDao.getOne(owner.getId());
+//    User userToEmail = userDao.findByUsername(username);
+//    mailtrapService.prepareAndSend(emailFrom, userToEmail.getEmail(), emailSubject, emailBody);
+//        return "redirect:/profile-page";
+//    }
 
 
 }
