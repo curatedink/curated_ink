@@ -100,11 +100,17 @@ public class ImageController {
 
     // save artist image to images table
     @PostMapping("/artist-upload")
-    public String insert(@ModelAttribute Image image, @RequestParam(name = "style") List<Style> styles) {
+    public String insert(@ModelAttribute Image image, @RequestParam(name = "style", required = false) List<Style> styles) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User author = usersDao.getOne(principal.getId());
         image.setUser(author);
-        image.setStyles(styles);
+        if (styles != null) {
+            image.setStyles(styles);
+        } else {
+            List<Style> defaultStyles = new ArrayList<>();
+            defaultStyles.add(stylesDao.getOne(13L));
+            image.setStyles(defaultStyles);
+        }
         imagesDao.save(image);
         return "redirect:/profile-page";
     }
@@ -121,11 +127,17 @@ public class ImageController {
 
     // save canvas image to images table
     @PostMapping("/canvas-upload")
-    public String insertCanvasImage(@ModelAttribute Image image, @RequestParam(name = "style") List<Style> styles) {
+    public String insertCanvasImage(@ModelAttribute Image image, @RequestParam(name = "style", required = false) List<Style> styles) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User author = usersDao.getOne(principal.getId());
         image.setUser(author);
-        image.setStyles(styles);
+        if (styles != null) {
+            image.setStyles(styles);
+        } else {
+            List<Style> defaultStyles = new ArrayList<>();
+            defaultStyles.add(stylesDao.getOne(13L));
+            image.setStyles(defaultStyles);
+        }
         imagesDao.save(image);
         return "redirect:/profile-page";
     }
@@ -143,10 +155,16 @@ public class ImageController {
 
     // save canvas image edit
     @PostMapping("/tattoos/canvas-image-edit/{id}")
-    public String updateCanvasImage(@ModelAttribute Image imageToEdit, @RequestParam(name = "style") List<Style> styles) {
+    public String updateCanvasImage(@ModelAttribute Image imageToEdit, @RequestParam(name = "style", required = false) List<Style> styles) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         imageToEdit.setUser(currentUser);
-        imageToEdit.setStyles(styles);
+        if (styles != null) {
+            imageToEdit.setStyles(styles);
+        } else {
+            List<Style> defaultStyles = new ArrayList<>();
+            defaultStyles.add(stylesDao.getOne(13L));
+            imageToEdit.setStyles(defaultStyles);
+        }
         imagesDao.save(imageToEdit);
         return "redirect:/profile-page";
     }
@@ -163,10 +181,16 @@ public class ImageController {
 
     // save artist image edit
     @PostMapping("/tattoos/artist-image-edit/{id}")
-    public String updateArtistImage(@ModelAttribute Image imageToEdit, @RequestParam(name = "style") List<Style> styles) {
+    public String updateArtistImage(@ModelAttribute Image imageToEdit, @RequestParam(name = "style", required = false) List<Style> styles) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         imageToEdit.setUser(currentUser);
-        imageToEdit.setStyles(styles);
+        if (styles != null) {
+            imageToEdit.setStyles(styles);
+        } else {
+            List<Style> defaultStyles = new ArrayList<>();
+            defaultStyles.add(stylesDao.getOne(13L));
+            imageToEdit.setStyles(defaultStyles);
+        }
         imagesDao.save(imageToEdit);
         return "redirect:/profile-page";
     }

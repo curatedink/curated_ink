@@ -58,16 +58,7 @@ public class UserController {
     public String saveUser(@ModelAttribute User user, @RequestParam(name = "style", required = false) List<Style> styles ) {
         String hash = passwordEncoder.encode(user.getPassword()); // Security
         user.setPassword(hash); // Security
-        // Conditional logic to select "other" if no style is selected
-//        System.out.println(styles);
-        if (styles != null) {
-            user.setStyles(styles);
-        } else {
-            List<Style> defaultStyles = new ArrayList<>();
-            defaultStyles.add(stylesDao.getOne(13L));
-            user.setStyles(defaultStyles);
-        }
-        userDao.save(user);
+        styleValidation(user, styles);
         return "redirect:/login";
     }
 
@@ -84,15 +75,27 @@ public class UserController {
     }
 
     @PostMapping("/users/artist-edit")
-    public String update(@ModelAttribute User userToEdit, @RequestParam(name = "style") List<Style> styles) {
+    public String update(@ModelAttribute User userToEdit, @RequestParam(name = "style", required = false) List<Style> styles) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         userToEdit.setId(currentUser.getId());
         userToEdit.setPassword(currentUser.getPassword());
         userToEdit.setUsername(currentUser.getUsername());
         userToEdit.setIsArtist(currentUser.getIsArtist());
-        userToEdit.setStyles(styles);
-        userDao.save(userToEdit);
+        styleValidation(userToEdit, styles);
         return "redirect:/profile-page";
+    }
+
+   // Style Validation method used to make sure that the styles list is never empty
+    private void styleValidation(@ModelAttribute User userToEdit, @RequestParam(name = "style", required = false) List<Style> styles) {
+        if (styles != null) {
+            userToEdit.setStyles(styles);
+        } else {
+            List<Style> defaultStyles = new ArrayList<>();
+            defaultStyles.add(stylesDao.getOne(13L));
+            userToEdit.setStyles(defaultStyles);
+        }
+
+        userDao.save(userToEdit);
     }
 
 
