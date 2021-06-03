@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -54,17 +55,18 @@ public class UserController {
 
 
     @PostMapping("/sign-up")
-    public String saveUser(@ModelAttribute User user, @RequestParam(name = "style") List<Style> styles) {
+    public String saveUser(@ModelAttribute User user, @RequestParam(name = "style", required = false) List<Style> styles ) {
         String hash = passwordEncoder.encode(user.getPassword()); // Security
         user.setPassword(hash); // Security
-
         // Conditional logic to select "other" if no style is selected
 //        System.out.println(styles);
-//        if(styles.isEmpty()){
-//            styles.add(stylesDao.getOne(13L));
-//        }
-//        System.out.println(user.getStyles());
-        user.setStyles(styles);
+        if (styles != null) {
+            user.setStyles(styles);
+        } else {
+            List<Style> defaultStyles = new ArrayList<>();
+            defaultStyles.add(stylesDao.getOne(13L));
+            user.setStyles(defaultStyles);
+        }
         userDao.save(user);
         return "redirect:/login";
     }
@@ -138,8 +140,6 @@ public class UserController {
     }
 
 
-
-
     // ------------------------------------------------------ Delete a User:
     // Keep an eye on issues with foreign keys
     @PostMapping("/users/delete")
@@ -150,7 +150,7 @@ public class UserController {
     }
 
     // ------------------------------------------------------ Follow a User:
-        // NEED TO CLEAN THIS UP
+    // NEED TO CLEAN THIS UP
     // Visit another users page:
     @GetMapping("/profile/{id}")
     public String viewAnotherUserProfile(Model model, @PathVariable long id) {
@@ -186,7 +186,7 @@ public class UserController {
     }
 
     @PostMapping("/users/follow/{id}") // put this action on the follow button
-    public String followUser(@PathVariable long id){
+    public String followUser(@PathVariable long id) {
         //get current user:
         User principle = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userDao.getOne(principle.getId());
@@ -213,10 +213,10 @@ public class UserController {
             @RequestParam(name = "emailSubject") String emailSubject,
             @RequestParam(name = "emailBody") String emailBody
     ) {
-    User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    User emailFrom = userDao.getOne(owner.getId());
-    User userToEmail = userDao.findByUsername(username);
-    emailService.prepareAndSend(emailFrom, userToEmail.getEmail(), emailSubject, emailBody);
+        User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User emailFrom = userDao.getOne(owner.getId());
+        User userToEmail = userDao.findByUsername(username);
+        emailService.prepareAndSend(emailFrom, userToEmail.getEmail(), emailSubject, emailBody);
         return "redirect:/profile-page";
     }
 
