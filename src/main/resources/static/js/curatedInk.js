@@ -7,12 +7,14 @@
         images.forEach(function (image) {
             let imageUserId = image.user.id;
             let profileLink = /*[[@{/profile/}]]*/'/profile/';
-            html += '<div class="card m-5" style="width: 24rem;">';
+            html += '<div class="shadow-lg p-3 mb-5 bg-white rounded" style="width: 18rem;">';
             html += '<div class="card-body">';
-            html += '<img class="img-thumbnail rounded mx-auto d-block" src=" ' + image.imageUrl + '"' + '/>';
+            html += '<img class="img-thumbnail thumbnail mx-auto d-block" src=" ' + image.imageUrl + '"' + '/>';
             html += '</div>';
-            html += '<a class="m-2" href="' + profileLink + imageUserId + '">' + image.user.username + '</a>';
+            html += '<div class="card-footer footer-gallery d-flex justify-content-center">';
+            html += '<a class="button type1" href="' + profileLink + imageUserId + '">' + image.user.username + '</a>';
             // html += '<a class="btn detailed-modal" data-index-number="image.id" data-target="#gallery-detailed" data-toggle="modal"> View Details</a>'
+            html += '</div>';
             html += '</div>';
         });
         $('#images').html(html);
@@ -27,12 +29,13 @@
         images.forEach(function (image) {
             let imageUserId = image.user.id;
             let profileLink = /*[[@{/profile/}]]*/'/profile/';
-            html += '<div class="card m-5" style="width: 24rem;">';
+            html += '<div class="shadow-lg p-3 mb-5 bg-white rounded" style="width: 18rem;">';
             html += '<div class="card-body">';
-            // html += '<img class="img-thumbnail rounded mx-auto d-block" src=" ' + image[0].imageUrl + '"' + '/>';
-            html += '<img class="img-thumbnail rounded mx-auto d-block" src=" ' + image.imageUrl + '"' + '/>';
+            html += '<img class="img-thumbnail thumbnail mx-auto d-block" src=" ' + image.imageUrl + '"' + '/>';
             html += '</div>';
-            html += '<a class="m-2" href="' + profileLink + imageUserId + '">' + image.user.username + '</a>';
+            html += '<div class="card-footer footer-gallery d-flex justify-content-center">';
+            html += '<a class="button type1" href="' + profileLink + imageUserId + '">' + image.user.username + '</a>';
+            html += '</div>';
             html += '</div>';
         });
         $('#curated-gallery').html(html);
@@ -76,11 +79,14 @@
             let count = 1;
             $.each(images, function (key, val) {
                 if ((val.creditedArtist.search(regex) != -1) || (val.studioName.search(regex) != -1)) {
-                    html += '<div class="m-5" style="width: 24rem;">';
-                    html += '<div class="">';
-                    html += '<img class="img-thumbnail rounded mx-auto d-block" src=" ' + val.imageUrl + '"' + '/>';
-                    html += '<p class="ml-2">' + val.creditedArtist + '</p>';
-                    html += '<p class="ml-2">' + val.studioName + '</p>';
+                    let profileLink = /*[[@{/profile/}]]*/'/profile/';
+                    html += '<div class="shadow-lg p-3 mb-5 bg-white rounded" style="width: 22rem;">';
+                    html += '<div class="card-body">';
+                    html += '<img class="img-thumbnail thumbnail mx-auto d-block" src=" ' + val.imageUrl + '"' + '/>';
+                    html += '<p class="sub-text">Artist: </p>';
+                    html += '<p class="profile-text">' + val.creditedArtist + '</p>';
+                    html += '<p class="sub-text">Studio: </p>';
+                    html += '<p class="profile-text" >' + val.studioName + '</p>';
                     html += '</div>';
                     html += '</div>';
                     if (count % 2 == 0) {
