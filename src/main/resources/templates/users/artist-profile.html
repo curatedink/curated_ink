@@ -41,7 +41,7 @@
         </div>
     </div>
         <div class="row d-flex justify-content-around mt-4">
-            <a th:href="@{/tattoos/artist-upload}" class="profile-btn">Add a new image</a>
+            <a th:href="@{/tattoos/artist-upload}" class="custom-btn btn-4">Add a new image</a>
             <a class="profile-btn" id="portfolioImage"
                data-toggle="modal"
                th:attr="data-target=${'#artistProfileImage' + user.id}">
@@ -169,6 +169,7 @@
     $('#artistProfileImage').on('click', function () {
         $('#artistProfileImage').show();
     });
+
 </script>
 
 
