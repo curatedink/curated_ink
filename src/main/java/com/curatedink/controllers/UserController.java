@@ -6,7 +6,11 @@ import com.curatedink.models.User;
 import com.curatedink.repositories.ImageRepo;
 import com.curatedink.repositories.StyleRepo;
 import com.curatedink.repositories.UserRepo;
-import com.curatedink.services.EmailService;
+import com.curatedink.services.MailtrapService;
+import com.curatedink.services.SendGridService;
+import com.sendgrid.Content;
+import com.sendgrid.Email;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,19 +32,23 @@ public class UserController {
     private final UserRepo userDao;
     private final ImageRepo imagesDao;
     private PasswordEncoder passwordEncoder; // Security
-    private final EmailService emailService;
+    private final MailtrapService mailtrapService;
     private final StyleRepo stylesDao;
 
     @Value("${filestackApiKey}")
     private String filestackApiKey;
 
-    public UserController(UserRepo userDao, ImageRepo imagesDao, PasswordEncoder passwordEncoder, EmailService emailService, StyleRepo stylesDao) {
+    @Value("spring.sendgrid.api-key")
+    private String sendgridApiKey;
 
+    SendGridService sendGridService;
 
+    public UserController(UserRepo userDao, ImageRepo imagesDao, PasswordEncoder passwordEncoder, StyleRepo stylesDao, MailtrapService mailtrapService, SendGridService sendGridService) {
         this.userDao = userDao;
         this.imagesDao = imagesDao;
         this.passwordEncoder = passwordEncoder;
-        this.emailService = emailService;
+        this.mailtrapService = mailtrapService;
+        this.sendGridService = sendGridService;
         this.stylesDao = stylesDao;
     }
 
@@ -217,11 +225,27 @@ public class UserController {
             @RequestParam(name = "emailBody") String emailBody
     ) {
         User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User emailFrom = userDao.getOne(owner.getId());
-        User userToEmail = userDao.findByUsername(username);
-        emailService.prepareAndSend(emailFrom, userToEmail.getEmail(), emailSubject, emailBody);
+//        User emailFrom = userDao.getOne(owner.getId());
+        String emailFrom = "curated.ink.com@gmail.com";
+        String userToEmail = userDao.findByUsername(username).getEmail();
+        sendGridService.sendEmail(emailFrom, userToEmail, emailSubject, emailBody);
         return "redirect:/profile-page";
     }
+
+// Mailtrap API
+//    @PostMapping("/send-email")
+//    public String sendEmail(
+//            @ModelAttribute User profileOwner,
+//            @RequestParam(name = "ownerUsername") String username,
+//            @RequestParam(name = "emailSubject") String emailSubject,
+//            @RequestParam(name = "emailBody") String emailBody
+//    ) {
+//    User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//    User emailFrom = userDao.getOne(owner.getId());
+//    User userToEmail = userDao.findByUsername(username);
+//    mailtrapService.prepareAndSend(emailFrom, userToEmail.getEmail(), emailSubject, emailBody);
+//        return "redirect:/profile-page";
+//    }
 
 
 }
