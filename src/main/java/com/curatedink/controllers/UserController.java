@@ -40,13 +40,14 @@ public class UserController {
 
     SendGridService sendGridService;
 
-    public UserController(UserRepo userDao, ImageRepo imagesDao, PasswordEncoder passwordEncoder, MailtrapService mailtrapService) {
+    public UserController(UserRepo userDao, ImageRepo imagesDao, PasswordEncoder passwordEncoder, MailtrapService mailtrapService, SendGridService sendGridService) {
 
 
         this.userDao = userDao;
         this.imagesDao = imagesDao;
         this.passwordEncoder = passwordEncoder;
         this.mailtrapService = mailtrapService;
+        this.sendGridService = sendGridService;
     }
 
     // ------------------------------------------------------ User Sign-Up (Create):
@@ -210,12 +211,13 @@ public class UserController {
             @ModelAttribute User profileOwner,
             @RequestParam(name = "ownerUsername") String username,
             @RequestParam(name = "emailSubject") String emailSubject,
-            @RequestParam(name = "emailBody") Content emailBody
+            @RequestParam(name = "emailBody") String emailBody
     ) {
         User owner = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User emailFrom = userDao.getOne(owner.getId());
-        User userToEmail = userDao.findByUsername(username);
-        sendGridService.sendEmail(emailFrom.toString(), userToEmail.getEmail(), emailSubject, emailBody);
+//        User emailFrom = userDao.getOne(owner.getId());
+        String emailFrom = "curated.ink.com@gmail.com";
+        String userToEmail = userDao.findByUsername(username).getEmail();
+        sendGridService.sendEmail(emailFrom, userToEmail, emailSubject, emailBody);
         return "redirect:/profile-page";
     }
 

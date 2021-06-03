@@ -2,9 +2,11 @@ package com.curatedink.services;
 
 import com.curatedink.models.*;
 import com.sendgrid.*;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+@Service("sendGridService")
 public class SendGridService {
     SendGrid sendGrid;
 
@@ -12,8 +14,8 @@ public class SendGridService {
         this.sendGrid = sendGrid;
     }
 
-    public Response sendEmail(String from, String to, String subject, Content body) {
-        Mail mail = new Mail(new Email(from), subject, new Email(to), body);
+    public Response sendEmail(String from, String to, String subject, String body) {
+        Mail mail = new Mail(new Email(from), subject, new Email(to), new Content("text/plain", body));
         mail.setReplyTo(new Email("curated.ink.com@gmail.com"));
         Request request = new Request();
         Response response = null;
