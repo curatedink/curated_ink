@@ -22,9 +22,9 @@
              style="width: 18rem;"/>
     </div>
     <div>
-            <img src="/../img/tattoo-gun.jpg" width="400" height="auto"
-                 class="align-self-end"
-                 alt="Tattoo Gun">
+        <img src="/../img/tattoo-gun.jpg" width="400" height="auto"
+             class="align-self-end"
+             alt="Tattoo Gun">
     </div>
 </div>
 
@@ -40,17 +40,17 @@
             <p class="profile-text" th:text="${user.biography}"></p>
         </div>
     </div>
-        <div class="row d-flex justify-content-around mt-4">
-            <a th:href="@{/tattoos/artist-upload}" class="button type1">Add a new image</a>
-            <a class="button type1" id="portfolioImage"
-               data-toggle="modal"
-               th:attr="data-target=${'#artistProfileImage'}">
-                Add a Profile Image
-            </a>
-            <form th:action="@{/artist-edit}" th:method="get" class="form-inline mr-sm-2">
-                <button class="button type1">Edit Profile</button>
-            </form>
-        </div>
+    <div class="row d-flex justify-content-around mt-4">
+        <a th:href="@{/tattoos/artist-upload}" class="button type1">Add a new image</a>
+        <a class="button type1" id="portfolioImage"
+           data-toggle="modal"
+           th:attr="data-target=${'#artistProfileImage'}">
+            Add a Profile Image
+        </a>
+        <form th:action="@{/artist-edit}" th:method="get" class="form-inline mr-sm-2">
+            <button class="button type1">Edit Profile</button>
+        </form>
+    </div>
 
 </div>
 
@@ -61,81 +61,84 @@
         <div class="row md-6 justify-content-around">
 
             <!--            ****Need to refactor to only show specific artist's work****-->
+            <div th:each="image : ${images}">
+                <div class="shadow-lg p-3 mb-5 bg-white rounded" style="width: 18rem;" th:if="${!image.isProfileImage}">
+                    <div class="card-body">
+                        <img th:src="${image.imageUrl}" class="img-thumbnail thumbnail mx-auto d-block"/>
+                        <div class="card-footer footer">
+                            <a class="button type1" id="detailed-portfolio"
+                               data-toggle="modal"
+                               th:attr="data-target=${'#artist-detailed' + image.id}">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
 
-            <div class="shadow-lg p-3 mb-5 bg-white rounded" style="width: 18rem;" th:each="image : ${images}">
-                <div class="card-body">
-                    <img th:src="${image.imageUrl}" class="img-thumbnail thumbnail mx-auto d-block"/>
-                   <div class="card-footer footer">
-                    <a class="button type1" id="detailed-portfolio"
-                       data-toggle="modal"
-                       th:attr="data-target=${'#artist-detailed' + image.id}">
-                        View Details
-                    </a>
-                   </div>
-                </div>
-
-                <!--                Modal for Details-->
-                <div class="modal fade" id="artist-detailed" th:attr="id=${'artist-detailed' + image.id}"
-                     tabindex="-1" role="dialog"
-                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <!--                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>-->
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="card" style="width: 100%;">
-                                    <img th:src="${image.imageUrl}"/>
-                                    <div class="card-body">
-                                        <h3>Artist: <span th:text="${image.creditedArtist}"></span></h3>
-                                        <h5>Studio: <span th:text="${image.studioName}"></span></h5>
-                                        <p>About the Work: <span th:text="${image.comment}"></span></p>
+                    <!--                Modal for Details-->
+                    <div class="modal fade" id="artist-detailed" th:attr="id=${'artist-detailed' + image.id}"
+                         tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <!--                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>-->
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card" style="width: 100%;">
+                                        <img th:src="${image.imageUrl}"/>
+                                        <div class="card-body">
+                                            <h3>Artist: <span th:text="${image.creditedArtist}"></span></h3>
+                                            <h5>Studio: <span th:text="${image.studioName}"></span></h5>
+                                            <p>About the Work: <span th:text="${image.comment}"></span></p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <!--                                Might need to change this to take out the id portion-->
-                                <a th:href="@{/artist-image-edit/{id}(id=${image.id})}"
-                                   class="button type1">Edit</a>
-                                <form th:action="@{/tattoos/delete/{id}(id=${image.id})}" th:method="post">
-                                    <button class="button type1">Delete Image</button>
-                                </form>
+                                <div class="modal-footer">
+                                    <!--                                Might need to change this to take out the id portion-->
+                                    <a th:href="@{/artist-image-edit/{id}(id=${image.id})}"
+                                       class="button type1">Edit</a>
+                                    <form th:action="@{/tattoos/delete/{id}(id=${image.id})}" th:method="post">
+                                        <button class="button type1">Delete Image</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
-<!--                Modal for Profile Image-->
-                <!--                     th:attr="id=${'artistProfileImage'}"-->
-                <div class="modal fade" id="artistProfileImage" th:object="${image}"
-                     tabindex="-1" role="dialog">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Profile Image</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+            <!--                Modal for Profile Image-->
+            <!--                     th:attr="id=${'artistProfileImage'}"-->
+            <div class="modal fade" id="artistProfileImage" th:object="${image}"
+                 tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Profile Image</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form th:action="@{/profile-image}" th:method="post">
+                                <label for="uploadImage"></label>
+                                <button class="form-control mb-4" id="uploadImage" name="uploadImage" type="button">
+                                    Upload Image
                                 </button>
-                            </div>
-                            <div class="modal-body">
-                                <form th:action="@{/profile-image}" th:method="post">
-                                    <label for="uploadImage"></label>
-                                    <button class="form-control mb-4" id="uploadImage" name="uploadImage" type="button">Upload Image</button>
-                                    <input id="filestackImageUrl" name="filestackImageUrl" value="replace" th:field="*{imageUrl}" type="hidden">
+                                <input id="filestackImageUrl" name="filestackImageUrl" value="replace"
+                                       th:field="*{imageUrl}" type="hidden">
 
-                                    <button class="button type1" type="submit">Add Profile Image</button>
-                                </form>
+                                <button class="button type1" type="submit">Add Profile Image</button>
+                            </form>
                             <div class="modal-footer">
-                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
+            </div>
 
 
         </div>
@@ -173,7 +176,6 @@
     });
 
 </script>
-
 
 
 </body>

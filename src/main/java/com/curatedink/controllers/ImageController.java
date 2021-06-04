@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -53,7 +54,9 @@ public class ImageController {
     // json - world gallery
     @GetMapping(value = "/gallery.json")
     public @ResponseBody List<Image> getAllImagesInJSONFormat() {
-        return imagesDao.findAllByIsProfileImageIsFalse();
+        List<Image> allNonProfileImages = imagesDao.findAllByIsProfileImageIsFalse();
+        Collections.reverse(allNonProfileImages);
+        return allNonProfileImages;
     }
 
     @GetMapping("/gallery")
@@ -70,12 +73,19 @@ public class ImageController {
         User currentUser = usersDao.getOne(principal.getId());
 
         List<User> currentUserFollowingList = currentUser.getFollowingList();
-        List<Image> allImages = imagesDao.findAllByIsProfileImageIsFalse();
+//        List<Image> allImages = imagesDao.findAllByIsProfileImageIsFalse();
+//        Collections.reverse(allImages);
         List<Object> followedImages = new ArrayList <Object>();
 
         for (User user : currentUserFollowingList) {
-            followedImages.addAll(user.getImages());
-            System.out.println(followedImages);
+            for (Image image : user.getImages()) {
+                if (!image.getIsProfileImage()){
+                    followedImages.add(image);
+                }
+            }
+//            followedImages.addAll(user.getImages());
+//            System.out.println(followedImages);
+            Collections.reverse(followedImages);
         }
         return followedImages;
     }
