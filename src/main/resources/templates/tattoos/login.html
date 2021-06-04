@@ -10,33 +10,34 @@
 </head>
 <body>
 
-<div class="">
+<div class="bg-login">
     <div class="container">
 
         <div>
             <h1 class="login-heading">Curated Ink</h1>
         </div>
 
-        <div class="mb-2">
-            <div th:if="${param.error}">
-                Invalid Username and Password.
-            </div>
-            <div th:if="${param.logout}">
-                You have been logged out.
-            </div>
-        </div>
-
         <div class="container mb-4">
+
+            <div class="logout-text">
+                <div th:if="${param.error}">
+                    Invalid Username and Password.
+                </div>
+                <div th:if="${param.logout}">
+                    You have been logged out.
+                </div>
+            </div>
 
             <form th:action="@{/login}" method="post">
                 <div class="mb-3">
-                    <input id="email" name="username" class="form-control" placeholder="Username" type="text"/>
+                    <input id="email" name="username" class="background-form"
+                           placeholder="Username" type="text"/>
                 </div>
                 <div>
-                    <input id="password" name="password" class="form-control" placeholder="Password" type="password"/>
+                    <input id="password" name="password" class="background-form" placeholder="Password" type="password"/>
                 </div>
                 <div class="m-4 d-flex justify-content-center">
-                    <input class="button type1" type="submit" value="Login"/>
+                    <button class="button type1" type="submit" value="Login">Login</button>
                 </div>
             </form>
 
