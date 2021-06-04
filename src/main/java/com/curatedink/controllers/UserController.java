@@ -176,8 +176,9 @@ public class UserController {
         List<User> followingList = profileOwner.getFollowingList();
         List<User> followerList = profileOwner.getFollowerList();
 
-        //Checking to see if the current user is on the viewed profile users following list
-        boolean showButton = !followerList.contains(currentUser);
+        // Checking to see if the current user is on the viewed profile users following list
+        // && is not viewing their own profile
+        boolean showButton = (!followerList.contains(currentUser)) && (id != currentUser.getId()) ;
         System.out.println(showButton); // TEST GOOD
         model.addAttribute("showButton", showButton);
 
