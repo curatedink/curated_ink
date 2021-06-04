@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <head th:replace=" partials/head :: head"/>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+    <nav th:replace=" partials/nav :: nav"/>
+
+    <div>
+        <div class="title">
+            <h1>About Us</h1>
+        </div>
+
+        <div class="container">
+            <div>
+                <h4>Sabrina</h4>
+                <h6>web dev</h6>
+            </div>
+
+            <div>
+                <h4>Corey</h4>
+                <h6>web dev</h6>
+            </div>
+
+            <div>
+                <h4>Javier</h4>
+                <h6>web dev</h6>
+            </div>
+
+            <div>
+                <h4>Michael</h4>
+                <h6>web dev</h6>
+            </div>
+
+        </div>
+    </div>
+
+    <footer th:include="partials/foot :: foot"/>
+</body>
+</html>
