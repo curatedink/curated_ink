@@ -85,6 +85,8 @@ public class ImageController {
     @PostMapping("/tattoos/delete/{id}")
     public String deleteImage(@PathVariable("id") long id) {
         Image imageToDelete = imagesDao.getOne(id);
+        List<Style> imageStyles = imageToDelete.getStyles();
+        imageStyles.clear();
         imagesDao.delete(imageToDelete);
         return "redirect:/profile-page";
     }
