@@ -90,19 +90,22 @@ public class UserController {
         userToEdit.setUsername(currentUser.getUsername());
         userToEdit.setIsArtist(currentUser.getIsArtist());
         styleValidation(userToEdit, styles);
+
         return "redirect:/profile-page";
     }
 
    // Style Validation method used to make sure that the styles list is never empty
     private void styleValidation(@ModelAttribute User userToEdit, @RequestParam(name = "style", required = false) List<Style> styles) {
         if (styles != null) {
+            System.out.println(styles);
             userToEdit.setStyles(styles);
         } else {
             List<Style> defaultStyles = new ArrayList<>();
             defaultStyles.add(stylesDao.getOne(13L));
             userToEdit.setStyles(defaultStyles);
         }
-
+        System.out.println(userToEdit.getStyles());
+        System.out.println(userToEdit.getBiography());
         userDao.save(userToEdit);
     }
 
@@ -125,13 +128,12 @@ public class UserController {
         userToEdit.setPassword(currentUser.getPassword());
         userToEdit.setUsername(currentUser.getUsername());
         userDao.save(userToEdit);
-        return "redirect:/profile-page";
+        return "users/profile-page";
     }
 
-    // -----------------------------------------------------
-
+    // ------------------------------------------------------ Profile Mapping Controller:
     // After logging in the user is directed here to then be directed according to their
-    // usertype (isArtist) value
+    // usertype (isArtist) value to their corresponding profile page type
     @GetMapping("/profile-page")
     public String pointToProfile(Model model) {
         // Grabbing the current user object with the next line
