@@ -38,11 +38,31 @@
     font-weight: 300;
 }
 
+.login-heading {
+    font-family: 'Anton', sans-serif;
+    text-align: center;
+    color: black;
+    font-size: 4em;
+    padding-top: 1em;
+    text-transform: uppercase;
+    margin-bottom: 1em;
+}
+
 .gallery-heading {
     font-family: 'Anton', sans-serif;
     text-align: center;
     color: black;
     font-size: 4em;
+    padding-top: 1em;
+    text-transform: uppercase;
+    margin-bottom: 1em;
+}
+
+.gallery-views {
+    font-family: 'Anton', sans-serif;
+    text-align: center;
+    color: black;
+    font-size: 2em;
     padding-top: 1em;
     text-transform: uppercase;
     margin-bottom: 1em;

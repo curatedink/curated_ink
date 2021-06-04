@@ -99,9 +99,9 @@
                             <div class="modal-footer">
                                 <!--                                Might need to change this to take out the id portion-->
                                 <a th:href="@{/artist-image-edit/{id}(id=${image.id})}"
-                                   class="btn">Edit</a>
+                                   class="button type1">Edit</a>
                                 <form th:action="@{/tattoos/delete/{id}(id=${image.id})}" th:method="post">
-                                    <button class="btn">Delete Image</button>
+                                    <button class="button type1">Delete Image</button>
                                 </form>
                             </div>
                         </div>
@@ -127,7 +127,7 @@
                                     <button class="form-control mb-4" id="uploadImage" name="uploadImage" type="button">Upload Image</button>
                                     <input id="filestackImageUrl" name="filestackImageUrl" value="replace" th:field="*{imageUrl}" type="hidden">
 
-                                    <button class="btn" type="submit">Add Profile Image</button>
+                                    <button class="button type1" type="submit">Add Profile Image</button>
                                 </form>
                             <div class="modal-footer">
                             </div>
