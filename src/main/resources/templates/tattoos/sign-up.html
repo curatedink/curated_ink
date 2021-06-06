@@ -11,55 +11,52 @@
 
 <!--<nav th:replace=" partials/nav :: nav"/>-->
 
-<div class="">
+<div class="bg-signup">
     <div class="container">
+        <div class="container">
 
         <div>
-            <h1 class="">Sign Up and Get Curated</h1>
+            <h1 class="login-heading">Sign Up and Get Curated</h1>
         </div>
 
-        <div class="container mb-4">
-            <form th:action="@{/sign-up}" method="POST" th:object="${user}">
+        <div class="mb-4">
+            <form th:action="@{/sign-up}" method="POST" th:object="${user}" class="form-padding">
 
                 <label for="username">Username</label>
-                <input id="username" th:field="*{username}" class="form-control mb-4" placeholder="Username"/>
+                <input id="username" th:field="*{username}" class="background-form mb-4" placeholder="Username"/>
 
                 <label for="password">Password</label>
-                <input id="password" type="password" th:field="*{password}" class="form-control mb-4"
+                <input id="password" type="password" th:field="*{password}" class="mb-4"
                        placeholder="Password"/>
 
                 <label for="email">Email</label>
-                <input id="email" th:field="*{email}" class="form-control mb-4" placeholder="Email"/>
+                <input id="email" th:field="*{email}" class="mb-4" placeholder="Email"/>
 
                 <label for="display_name">Display Name</label>
-                <input id="display_name" th:field="*{displayName}" class="form-control mb-4" placeholder="Display Name"/>
-
-<!--                <label for="zipcode">Zip Code</label>-->
-<!--                <input id="zipcode" th:field="*{zipcode}" class="form-control mb-4" placeholder="Zip Code"/>-->
+                <input id="display_name" th:field="*{displayName}" class="mb-4" placeholder="Display Name"/>
 
                 <label for="biography">Bio</label>
-                <input id="biography" th:field="*{biography}" class="form-control mb-4"
+                <input id="biography" th:field="*{biography}" class="mb-4"
                        placeholder="What do you want the world to know?"/>
 
                 <label for="is_artist">Are you an Artist or a Canvas?</label>
-                <select id="is_artist" th:field="*{isArtist}" class="form-control mb-4" >
+                <select id="is_artist" th:field="*{isArtist}" class="mb-4">
                     <option value="true">Artist</option>
                     <option value="false">Canvas</option>
                 </select>
 
                 <label for="studio_name">Studio Name</label>
-                <input id="studio_name" th:field="*{studioName}" class="form-control mb-4" placeholder="Studio Name"/>
+                <input id="studio_name" th:field="*{studioName}" class="mb-4" placeholder="Studio Name"/>
 
                 <label>What styles do you specialize in?</label>
                 <div th:replace=" partials/style-list :: style-list"/>
 
-<!--                <div class="form-group form-check m-4">-->
-<!--                    <input type="checkbox" class="form-check-input" id="promo">-->
-<!--                    <label class="form-check-label" for="promo">Sign me up for promotional emails!</label>-->
-<!--                </div>-->
+                <div class="m-4 d-flex justify-content-center">
+                    <button class="button type1" value="Sign me up!" type="submit">Sign Up</button>
+                </div>
 
-                <input class="button type1" value="Sign me up!" type="submit"/>
             </form>
+        </div>
         </div>
 
     </div>

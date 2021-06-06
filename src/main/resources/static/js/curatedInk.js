@@ -7,7 +7,7 @@
         images.forEach(function (image) {
             let imageUserId = image.user.id;
             let profileLink = /*[[@{/profile/}]]*/'/profile/';
-            html += '<div class="shadow-lg p-3 mb-5 bg-white rounded" style="width: 18rem;">';
+            html += '<div class="shadow-lg p-3 mb-5 bg-white rounded card-m" style="width: 18rem;">';
             html += '<div class="card-body">';
             html += '<img class="img-thumbnail thumbnail mx-auto d-block" src=" ' + image.imageUrl + '"' + '/>';
             html += '</div>';
@@ -29,7 +29,7 @@
         images.forEach(function (image) {
             let imageUserId = image.user.id;
             let profileLink = /*[[@{/profile/}]]*/'/profile/';
-            html += '<div class="shadow-lg p-3 mb-5 bg-white rounded" style="width: 18rem;">';
+            html += '<div class="shadow-lg p-3 mb-5 bg-white rounded card-m" style="width: 18rem;">';
             html += '<div class="card-body">';
             html += '<img class="img-thumbnail thumbnail mx-auto d-block" src=" ' + image.imageUrl + '"' + '/>';
             html += '</div>';
@@ -51,7 +51,7 @@
         let html = '';
         $.each(images, function (key, val) {
             if (val.id == imageId) {
-                html += '<div class="m-5" style="width: 24rem;">';
+                html += '<div class="m-5" style="width: 18rem;">';
                 // html += '<div class="">';
                 html += '<img class="img-thumbnail rounded mx-auto d-block" src=" ' + image.imageUrl + '"' + '/>';
                 html += '<p class="ml-2">' + image.creditedArtist + '</p>';
@@ -80,7 +80,7 @@
             $.each(images, function (key, val) {
                 if ((val.creditedArtist.search(regex) != -1) || (val.studioName.search(regex) != -1)) {
                     let profileLink = /*[[@{/profile/}]]*/'/profile/';
-                    html += '<div class="shadow-lg p-3 mb-5 bg-white rounded" style="width: 22rem;">';
+                    html += '<div class="shadow-lg p-3 mb-5 bg-white rounded card-m" style="width: 18rem;">';
                     html += '<div class="card-body">';
                     html += '<img class="img-thumbnail thumbnail mx-auto d-block" src=" ' + val.imageUrl + '"' + '/>';
                     html += '<p class="sub-text">Artist: </p>';
