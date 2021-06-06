@@ -20,13 +20,13 @@
         <div class="profile-cover">
             <img src="/../img/mvnw.jpg" alt="Flash Tattoos">
         </div>
-<!--        <div th:each="image : ${images}">-->
-<!--            <img th:if="${image.isProfileImage}"-->
-<!--                 th:src="${image.imageUrl}"-->
-<!--                 alt="Artist Profile Image"-->
-<!--                 class="profile-image"/>-->
-<!--            &lt;!&ndash;            style="width: 9rem;"&ndash;&gt;-->
-<!--        </div>-->
+        <!--        <div th:each="image : ${images}">-->
+        <!--            <img th:if="${image.isProfileImage}"-->
+        <!--                 th:src="${image.imageUrl}"-->
+        <!--                 alt="Artist Profile Image"-->
+        <!--                 class="profile-image"/>-->
+        <!--            &lt;!&ndash;            style="width: 9rem;"&ndash;&gt;-->
+        <!--        </div>-->
     </div>
 </div>
 
@@ -34,40 +34,41 @@
 <!--Artist Information-->
 <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col-8">
             <p class="sub-text">Artist</p>
             <h1 th:text="${user.username}" class="profile-heading"/>
-            <div class="row container">
-                <div class="col-9">
-                    <p class="sub-text">Current Studio</p>
-                    <p class="profile-text" th:text="${user.studioName}"></p>
-                    <p class="sub-text">About</p>
-                    <p class="profile-text" th:text="${user.biography}"></p>
-                </div>
-            </div>
-            <div class="col">
-                <div th:each="image : ${images}">
-                    <img th:if="${image.isProfileImage}"
-                         th:src="${image.imageUrl}"
-                         alt="Artist Profile Image"
-                         class="profile-image"/>
-                    <!--            style="width: 9rem;"-->
-                </div>
-
-            </div>
+            <!--            <div class="container">-->
+            <!--                <div class="col">-->
+            <p class="sub-text">Current Studio</p>
+            <p class="profile-text" th:text="${user.studioName}"></p>
+            <p class="sub-text">About</p>
+            <p class="profile-text" th:text="${user.biography}"></p>
+            <!--                </div>-->
+            <!--            </div>-->
         </div>
-        <!--    div for buttons-->
-        <div class="row d-flex justify-content-around mt-4">
-            <form th:if="${showButton}" th:action="@{/users/follow/{id}(id=${user.getId()})}" method="post">
-                <button id="follow_me" type="submit" class="button type1">Follow</button>
-            </form>
-            <!--        <button id="follow_me">Follow</button>-->
-            <!--        <a th:href="@{/canvas-profile/{id}(id=${user.id})}" class="btn btn-block">View My Canvas Profile</a>-->
-            <a th:href="@{/send-email/{id}(id=${user.getId()})}" class="button type1">Request Work</a>
-        </div>
+        <div class="col d-flex align-items-center justify-content-center">
+            <div th:each="image : ${images}">
+                <img th:if="${image.isProfileImage}"
+                     th:src="${image.imageUrl}"
+                     alt="Artist Profile Image"
+                     class="profile-image"/>
+                <!--            style="width: 9rem;"-->
+            </div>
 
+        </div>
 
     </div>
+    <!--    div for buttons-->
+    <div class="row d-flex justify-content-around mt-4">
+        <form th:if="${showButton}" th:action="@{/users/follow/{id}(id=${user.getId()})}" method="post">
+            <button id="follow_me" type="submit" class="button type1">Follow</button>
+        </form>
+        <!--        <button id="follow_me">Follow</button>-->
+        <!--        <a th:href="@{/canvas-profile/{id}(id=${user.id})}" class="btn btn-block">View My Canvas Profile</a>-->
+        <a th:href="@{/send-email/{id}(id=${user.getId()})}" class="button type1">Request Work</a>
+    </div>
+
+
 </div>
 
 <!--Artist's Images-->
