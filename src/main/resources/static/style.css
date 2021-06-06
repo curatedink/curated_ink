@@ -208,6 +208,7 @@ a:hover, a:visited, a:link, a:active {
 
 form {
     background-color: white;
+    font-family: 'Open Sans', sans-serif;
     /*padding: 1em;*/
 }
 
