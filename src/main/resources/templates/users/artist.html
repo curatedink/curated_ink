@@ -78,7 +78,8 @@
 
             <!--            ****Need to refactor to only show specific artist's work****-->
             <div th:each="image : ${images}">
-                <div class="shadow-lg p-3 mb-5 bg-white rounded" style="width: 18rem;" th:if="${!image.isProfileImage}">
+                <div class="shadow-lg p-3 mb-5 bg-white rounded card-m" style="width: 18rem;"
+                     th:if="${!image.isProfileImage}">
                     <div class="card-body">
                         <img th:src="${image.imageUrl}" class="img-thumbnail thumbnail mx-auto d-block"/>
                         <div class="card-footer footer">
