@@ -208,6 +208,10 @@ a:hover, a:visited, a:link, a:active {
 
 form {
     background-color: white;
+    /*padding: 1em;*/
+}
+
+.form-padding {
     padding: 1em;
 }
 
@@ -345,4 +349,9 @@ input[type=text]:focus {
 .button-landing.type2.type2:hover:after, .button-landing.type2.type2:hover:before {
     width: 100%;
     height: 100%;
+}
+
+.button-m {
+    margin-top: 5em;
+    margin-bottom: 5em;
 }

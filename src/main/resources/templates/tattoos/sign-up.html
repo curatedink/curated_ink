@@ -20,7 +20,7 @@
         </div>
 
         <div class="mb-4">
-            <form th:action="@{/sign-up}" method="POST" th:object="${user}">
+            <form th:action="@{/sign-up}" method="POST" th:object="${user}" class="form-padding">
 
                 <label for="username">Username</label>
                 <input id="username" th:field="*{username}" class="background-form mb-4" placeholder="Username"/>
