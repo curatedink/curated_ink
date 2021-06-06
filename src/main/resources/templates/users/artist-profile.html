@@ -13,34 +13,54 @@
 
 
 <!--Container for cover image and profile image-->
-<div class="row cover d-flex justify-content-between align-items-end">
-    <div th:each="image : ${images}">
-        <img th:if="${image.isProfileImage}"
-             th:src="${image.imageUrl}"
-             alt="Artist Profile Image"
-             class=""
-             style="width: 18rem;"/>
-    </div>
-    <div>
-        <img src="/../img/tattoo-gun.jpg" width="400" height="auto"
-             class="align-self-end"
-             alt="Tattoo Gun">
+<!--<div class="row cover d-flex justify-content-between align-items-end">-->
+
+<div class="d-flex align-items-center justify-content-center">
+    <div class="contain">
+        <div class="profile-cover">
+            <img src="/../img/mvnw.jpg" alt="Flash Tattoos">
+        </div>
+        <!--        <div th:each="image : ${images}">-->
+        <!--            <img th:if="${image.isProfileImage}"-->
+        <!--                 th:src="${image.imageUrl}"-->
+        <!--                 alt="Artist Profile Image"-->
+        <!--                 class="profile-image"/>-->
+        <!--            &lt;!&ndash;            style="width: 9rem;"&ndash;&gt;-->
+        <!--        </div>-->
     </div>
 </div>
 
 
 <!--Artist Information-->
-<div class="col">
-    <h1 class="profile-heading" th:text="${user.username}"></h1>
-    <div class="row container">
-        <div class="col-9">
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <p class="sub-text">Artist</p>
+            <h1 th:text="${user.username}" class="profile-heading"/>
+            <!--            <div class="container">-->
+            <!--                <div class="col">-->
             <p class="sub-text">Current Studio</p>
             <p class="profile-text" th:text="${user.studioName}"></p>
             <p class="sub-text">About</p>
             <p class="profile-text" th:text="${user.biography}"></p>
+            <!--                </div>-->
+            <!--            </div>-->
         </div>
+        <div class="col d-flex align-items-center justify-content-center">
+            <div th:each="image : ${images}">
+                <img th:if="${image.isProfileImage}"
+                     th:src="${image.imageUrl}"
+                     alt="Artist Profile Image"
+                     class="profile-image"/>
+                <!--            style="width: 9rem;"-->
+            </div>
+
+        </div>
+
     </div>
-    <div class="row d-flex justify-content-around mt-4">
+
+
+    <div class="row d-flex justify-content-around button-m">
         <a th:href="@{/tattoos/artist-upload}" class="button type1">Add a new image</a>
         <a class="button type1" id="portfolioImage"
            data-toggle="modal"
