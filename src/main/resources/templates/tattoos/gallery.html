@@ -48,7 +48,7 @@
                     <div class="tab-pane fade show active m-4" id="world-gallery" role="tabpanel"
                          aria-labelledby="world-gallery-tab">
                         <div>
-                            <h5 class="gallery-views">World Gallery</h5>
+                            <h5 sec:authorize="isAuthenticated()" class="gallery-views">World Gallery</h5>
                         </div>
                         <div class="container">
                             <div class="row md-6 justify-content-around" id="images"></div>
