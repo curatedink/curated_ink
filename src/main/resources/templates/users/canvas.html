@@ -62,10 +62,12 @@
 
             <!--            ****Need to refactor to only show specific canvas' tats****-->
             <div th:each="image : ${images}">
-                <div class="shadow-lg p-3 mb-5 bg-white rounded card-m" style="width: 18rem;"
+                <div class="shadow-lg p-3 mb-5 bg-white rounded card-m" style="height: 22rem; width: 18rem;"
                      th:if="${!image.isProfileImage}">
-                    <div class="card-body">
-                        <img th:src="${image.imageUrl}" class="img-thumbnail thumbnail mx-auto d-block"/>
+                    <div class="card-body flex-column d-flex justify-content-center">
+                    <div class="card-div">
+                        <img th:src="${image.imageUrl}" class="card-img thumbnail mx-auto d-block"/>
+                    </div>
                         <div class="card-footer footer">
                             <a class="button type1" id="detailed-work"
                                data-toggle="modal"
