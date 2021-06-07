@@ -47,14 +47,14 @@
             <!--            </div>-->
         </div>
         <div class="col d-flex align-items-center justify-content-center">
+            <div class="profile-div mt-2">
             <div th:each="image : ${images}">
                 <img th:if="${image.isProfileImage}"
                      th:src="${image.imageUrl}"
                      alt="Artist Profile Image"
-                     class="profile-image"/>
-                <!--            style="width: 9rem;"-->
+                     class="img-profile"/>
             </div>
-
+            </div>
         </div>
 
     </div>
