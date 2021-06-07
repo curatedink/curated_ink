@@ -135,7 +135,8 @@ public class UserController {
     @GetMapping("/profile-page")
     public String pointToProfile(Model model) {
         // Grabbing the current user object with the next line
-        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = userDao.getOne(principal.getId());
         String currentUserId = String.valueOf(currentUser.getId());
         Image image = new Image();
         model.addAttribute("image", image);
