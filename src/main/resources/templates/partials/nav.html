@@ -17,19 +17,19 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent" sec:authorize="isAuthenticated()">
             <ul class="navbar-nav mr-auto d-flex align-items-end">
-                <li class="nav-item nav-text">
+                <li class="nav-item">
                     <form th:action="@{/gallery}" th:method="get" class="form-inline mr-sm-2">
-                        <button class="nav-link btn">Explore the Gallery</button>
+                        <button class="nav-link btn nav-text">Explore the Gallery</button>
                     </form>
                 </li>
-                <li class="nav-item nav-text">
+                <li class="nav-item">
                     <form th:action="@{/profile-page}" th:method="get" class="form-inline mr-sm-2">
-                        <button class="nav-link btn">View Your Profile</button>
+                        <button class="nav-link btn nav-text">View Your Profile</button>
                     </form>
                 </li>
-                <li class="nav-item nav-text">
+                <li class="nav-item">
                     <form th:action="@{/logout}" th:method="post" class="form-inline mr-sm-2">
-                        <button class="nav-link btn">Logout</button>
+                        <button class="nav-link btn nav-text">Logout</button>
                     </form>
                 </li>
             </ul>
