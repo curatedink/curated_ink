@@ -24,6 +24,16 @@
     /*margin-top: 1em;*/
 }
 
+.email-bg {
+    background-image: url("/../img/Ayres_8671.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 20em;
+    /*margin-top: 1em;*/
+}
+
 .bg-about {
     background-image: url("/../img/Ayres_8708.jpg");
     height: 100%;

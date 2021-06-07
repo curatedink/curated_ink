@@ -10,25 +10,31 @@
 </head>
 <body>
 
-<div class="email-class">
+<nav th:replace=" partials/nav :: nav"/>
+
+<div class="email-bg">
+
+
     <div class="container">
 
         <div>
-            <h2 class="">Send Email</h2>
+            <h2 class="gallery-heading">Get Your Next Piece of Art</h2>
         </div>
 
         <div class="container mb-4">
-            <form th:action="@{/send-email}" method="POST">
+            <form th:action="@{/send-email}" method="POST" class="form-padding">
 
-                    <input name="ownerUsername" type="hidden" th:value="*{profileOwner.getUsername()}">
+                <input name="ownerUsername" type="hidden" th:value="*{profileOwner.getUsername()}">
 
-                    <label for="emailSubject">Subject:</label>
-                    <input id="emailSubject" name="emailSubject" class="form-control mb-4">
+                <label for="emailSubject">Subject:</label>
+                <input id="emailSubject" name="emailSubject" class="form-control mb-4">
 
-                    <label for="emailBody">Body:</label>
-                    <textarea id="emailBody" name="emailBody" class="form-control mb-4" rows="6" cols="20"></textarea>
+                <label for="emailBody">Body:</label>
+                <textarea id="emailBody" name="emailBody" class="form-control mb-4" rows="6" cols="20"></textarea>
 
-                    <input class="button type1" type="submit">
+                <div class="d-flex justify-content-center">
+                    <button class="button type1" type="submit">Get Curated</button>
+                </div>
 
             </form>
         </div>
