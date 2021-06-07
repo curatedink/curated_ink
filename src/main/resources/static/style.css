@@ -376,3 +376,7 @@ input[type=text]:focus {
 .card-m {
     margin: 2em;
 }
+
+.fab:hover {
+    opacity: 0.7;
+}
