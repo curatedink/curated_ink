@@ -41,14 +41,14 @@
             <p class="profile-text" th:text="${user.biography}"></p>
         </div>
         <div class="col d-flex align-items-center justify-content-center">
-            <div th:each="image : ${images}">
-                <img th:if="${image.isProfileImage}"
-                     th:src="${image.imageUrl}"
-                     alt="Canvas Profile Image"
-                     class="profile-image"/>
-                <!--            style="width: 9rem;"-->
+            <div class="profile-div mt-2">
+                <div th:each="image : ${images}">
+                    <img th:if="${image.isProfileImage}"
+                         th:src="${image.imageUrl}"
+                         alt="Artist Profile Image"
+                         class="img-profile"/>
+                </div>
             </div>
-
         </div>
 
     </div>
