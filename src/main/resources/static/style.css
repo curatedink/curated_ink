@@ -419,3 +419,11 @@ input[type=text]:focus {
 .card-btn:hover {
     opacity: 0.7;
 }
+
+
+.codeup {
+    background-image: url("/../img/codeup.png");
+    height: 38px;
+    width: 38px;
+    display: block;
+}
