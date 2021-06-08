@@ -77,11 +77,11 @@
                         <div class="card-div">
                         <img th:src="${image.imageUrl}" class="card-img thumbnail mx-auto d-block"/>
                         </div>
-                            <div class="card-footer footer">
-                            <a class="button type1" id="detailed-portfolio"
+                            <div class="card-footer footer flex-column d-flex justify-content-center">
+                            <a class="card-btn" id="detailed-portfolio"
                                data-toggle="modal"
                                th:attr="data-target=${'#artist-detailed' + image.id}">
-                                View Details
+                                Details
                             </a>
                         </div>
                     </div>
