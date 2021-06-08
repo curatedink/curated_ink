@@ -44,6 +44,16 @@
     /*margin-top: 1em;*/
 }
 
+.bg-team {
+    background-image: url("/../img/Ayres_8694.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 20em;
+    /*margin-top: 1em;*/
+}
+
 .bg-signup {
     background-image: url("/../img/signup.jpg");
     height: 100%;
@@ -190,7 +200,7 @@
 
 .about-text {
     font-family: 'Anton', sans-serif;
-    font-size: 2.5em;
+    font-size: 2.2em;
     text-transform: uppercase;
 }
 
