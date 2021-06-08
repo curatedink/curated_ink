@@ -11,33 +11,35 @@
 <nav th:replace=" partials/nav :: nav"/>
 
 
-<div class="container">
+<div class="bg-about">
     <div>
-        <h1 class="mb-4">Update your Image</h1>
+        <h1 class="gallery-heading">Update your Image</h1>
     </div>
 
     <div class="container mb-4">
 
-        <form th:action="@{'/tattoos/canvas-image-edit/' + ${image.id}}" th:method="post" th:object="${image}">
+        <form th:action="@{'/tattoos/canvas-image-edit/' + ${image.id}}" class="form-padding" th:method="post" th:object="${image}">
 
             <label for="imageUrl">Image URL</label>
-            <input id="imageUrl" th:field="*{imageUrl}" class="form-control mb-4" placeholder="Image URL"/>
+            <input id="imageUrl" th:field="*{imageUrl}" class="background-form" placeholder="Image URL"/>
 
             <label for="comment">Comment</label>
-            <input id="comment" th:field="*{comment}" class="form-control mb-4"
+            <input id="comment" th:field="*{comment}" class="background-form"
                    placeholder="Wanna leave a comment about the piece?"/>
 
             <label for="creditedArtist">Artist Name</label>
-            <input id="creditedArtist" th:field="*{creditedArtist}" class="form-control mb-4"
+            <input id="creditedArtist" th:field="*{creditedArtist}" class="background-form"
                    placeholder="Artist Name"/>
 
             <label for="studioName">Studio Name</label>
-            <input id="studioName" th:field="*{studioName}" class="form-control mb-4" placeholder="Studio Name"/>
+            <input id="studioName" th:field="*{studioName}" class="background-form" placeholder="Studio Name"/>
 
             <label>What style is this work?</label>
             <div th:replace=" partials/style-list :: style-list"/>
 
+            <div class="d-flex justify-content-around mt-4">
             <button class="button type1" type="submit">Update Image</button>
+            </div>
 <!--            <form th:action="@{/tattoos/delete/{id}(id=${image.id})}" th:method="post">-->
 <!--                <button class="btn">Delete Image</button>-->
 <!--            </form>-->

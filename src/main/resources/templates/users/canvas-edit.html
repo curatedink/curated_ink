@@ -11,33 +11,36 @@
 <nav th:replace=" partials/can-nav :: can-nav"/>
 
 
-<div class="container">
+<div class="bg-about">
+
     <div>
-        <h1 class="mb-4">Update your profile</h1>
+        <h1 class="gallery-heading">Update your profile</h1>
     </div>
 
     <div class="container mb-4">
 
-        <form th:action="@{'/users/canvas-edit/'}" th:method="post" th:object="${user}">
+        <form th:action="@{'/users/canvas-edit/'}" class="form-padding" th:method="post" th:object="${user}">
 
             <label for="email">Email</label>
-            <input id="email" th:field="*{email}" class="form-control mb-4" placeholder="Email"/>
+            <input id="email" th:field="*{email}" class="background-form" placeholder="Email"/>
 
 <!--            <label for="password">Password</label>-->
 <!--            <input id="password" type="password" th:field="*{password}" class="form-control mb-4"-->
 <!--                   placeholder="Password"/>-->
 
             <label for="display_name">Display Name</label>
-            <input id="display_name" th:field="*{displayName}" class="form-control mb-4" placeholder="Display Name"/>
+            <input id="display_name" th:field="*{displayName}" class="background-form" placeholder="Display Name"/>
 
 <!--            <label for="zipcode">Zip Code</label>-->
 <!--            <input id="zipcode" th:field="*{zipcode}" class="form-control mb-4" placeholder="Zip Code"/>-->
 
             <label for="biography">Bio</label>
-            <input id="biography" th:field="*{biography}" class="form-control mb-4"
+            <input id="biography" th:field="*{biography}" class="background-form"
                    placeholder="What do you want the world to know?"/>
 
-            <button class="button type1" type="submit">Update Profile</button>
+            <div class="d-flex justify-content-around mt-4">
+                <button class="button type1" type="submit">Update Profile</button>
+            </div>
         </form>
 
 <!--        <form th:action="@{/users/delete}" th:method="post">-->
