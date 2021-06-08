@@ -1,7 +1,9 @@
 # curatedink
 
 ### Contents
-- lorem ipsum dolor
+- [Introduction](#introduction)
+- [Technologies](#technologies)
+- [Setup](#setup)
 
 ### Introduction
 asdf
