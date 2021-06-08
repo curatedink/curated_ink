@@ -16,6 +16,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -63,7 +65,10 @@ public class UserController {
 
 
     @PostMapping("/sign-up")
-    public String saveUser(@ModelAttribute User user, @RequestParam(name = "style", required = false) List<Style> styles ) {
+    public String saveUser(@ModelAttribute User user,
+                           @RequestParam(name = "style", required = false) List<Style> styles,
+                           @Validated User existingUser,
+                           Errors validation) {
         String hash = passwordEncoder.encode(user.getPassword()); // Security
         user.setPassword(hash); // Security
         styleValidation(user, styles);
