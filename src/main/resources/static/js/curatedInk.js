@@ -82,10 +82,12 @@
             $.each(images, function (key, val) {
                 if ((val.creditedArtist.search(regex) != -1) || (val.studioName.search(regex) != -1)) {
                     let profileLink = /*[[@{/profile/}]]*/'/profile/';
-                    html += '<div class="shadow-lg p-3 mb-5 bg-white rounded card-m" style="height: 29rem; width:' +
-                        ' 20rem;">';
+                    html += '<div class="shadow-lg p-3 mb-5 bg-white rounded card-m" style="height: 34rem; width:' +
+                        ' 19rem;">';
                     html += '<div class="card-body flex-column d-flex justify-content-center">';
-                    html += '<img class="img-thumbnail thumbnail mx-auto d-block" src=" ' + val.imageUrl + '"' + '/>';
+                    html += '<div class="card-div">';
+                    html += '<img class="card-img thumbnail mx-auto d-block" src=" ' + val.imageUrl + '"' + '/>';
+                    html += '</div>';
                     html += '<p class="sub-text">Artist: </p>';
                     html += '<p class="profile-text">' + val.creditedArtist + '</p>';
                     html += '<p class="sub-text">Studio: </p>';
