@@ -55,7 +55,7 @@
 
     <div class="row d-flex justify-content-around button-m">
         <a th:href="@{/tattoos/artist-upload}" class="button type1">Add a new image</a>
-        <a class="button type1" id="portfolioImage"
+        <a th:if="${showAddProfileImageButton}" class="button type1" id="portfolioImage"
            data-toggle="modal"
            th:attr="data-target=${'#artistProfileImage'}">
             Add a Profile Image

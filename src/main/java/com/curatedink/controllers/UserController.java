@@ -98,7 +98,7 @@ public class UserController {
         return "redirect:/profile-page";
     }
 
-   // Style Validation method used to make sure that the styles list is never empty
+    // Style Validation method used to make sure that the styles list is never empty
     private void styleValidation(@ModelAttribute User userToEdit, @RequestParam(name = "style", required = false) List<Style> styles) {
         if (styles != null) {
             userToEdit.setStyles(styles);
@@ -133,8 +133,7 @@ public class UserController {
         return "redirect:/profile-page";
     }
 
-    // -----------------------------------------------------
-
+    // ----------------------------------------------------- Mapping to logged in users profile:
     // After logging in the user is directed here to then be directed according to their
     // usertype (isArtist) value
     @GetMapping("/profile-page")
@@ -143,7 +142,18 @@ public class UserController {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userDao.getOne(principal.getId());
         String currentUserId = String.valueOf(currentUser.getId());
+        
+        // Checking to see if the user has already uploaded a profile image and if they
+        // have do not show the "Add Profile Image Button"
+        boolean profileImageButton = true;
+        for (Image image : currentUser.getImages()) {
+            if (image.getIsProfileImage()) {
+                profileImageButton = false;
+                break;
+            }
+        }
         Image image = new Image();
+        model.addAttribute("showAddProfileImageButton", profileImageButton);
         model.addAttribute("image", image);
         model.addAttribute("filestackApiKey", filestackApiKey);
         model.addAttribute("user", currentUser);
@@ -184,7 +194,7 @@ public class UserController {
 
         // Checking to see if the current user is on the viewed profile users following list
         // && is not viewing their own profile
-        boolean showButton = (!followerList.contains(currentUser)) && (id != currentUser.getId()) ;
+        boolean showButton = (!followerList.contains(currentUser)) && (id != currentUser.getId());
 //        System.out.println(showButton); // TEST GOOD
         model.addAttribute("showButton", showButton);
 
