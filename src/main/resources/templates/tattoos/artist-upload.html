@@ -9,35 +9,37 @@
 </head>
 <body>
 <nav th:replace=" partials/nav :: nav"/>
-<div class="">
+<div class="bg-about">
     <div class="container">
 
         <div>
-            <h1 class="">Upload Your Work</h1>
+            <h1 class="gallery-heading">Upload Your Work</h1>
         </div>
 
         <div class="container mb-4">
-            <form th:action="@{/artist-upload}" method="POST" th:object="${image}">
+            <form th:action="@{/artist-upload}"  class="form-padding" method="POST" th:object="${image}">
 
                 <label for="uploadImage"></label>
                 <button class="form-control mb-4" id="uploadImage" name="uploadImage" type="button">Upload Image</button>
                 <input id="filestackImageUrl" name="filestackImageUrl" value="replace" th:field="*{imageUrl}" type="hidden">
 
                 <label for="comment">Comment</label>
-                <input id="comment" th:field="*{comment}" class="form-control mb-4"
+                <input id="comment" th:field="*{comment}" class="background-form"
                        placeholder="Wanna leave a comment about the piece?"/>
 
                 <label for="creditedArtist">Artist Name</label>
-                <input id="creditedArtist" th:field="*{creditedArtist}" class="form-control mb-4"
+                <input id="creditedArtist" th:field="*{creditedArtist}" class="background-form"
                        placeholder="Artist Name"/>
 
                 <label for="studioName">Studio Name</label>
-                <input id="studioName" th:field="*{studioName}" class="form-control mb-4" placeholder="Studio Name"/>
+                <input id="studioName" th:field="*{studioName}" class="background-form" placeholder="Studio Name"/>
 
-                <label>What style is this work?</label>
+                <label class="mt-4">What style is this work?</label>
                 <div th:replace=" partials/style-list :: style-list"/>
 
-                <input class="button type1" value="Add new work" type="submit"/>
+                <div class="d-flex justify-content-around mt-4">
+                    <button class="button type1" value="Add new work" type="submit">Add new work</button>
+                </div>
             </form>
 
         </div>
