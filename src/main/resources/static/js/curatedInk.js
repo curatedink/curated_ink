@@ -12,7 +12,7 @@
             html += '<img class="card-img thumbnail mx-auto d-block" src=" ' + image.imageUrl + '"' + '/>';
             html += '</div>';
             // html += '<div class="card-footer footer-gallery d-flex justify-content-center">';
-            html += '<a class="card-btn" href="' + profileLink + imageUserId + '">' + image.user.username + '</a>';
+            html += '<a class="card-btn" href="' + profileLink + imageUserId + '">' + image.user.displayName + '</a>';
             // html += '<a class="btn detailed-modal" data-index-number="image.id" data-target="#gallery-detailed" data-toggle="modal"> View Details</a>'
             html += '</div>';
             html += '</div>';
@@ -36,7 +36,7 @@
             html += '<img class="card-img thumbnail mx-auto d-block" src=" ' + image.imageUrl + '"' + '/>';
             html += '</div>';
             // html += '<div class="card-footer footer-gallery d-flex justify-content-center">';
-            html += '<a class="card-btn" href="' + profileLink + imageUserId + '">' + image.user.username + '</a>';
+            html += '<a class="card-btn" href="' + profileLink + imageUserId + '">' + image.user.displayName + '</a>';
             html += '</div>';
             html += '</div>';
         });
