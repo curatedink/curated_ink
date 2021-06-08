@@ -6,9 +6,13 @@
 - [Setup](#setup)
 
 ### Introduction
-lorem ipsum
+    lorem ipsum valar morghulis lorem ipsum valar dohaerys.
+    lorem ipsum.
+
 
 ### Technologies
+- lorem ipsum
+- lorem ipsum
 - lorem ipsum
 
 ### Setup
