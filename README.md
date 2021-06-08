@@ -4,12 +4,13 @@
 - lorem ipsum dolor
 
 ### Introduction
+asdf
 
 ### Technologies
 - lorem ipsum
 
 ### Setup
-1. Create a file named ```application.properties``` inside of the same directory as ```example.properties```
+1. Create a file named ```application.properties``` inside of the same directory as ```example.properties```.
 2. Update ```application.properties``` file using ```example.properties```:
     - in the line of code that reads: ```spring.datasource.url``` replace ```YOUR_DB``` with your database name.
     - in the line of code that reads: ```spring.datasource.username``` replace ```YOUR_USERNAME``` with your database username.
