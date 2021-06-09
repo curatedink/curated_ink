@@ -427,3 +427,7 @@ input[type=text]:focus {
     width: 38px;
     display: block;
 }
+
+.codeup:hover {
+    opacity: 0.7;
+}
