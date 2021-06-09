@@ -15,8 +15,8 @@ Curated Ink gives tattoo artists an innovative social media platform to market t
 - Filestack API
 
 ## Table of Contents
-1. [Libraries and Utilities Applied](https://github.com/codeup-capstone-3d-printing-club/capstone-3d-printing#libraries-and-utilities-applied)
-2. [Setup Instruction](https://github.com/codeup-capstone-3d-printing-club/capstone-3d-printing#setup-instruction)
+1. [Libraries and Utilities Applied](https://github.com/curatedink/curated_ink/edit/main#libraries-and-utilities-applied)
+2. [Setup Instruction](https://github.com/curatedink/curated_ink/edit/main#setup-instruction)
 
 
 ### Libraries and Utilities Applied
