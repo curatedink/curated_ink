@@ -22,6 +22,11 @@
         <div class="container mb-4">
             <form th:action="@{/canvas-upload}" class="form-padding" method="POST" th:object="${image}">
 
+<!--                        preview uploaded image  -->
+                <label for="imagePreview"></label>
+                <img id="imagePreview" src="" alt="image uploaded">
+                <br>
+
                 <label for="uploadImage"></label>
                 <button class="form-control mb-4" id="uploadImage" name="uploadImage" type="button">Upload Image</button>
                 <input id="filestackImageUrl" name="filestackImageUrl" value="replace" th:field="*{imageUrl}" type="hidden">
