@@ -234,6 +234,7 @@ input, textarea, select {
     margin: 8px 0;
     background-color: white;
     box-sizing: border-box;
+    outline:none;
     border: none;
     border-bottom: 1px solid black;
     font-family: 'Open Sans', sans-serif;
@@ -244,7 +245,7 @@ input, textarea, select {
 }
 
 input[type=text]:focus {
-    border: 3px solid #555;
+    /*border: 3px solid #555;*/
 }
 
 .button {
@@ -391,8 +392,15 @@ input[type=text]:focus {
 }
 
 .card-div {
-    width: 220px;
-    height: 220px;
+    width: 380px;
+    height: 360px;
+    overflow: hidden;
+    align-content: center;
+}
+
+.card-about-div {
+    width: 240px;
+    height: 240px;
     overflow: hidden;
     align-content: center;
 }

@@ -6,7 +6,7 @@
         images.forEach(function (image) {
             let imageUserId = image.user.id;
             let profileLink = /*[[@{/profile/}]]*/'/profile/';
-            html += '<div class="shadow-lg p-3 mb-5 bg-white rounded card-m" style="height: 22rem; width: 18rem;">';
+            html += '<div class="shadow-lg p-3 mb-5 bg-white rounded card-m" style="height: 32rem; width: 28rem;">';
             html += '<div class="card-body flex-column d-flex justify-content-center">';
             html += '<div class="card-div">';
             html += '<img class="card-img thumbnail mx-auto d-block" src=" ' + image.imageUrl + '"' + '/>';
@@ -30,7 +30,7 @@
         images.forEach(function (image) {
             let imageUserId = image.user.id;
             let profileLink = /*[[@{/profile/}]]*/'/profile/';
-            html += '<div class="shadow-lg p-3 mb-5 bg-white rounded card-m" style="height: 22rem; width: 18rem;">';
+            html += '<div class="shadow-lg p-3 mb-5 bg-white rounded card-m" style="height: 32rem; width: 28rem;">';
             html += '<div class="card-body flex-column d-flex justify-content-center">';
             html += '<div class="card-div">';
             html += '<img class="card-img thumbnail mx-auto d-block" src=" ' + image.imageUrl + '"' + '/>';
@@ -82,10 +82,10 @@
             $.each(images, function (key, val) {
                 if ((val.creditedArtist.search(regex) != -1) || (val.studioName.search(regex) != -1)) {
                     let profileLink = /*[[@{/profile/}]]*/'/profile/';
-                    html += '<div class="shadow-lg p-3 mb-5 bg-white rounded card-m" style="height: 34rem; width:' +
-                        ' 19rem;">';
+                    html += '<div class="shadow-lg p-3 mb-5 bg-white rounded card-m" style="height: 40rem; width:' +
+                        ' 29rem;">';
                     html += '<div class="card-body flex-column d-flex justify-content-center">';
-                    html += '<div class="card-div">';
+                    html += '<div class="card-div mb-4">';
                     html += '<img class="card-img thumbnail mx-auto d-block" src=" ' + val.imageUrl + '"' + '/>';
                     html += '</div>';
                     html += '<p class="sub-text">Artist: </p>';
